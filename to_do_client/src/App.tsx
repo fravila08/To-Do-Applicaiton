@@ -1,46 +1,71 @@
-import { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import './App.css'
-import { Header } from './components/Header/Header'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { Task } from './components/Task/Task'
-import Button from 'react-bootstrap/Button'
+import { Task } from './components/Task'
 import axios from 'axios'
 import { CsrfToken } from './components/CsrfToken'
 
-export type Tasks= {
+export interface Tasks {
   id: number;
-  title: string;
+  Title: string;
+  Completed:boolean;
 }
 
-export async function getTasks():Promise<Tasks[]>{
-  let response= await axios.get('allTasks')
-  console.log(response.data.tasks)
-  return response.data.tasks
+export interface RTasks{
+  completed: Tasks[];
+  pending: Tasks[];
 }
+
+export async function getTasks():Promise<RTasks>{
+    let response= await axios.get('allTasks')
+    return response.data
+  }
 
 
 function App() {
+  const dTasks: Tasks[]=[]
   const [selectedIDs, setSelectedIDs]= useState<number[]>([])
+  const [compTasks, setCompTasks]:[Tasks[],(compTasks:Tasks[])=>void]=React.useState(dTasks)
+  const [pendTasks, setPendTasks]:[Tasks[],(pendTasks:Tasks[])=>void]=React.useState(dTasks)
 
+  
   useEffect(()=>{
-    console.log(selectedIDs,'ue')
-  },[selectedIDs])
+    const getResponse=async ()=>{ 
+      let response=await getTasks()
+      setCompTasks(response.completed)
+      setPendTasks(response.pending)
+    }
+    getResponse()
+  },[])
+
+  // useEffect(()=>{
+  //   console.log(selectedIDs,'ue')
+  // },[selectedIDs])
+
+
   
   CsrfToken()
   return (
     <Container className="App">
      
+    <Row style={{textAlign:"center"}}>
+        <h1>To Do App</h1>
+    </Row>
     <Row>
-      <Header selectedIDs={selectedIDs} />
+      {/* <Header selectedIDs={selectedIDs} /> */}
     </Row>
 
     <Row>
       <Col xs={1}>
       </Col>
-      <Col xs={10} style={{border:"black solid 4px"}}>
-        Pending
+      <Col xs={10} style={{border:"black solid 4px", height:"40vh", backgroundColor:"lightgray", textAlign:"center"}}>
+        <h5 style={{backgroundColor:"white", borderRadius:"5vw", marginTop:"5px"}}>Pending</h5>
+        
+        {pendTasks.map((task)=>(
+          <Task selected={selectedIDs} setSelected={setSelectedIDs} task={task} />
+        ))}
       </Col>
       <Col xs={1}>
       </Col>
@@ -49,20 +74,17 @@ function App() {
     <Row>
       <Col xs={1}>
       </Col>
-      <Col xs={10} style={{border:"black solid 4px"}}>
-        Completed
-        <Container>
-          <Task 
+      <Col xs={10} style={{border:"black solid 4px", height:"40vh", backgroundColor:"lightgray", textAlign:"center"}}>
+        <h5 style={{backgroundColor:"white", borderRadius:"5vw", marginTop:"5px"}}>Completed</h5>
+       
+          {compTasks.map((task)=>(
+            <Task 
             setSelected={setSelectedIDs} 
             selected={selectedIDs} 
-            task={{"id":1,"title":"Style"}}
+            task={task}
           />
-          <Task 
-            setSelected={setSelectedIDs} 
-            selected={selectedIDs} 
-            task={{"id":2,"title":"Style 2"}}
-          />
-        </Container>
+          ))}
+     
       </Col>
       <Col xs={1}>
         

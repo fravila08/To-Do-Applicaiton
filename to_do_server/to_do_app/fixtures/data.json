@@ -26,5 +26,21 @@
         "fields":{
             "Title":"Read POODR"
         }
+    },
+    {
+        "model":"to_do_app.Task",
+        "pk":5,
+        "fields":{
+            "Title":"Complete Code Platoon",
+            "Completed":true
+        }
+    },
+    {
+        "model":"to_do_app.Task",
+        "pk":6,
+        "fields":{
+            "Title":"Start hunting for jobs",
+            "Completed":true
+        }
     }
 ]

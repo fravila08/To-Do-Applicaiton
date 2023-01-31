@@ -3,6 +3,8 @@
 
 This To-Do application will allow users to `create` new tasks, `update` existing tasks, `delete` a task/set of tasks, and `read` both pending and/or completed task.
 
+- Documentation
+  - [Running Tests](https://github.com/fravila08/To-Do-Applicaiton/tree/starting_react/documentation/tests)
 
 ## Out-Line
 
@@ -96,13 +98,6 @@ To run this project, you will need to add the following environment variables to
 
 `django`= your Django SECRET_KEY   
 
-#### Running Tests
-
-To run tests after cloning/forking the repository and creating your .env file with your SECRET_KEY. Change directory into `to_do_server` and run the following.
-
-```bash
-  python3 manage.py test to_do_app/tests
-```
 
 
 ### Database: PostgreSQL Schema

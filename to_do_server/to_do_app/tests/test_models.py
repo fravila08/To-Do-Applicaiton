@@ -12,5 +12,5 @@ class TestModels(TestCase):
         self.assert_(self.task)
         
     def test_changing_task_complete_change(self):
-        self.task.Completed=True
+        self.task.change_status()
         self.assertTrue(self.task.Completed)

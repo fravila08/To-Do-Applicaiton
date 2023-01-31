@@ -6,5 +6,7 @@ class Task(models.Model):
     Completed=models.BooleanField(default=False)
     # ParentTask=models.ForeignKey("Task",null=True, on_delete=models.CASCADE)
     # User= models.ForeignKey("AppUser", null=True, on_delete=models.CASCADE)
+    def change_status(self):
+        self.Completed = not self.Completed
     
     
