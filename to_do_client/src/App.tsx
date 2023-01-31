@@ -6,10 +6,18 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Task } from './components/Task/Task'
 import Button from 'react-bootstrap/Button'
+import axios from 'axios'
+import { CsrfToken } from './components/CsrfToken'
 
 export type Tasks= {
   id: number;
   title: string;
+}
+
+export async function getTasks():Promise<Tasks[]>{
+  let response= await axios.get('allTasks')
+  console.log(response.data.tasks)
+  return response.data.tasks
 }
 
 
@@ -20,28 +28,10 @@ function App() {
     console.log(selectedIDs,'ue')
   },[selectedIDs])
   
-  function addToSelection(selected:number[],id:number, checked:boolean):void{
-    console.log("hello")
-    let mySelected=selected
-    if(checked){
-        mySelected.push(Number(id))
-    }
-    else{
-        let newSelected:number[]=[]
-        for(let i=0; i< mySelected.length; i++){
-            if(mySelected[i]!==id){
-                newSelected.push(mySelected[i])
-            }
-        }
-        mySelected=newSelected
-    }
-    console.log(mySelected,'s')
-    return setSelectedIDs(mySelected)
-
-}
-
+  CsrfToken()
   return (
     <Container className="App">
+     
     <Row>
       <Header selectedIDs={selectedIDs} />
     </Row>
