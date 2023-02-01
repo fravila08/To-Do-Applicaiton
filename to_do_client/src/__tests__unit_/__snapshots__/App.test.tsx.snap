@@ -18,7 +18,66 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
   </div>
   <div
     className="row"
-  />
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+        style={
+          {
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <div
+          className="col"
+        >
+          <button
+            className="btn btn-danger"
+            disabled={true}
+            type="button"
+          >
+            Delete
+          </button>
+          <button
+            className="btn btn-warning"
+            disabled={true}
+            type="button"
+          >
+            Change Status
+          </button>
+        </div>
+        <div
+          className="col"
+        >
+          <form
+            className=""
+            onSubmit={[Function]}
+            style={
+              {
+                "display": "flex",
+              }
+            }
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              value=""
+            />
+            <button
+              className="btn btn-success"
+              disabled={true}
+              type="submit"
+            >
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <div
     className="row"
   >

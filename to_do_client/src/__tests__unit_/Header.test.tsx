@@ -2,6 +2,7 @@ import { describe, expect, it, vi, Mocked } from "vitest";
 import TestRenderer from 'react-test-renderer';
 import { Header, createTask } from "../components/Header";
 import axios from 'axios';
+import { Tasks } from "../App";
 
 vi.mock('axios')
 
@@ -19,7 +20,11 @@ describe("This will confirm the correct information will be sent on `post`",()=>
 describe("Will take a snapshot of the current Header compenent",()=>{
     it("will create a snapshot",()=>{
         let selectedIDs:number[]=[]
-        const header= TestRenderer.create(<Header selectedIDs={selectedIDs}/>)
+        let pendTasks:Tasks[]=[]
+        const setPendTasks= (tasks: Tasks[]) =>{pendTasks=tasks};
+        let bigID:number=0
+        const setBigID=(id: number)=>{bigID=id};
+        const header= TestRenderer.create(<Header bigID={bigID} setBigID={setBigID} pendTasks={pendTasks} setPendTasks={setPendTasks} selectedIDs={selectedIDs}/>)
         expect(header).toMatchSnapshot()
     })
 })

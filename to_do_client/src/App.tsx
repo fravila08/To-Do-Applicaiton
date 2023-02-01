@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import { Task } from './components/Task'
 import axios from 'axios'
 import { CsrfToken } from './components/CsrfToken'
+import { Header } from './components/Header'
 
 export interface Tasks {
   id: number;
@@ -16,6 +17,7 @@ export interface Tasks {
 export interface RTasks{
   completed: Tasks[];
   pending: Tasks[];
+  biggestID: number;
 }
 
 export async function getTasks():Promise<RTasks>{
@@ -29,6 +31,7 @@ function App() {
   const [selectedIDs, setSelectedIDs]= useState<number[]>([])
   const [compTasks, setCompTasks]:[Tasks[],(compTasks:Tasks[])=>void]=React.useState(dTasks)
   const [pendTasks, setPendTasks]:[Tasks[],(pendTasks:Tasks[])=>void]=React.useState(dTasks)
+  const [bigID, setBigID]=useState<number>(0)
 
   
   useEffect(()=>{
@@ -36,6 +39,7 @@ function App() {
       let response=await getTasks()
       setCompTasks(response.completed)
       setPendTasks(response.pending)
+      setBigID(response.biggestID)
     }
     getResponse()
   },[])
@@ -54,7 +58,7 @@ function App() {
         <h1>To Do App</h1>
     </Row>
     <Row>
-      {/* <Header selectedIDs={selectedIDs} /> */}
+      <Header bigID={bigID} setBigID={setBigID} pendTasks={pendTasks} setPendTasks={setPendTasks} selectedIDs={selectedIDs} />
     </Row>
 
     <Row>
