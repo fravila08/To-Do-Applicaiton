@@ -11,7 +11,12 @@ exports[`Will take a snapshot of the current Task compenent > will create a snap
   }
 >
   <div
-    className="col-9"
+    className="col-8"
+    style={
+      {
+        "display": "flex",
+      }
+    }
   >
     Style
   </div>

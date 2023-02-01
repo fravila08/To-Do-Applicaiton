@@ -3,36 +3,49 @@
 exports[`Will take a snapshot of the current Header compenent > will create a snapshot 1`] = `
 <div
   className="container"
+  style={
+    {
+      "marginBottom": "1vh",
+    }
+  }
 >
   <div
     className="row"
-    style={
-      {
-        "display": "flex",
-        "justifyContent": "space-between",
-      }
-    }
   >
     <div
-      className="col"
+      className="col-4"
+      style={
+        {
+          "display": "flex",
+          "justifyContent": "center",
+          "margin": 0,
+          "padding": 0,
+        }
+      }
     >
       <button
         className="btn btn-danger"
         disabled={true}
         type="button"
       >
-        Delete
+        Del
       </button>
       <button
         className="btn btn-warning"
         disabled={true}
         type="button"
       >
-        Change Status
+        Stat
       </button>
     </div>
     <div
-      className="col"
+      className="col-8"
+      style={
+        {
+          "margin": 0,
+          "padding": 0,
+        }
+      }
     >
       <form
         className=""

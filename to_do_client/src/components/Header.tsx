@@ -45,15 +45,15 @@ export const Header: React.FC<IdsProps>=({bigID, setBigID ,pendTasks, setPendTas
         }
     }
     
-
+// style={{display:"flex", justifyContent:"space-between"}}
     return(
-        <Container >
-            <Row style={{display:"flex", justifyContent:"space-between"}}>
-                <Col>
-                    <Button variant='danger'   disabled={selectedIDs.length>=1? false: true}>Delete</Button>
-                    <Button variant='warning'  disabled={selectedIDs.length>=1? false: true}>Change Status</Button>
+        <Container style={{marginBottom:"1vh"}}>
+            <Row >
+                <Col style={{margin:0,padding:0, display:"flex", justifyContent:'center'}} xs={4}>
+                    <Button variant='danger'   disabled={selectedIDs.length>=1? false: true}>Del</Button>
+                    <Button variant='warning'  disabled={selectedIDs.length>=1? false: true}>Stat</Button>
                 </Col>
-                <Col>
+                <Col xs={8} style={{margin:0,padding:0}}>
                     <Form style={{display:"flex"}} onSubmit={(e)=>creatingNewTask(newTask, e)}>
                         <Form.Control value={newTask} onChange={(e)=>setNewTask(e.target.value)} />
                         <Button variant='success' disabled={showCreate} type="submit">Create</Button>

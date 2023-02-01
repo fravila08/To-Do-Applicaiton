@@ -17,7 +17,7 @@ interface IdSelectionProps{
 export const Task: React.FC<IdSelectionProps>=({setSelected, selected, task})=>{
     return(
         <Row style={{backgroundColor:"grey", border:"black 2px solid"}}>
-            <Col xs={9}>
+            <Col xs={8} style={{display:'flex'}}>
                 {task.Title}
             </Col>
             <Col xs={2}>
