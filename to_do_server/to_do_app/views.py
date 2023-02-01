@@ -17,7 +17,9 @@ def all_tasks(request):
         pendingTasks=filter(lambda x:x['Completed'] == False, myTasks)
         completedTasks=list(completedTasks)
         pendingTasks=list(pendingTasks)
-        biggestId=max(myTasks, key=lambda x:x['id'])['id']
+        biggestId=0
+        if len(myTasks) > 0:
+            biggestId=max(myTasks, key=lambda x:x['id'])['id']
         return JsonResponse({"completed":completedTasks, 'pending':pendingTasks,"biggestId":biggestId})
     elif request.method=='POST':
         try:

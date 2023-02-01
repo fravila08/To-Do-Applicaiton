@@ -5,6 +5,7 @@ This To-Do application will allow users to `create` new tasks, `update` existing
 
 - Documentation
   - [Running Tests](https://github.com/fravila08/To-Do-Applicaiton/tree/starting_react/documentation/tests)
+  - [API Documentation](https://github.com/fravila08/To-Do-Applicaiton/tree/starting_react/documentation/API_Ref/api_doc.md)
 
 ## Out-Line
 
@@ -96,7 +97,9 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`django`= your Django SECRET_KEY   
+```
+  django= your Django SECRET_KEY   
+```
 
 
 
