@@ -1,25 +1,17 @@
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import { useEffect, useState } from 'react'
-import { ITask } from '../App'
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { ITask } from "../App";
 
-interface IdSelectionProps{
-    task: ITask;
+interface TaskProps {
+  task: ITask;
 }
 
-
-
-
-export const Task: React.FC<IdSelectionProps>=({task})=>{
-    return(
-        <Row className='task'>
-
-            <Col xs={9} className='taskTitle'>
-                {task.title}
-            </Col>
-            
-        </Row>
-    )
-}
+export const Task: React.FC<TaskProps> = ({ task }) => {
+  return (
+    <Row className="task">
+      <Col xs={9} className="taskTitle">
+        {task.title}
+      </Col>
+    </Row>
+  );
+};
