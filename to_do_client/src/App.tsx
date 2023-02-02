@@ -55,7 +55,7 @@ function App() {
     <Container className="App">
      
     <Row style={{textAlign:"center"}}>
-        <h1>To Do App</h1>
+        <h1 id="LastEle">To Do App</h1>
     </Row>
     <Row>
       <Header bigID={bigID} setBigID={setBigID} pendTasks={pendTasks} setPendTasks={setPendTasks} selectedIDs={selectedIDs} />
@@ -90,9 +90,9 @@ function App() {
           ))}
      
       </Col>
-      <Col xs={1}>
+      <Col  xs={1}>
         
-      </Col>
+      </Col >
     </Row>
     </Container>
   )

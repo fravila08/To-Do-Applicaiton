@@ -10,9 +10,9 @@ vi.mock('axios')
 describe("Interacts with database to get data",()=>{
     it("will mock axios to test it's funcionality",async ()=>{
         const mockedAxios= axios as Mocked<typeof axios>;
-        mockedAxios.get.mockResolvedValue({data:{completed:[],pending:[]}})
+        mockedAxios.get.mockResolvedValue({data:{completed:[],pending:[], bigId:0}})
         const tasks=await getTasks()
-        expect(tasks).toStrictEqual({completed:[],pending:[]})
+        expect(tasks).toStrictEqual({completed:[],pending:[],bigId:0})
     })
 })
 

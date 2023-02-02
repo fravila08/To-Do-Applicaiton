@@ -55,12 +55,11 @@ export const Header: React.FC<IdsProps>=({bigID, setBigID ,pendTasks, setPendTas
                 </Col>
                 <Col xs={8} style={{margin:0,padding:0}}>
                     <Form style={{display:"flex"}} onSubmit={(e)=>creatingNewTask(newTask, e)}>
-                        <Form.Control value={newTask} onChange={(e)=>setNewTask(e.target.value)} />
-                        <Button variant='success' disabled={showCreate} type="submit">Create</Button>
+                        <Form.Control value={newTask} id='createTaskInput' onChange={(e)=>setNewTask(e.target.value)} />
+                        <Button variant='success' id='createTaskButton' disabled={showCreate} type="submit">Create</Button>
                     </Form>
                 </Col>
             </Row>
-            
         </Container>
     )
 }
