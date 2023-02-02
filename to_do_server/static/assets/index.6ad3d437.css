@@ -1,4 +1,4 @@
-@charset "UTF-8";/*!
+@charset "UTF-8";#Header{text-align:center}.listHolder{border:black solid 4px;min-height:40vh;background-color:#d3d3d3;text-align:center}.listHeader{background-color:#f5f5f5;border-radius:5vw;margin-top:1vh}.task{background-color:gray;border:black 2px solid}.taskTitle{display:flex}/*!
 * Bootstrap  v5.2.3 (https://getbootstrap.com/)
 * Copyright 2011-2022 The Bootstrap Authors
 * Copyright 2011-2022 Twitter, Inc.

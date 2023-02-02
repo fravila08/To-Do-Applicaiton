@@ -12,18 +12,12 @@ def home(request):
 def all_tasks(request):
     if request.method=='GET':
         myTasks = list(Task.objects.all().values())
-        # print(myTasks)
         completedTasks= filter(lambda x:x['Completed'] ==True, myTasks)
         pendingTasks=filter(lambda x:x['Completed'] == False, myTasks)
         completedTasks=list(completedTasks)
         pendingTasks=list(pendingTasks)
-        biggestId=max(myTasks, key=lambda x:x['id'])['id']
+        biggestId=1
+        if len(myTasks)>=1:
+            biggestId=max(myTasks, key=lambda x:x['id'])['id']
         return JsonResponse({"completed":completedTasks, 'pending':pendingTasks,"biggestId":biggestId})
-    elif request.method=='POST':
-        try:
-            newTask=Task.objects.create(Title=request.data['name'])
-            newTask.save()
-            return JsonResponse({'itemCreated':True})
-        except:
-            return JsonResponse({'itemCreated':False})
     
