@@ -64,7 +64,7 @@ function App() {
     <Row>
       <Col xs={1}>
       </Col>
-      <Col xs={10} style={{border:"black solid 4px", height:"40vh", backgroundColor:"lightgray", textAlign:"center"}}>
+      <Col xs={10} style={{border:"black solid 4px", height:"40vh", backgroundColor:"lightgray", textAlign:"center",flexWrap:'wrap', overflowY:'scroll'}}>
         <h5 style={{backgroundColor:"white", borderRadius:"5vw", marginTop:"5px"}}>Pending</h5>
         
         {pendTasks.map((task)=>(
@@ -79,7 +79,7 @@ function App() {
       <Col xs={1}>
       </Col>
       <Col xs={10} style={{border:"black solid 4px", height:"40vh", backgroundColor:"lightgray", textAlign:"center"}}>
-        <h5 style={{backgroundColor:"white", borderRadius:"5vw", marginTop:"5px"}}>Completed</h5>
+        <h5 style={{backgroundColor:"white", borderRadius:"5vw", marginTop:"5px", flexWrap:'wrap', overflowY:'scroll' }}>Completed</h5>
        
           {compTasks.map((task)=>(
             <Task 

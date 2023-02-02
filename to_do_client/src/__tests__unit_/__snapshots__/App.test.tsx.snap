@@ -12,7 +12,9 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
       }
     }
   >
-    <h1>
+    <h1
+      id="LastEle"
+    >
       To Do App
     </h1>
   </div>
@@ -76,12 +78,14 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
           >
             <input
               className="form-control"
+              id="createTaskInput"
               onChange={[Function]}
               value=""
             />
             <button
               className="btn btn-success"
               disabled={true}
+              id="createTaskButton"
               type="submit"
             >
               Create
