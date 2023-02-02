@@ -14,15 +14,15 @@
 
 - Running Models Tests
 ```bash
-  python3 manage.py test to_do_app/tests/test_models.py
+  python3 manage.py test to_do_app.tests.test_models
 ```
 
 - Running Urls Tests
 ```bash
-  python3 manage.py test to_do_app/tests/test_urls.py
+  python3 manage.py test to_do_app.tests.test_urls
 ```
 
 - Running Views Tests
 ```bash
-  python3 manage.py test to_do_app/tests/test_views.py
+  python3 manage.py test to_do_app.tests.test_views
 ```
