@@ -9,4 +9,4 @@ class TestViews(TestCase):
         client=Client()
         response=client.get(reverse("allTasks"))
         body=json.loads(response.content)
-        self.assertEquals(body, {'completed':[],'pending':[], 'biggestId':1})
+        self.assertEquals(body, {'tasks':[]})

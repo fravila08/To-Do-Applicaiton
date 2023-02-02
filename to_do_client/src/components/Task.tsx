@@ -3,10 +3,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import { useEffect, useState } from 'react'
-import { TaskInterface } from '../App'
+import { ITask } from '../App'
 
 interface IdSelectionProps{
-    task: TaskInterface;
+    task: ITask;
 }
 
 
@@ -17,7 +17,7 @@ export const Task: React.FC<IdSelectionProps>=({task})=>{
         <Row className='task'>
 
             <Col xs={9} className='taskTitle'>
-                {task.Title}
+                {task.title}
             </Col>
             
         </Row>

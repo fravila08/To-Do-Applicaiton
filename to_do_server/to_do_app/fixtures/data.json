@@ -3,44 +3,44 @@
         "model": "to_do_app.Task",
         "pk": 1,
         "fields":{
-            "Title":"Create Test"
+            "title":"Create Test"
         }
     },
     {
         "model":"to_do_app.Task",
         "pk":2,
         "fields":{
-            "Title":"Code some more"
+            "title":"Code some more"
         }
     },
     {
         "model":"to_do_app.Task",
         "pk":3,
         "fields":{
-            "Title":"Learn more about TS"
+            "title":"Learn more about TS"
         }
     },
     {
         "model":"to_do_app.Task",
         "pk":4,
         "fields":{
-            "Title":"Read POODR"
+            "title":"Read POODR"
         }
     },
     {
         "model":"to_do_app.Task",
         "pk":5,
         "fields":{
-            "Title":"Complete Code Platoon",
-            "Completed":true
+            "title":"Complete Code Platoon",
+            "completed":true
         }
     },
     {
         "model":"to_do_app.Task",
         "pk":6,
         "fields":{
-            "Title":"Start hunting for jobs",
-            "Completed":true
+            "title":"Start hunting for jobs",
+            "completed":true
         }
     }
 ]

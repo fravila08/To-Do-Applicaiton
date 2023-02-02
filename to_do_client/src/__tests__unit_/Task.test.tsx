@@ -7,7 +7,7 @@ import TestRenderer from 'react-test-renderer';
 describe("Task.tsx",()=>{
     it("will create and match a snapshot",()=>{
         const header= TestRenderer.create(<Task 
-            task={{"id":1,"Title":"Style", "Completed":false}}
+            task={{"id":1,"title":"Style", "completed":false}}
         />)
         expect(header).toMatchSnapshot()
     })

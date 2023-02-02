@@ -10,9 +10,9 @@ describe("App.tsx",()=>{
     describe("getTasks function",()=>{
         it("will return 2 arrays of tasks [completed/pending]",async ()=>{
             const mockedAxios= axios as Mocked<typeof axios>;
-            mockedAxios.get.mockResolvedValue({data:{completed:[],pending:[]}})
+            mockedAxios.get.mockResolvedValue({data:{tasks:[]}})
             const tasks=await getTasks()
-            expect(tasks).toStrictEqual({completed:[],pending:[]})
+            expect(tasks).toStrictEqual({tasks:[]})
         })
     })
 })

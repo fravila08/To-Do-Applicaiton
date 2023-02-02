@@ -7,16 +7,14 @@ import { Task } from './components/Task'
 import axios from 'axios'
 import { CsrfToken } from './components/CsrfToken'
 
-export interface TaskInterface {
+export interface ITask {
     id: number;
-    Title: string;
-    Completed:boolean;
+    title: string;
+    completed:boolean;
 }
 
 export interface ResponseTasks{
-    completed: TaskInterface[];
-    pending: TaskInterface[];
-    biggestID: number;
+    tasks: ITask[];
 }
 
 export async function getTasks():Promise<ResponseTasks>{
@@ -27,14 +25,12 @@ export async function getTasks():Promise<ResponseTasks>{
 
 function App() {
   
-  const [compTasks, setCompTasks] : [TaskInterface[] , (compTasks:TaskInterface[])=>void]=useState<TaskInterface[]>([])
-  const [pendTasks, setPendTasks] : [TaskInterface[] , (pendTasks:TaskInterface[])=>void]=useState<TaskInterface[]>([])
-  
+  const [tasks, setTasks]:[ITask[], (tasks:ITask[])=>void]=useState<ITask[]>([])
+
   useEffect(()=>{
       const getResponse=async ()=>{ 
           let response=await getTasks()
-          setCompTasks(response.completed)
-          setPendTasks(response.pending)
+          setTasks(response.tasks)
       }
       getResponse()
   },[])
@@ -56,10 +52,12 @@ function App() {
           
           <h5 className='listHeader'> Pending </h5>
           
-          {pendTasks.map((task)=>(
+          {tasks.map((task)=>(task.completed === false ?
             <Task 
               task={task} 
             />
+            :
+            null
           ))}
 
         </Col>
@@ -76,10 +74,12 @@ function App() {
           
           <h5 className='listHeader'> Completed </h5>
         
-          {compTasks.map((task)=>(
+          {tasks.map((task)=>( task.completed?
             <Task 
               task={task}
             />
+            :
+            null
           ))}
       
         </Col>
