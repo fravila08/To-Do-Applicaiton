@@ -1,0 +1,54 @@
+// Vitest Snapshot v1
+
+exports[`App > will create and match snapshot 1`] = `
+<div
+  className="App container"
+>
+  <div
+    className="row"
+    id="Header"
+  >
+    <h1>
+      To Do App
+    </h1>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col-1"
+    />
+    <div
+      className="listHolder col-10"
+    >
+      <h5
+        className="listHeader"
+      >
+         Pending 
+      </h5>
+    </div>
+    <div
+      className="col-1"
+    />
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col-1"
+    />
+    <div
+      className="listHolder col-10"
+    >
+      <h5
+        className="listHeader"
+      >
+         Completed 
+      </h5>
+    </div>
+    <div
+      className="col-1"
+    />
+  </div>
+</div>
+`;

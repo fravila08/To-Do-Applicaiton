@@ -25,7 +25,7 @@ Checkout current branch
   git checkout starting_django
 ```
 
-Create and activate Python Virtuan Environment
+Create and activate Python Virtual Environment
 
 ```bash
 #CREATE
@@ -53,10 +53,10 @@ Create .env file with `SECRET_KEY` from to_do_server/settings.py
   #Opens vim and creates your .env file in current directory
   vim .env
 
-  #Press 'i' on the keyboard and type in the following
+  #Press 'i' on your keyboard and type in the following
   django = <SECRET_KEY>
 
-  #Now exit --INSERT-- mode by pressing the 'ESC' key on yyour keyboard
+  #Now exit --INSERT-- mode by pressing the 'ESC' key on your keyboard
   #then exit and save the file by entering the following
   :wq
 ```

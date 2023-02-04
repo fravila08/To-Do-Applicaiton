@@ -9,5 +9,9 @@
 
 - Running Unit Test
 ```bash
-    npm run test __tests__unit_
+    npm run test Unit.test.tsx
 ```
+
+- End-to-End (e2e) Test
+```bash
+    npm run E2E.test.tsx

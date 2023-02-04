@@ -1,44 +1,22 @@
 // Vitest Snapshot v1
 
-exports[`Will take a snapshot of the current Task compenent > will create a snapshot 1`] = `
+exports[`Task.tsx > will create and match a snapshot 1`] = `
 <div
-  className="row"
-  style={
-    {
-      "backgroundColor": "grey",
-      "border": "black 2px solid",
-    }
-  }
+  className="task row"
 >
   <div
+<<<<<<< HEAD
     className="col-8"
     style={
       {
         "display": "flex",
       }
     }
+=======
+    className="taskTitle col-9"
+>>>>>>> starting_react
   >
     Style
-  </div>
-  <div
-    className="col-2"
-  >
-    <div
-      className="form-check"
-    >
-      <input
-        className="form-check-input"
-        disabled={false}
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="form-check-label"
-        title=""
-      >
-        select
-      </label>
-    </div>
   </div>
 </div>
 `;

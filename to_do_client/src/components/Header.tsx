@@ -5,11 +5,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Tasks } from '../App'
+import { ITask } from '../App'
 
 interface IdsProps{
-    pendTasks:Tasks[];
-    setPendTasks: (pendTasks: Tasks[]) => void;
+    pendTasks:ITask[];
+    setPendTasks: (pendTasks: ITask[]) => void;
     selectedIDs: number[];
     bigID:number;
     setBigID:(bigID: number)=>void;
@@ -39,7 +39,7 @@ export const Header: React.FC<IdsProps>=({bigID, setBigID ,pendTasks, setPendTas
         event?.preventDefault()
         let response=await createTask(str)
         if(response){
-            setPendTasks([...pendTasks, {'id':bigID,'Title':str,'Completed':false}])
+            setPendTasks([...pendTasks, {'id':bigID,'title':str,'completed':false}])
             setBigID(bigID++)
             setNewTask('')
         }

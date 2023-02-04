@@ -1,0 +1,25 @@
+#Header {
+  text-align: center;
+}
+
+.listHolder {
+  border: black solid 4px;
+  min-height: 40vh;
+  background-color: lightgrey;
+  text-align: center;
+}
+
+.listHeader {
+  background-color: whitesmoke;
+  border-radius: 5vw;
+  margin-top: 1vh;
+}
+
+.task {
+  background-color: grey;
+  border: black 2px solid;
+}
+
+.taskTitle {
+  display: flex;
+}

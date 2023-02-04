@@ -10,12 +10,12 @@ class TestViews(TestCase):
     def test_get_all_tasks(self):
         response=self.client.get(reverse("allTasks"))
         body=json.loads(response.content)
-        self.assertEquals(body, {'completed':[],'pending':[], 'biggestId':0})
+        self.assertEquals(body, {'tasks':[]})
         
     def test_new_task_body(self):
         response=self.client.post(reverse('newtask'))
         body=json.loads(response.content)
-        self.assertDictEqual(body,{'itemCreated':False})
+        self.assertDictEqual(body,{'itemCreated':False, 'id':0})
         
     def test_new_task_improper_input(self):
         response=self.client.post(reverse('newtask'))

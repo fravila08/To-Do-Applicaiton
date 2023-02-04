@@ -14,15 +14,16 @@
 ``` http
   POST .../newtask
 ```
-- Body of Request
+- Body of Request: 
 
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `name` | `string` | **Required:** Name of task being created |
 
-- Body of Response: Will return true if body is valid 
+
+- Body of Response: Will return true and the new task ID if item is successfully created
 
 ```
-  {'itemCreated':boolean}
+  {'itemCreated':boolean, 'id':int}
 ```

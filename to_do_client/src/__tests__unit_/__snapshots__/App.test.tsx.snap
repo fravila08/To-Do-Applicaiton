@@ -1,16 +1,12 @@
 // Vitest Snapshot v1
 
-exports[`Will take a snapshot of the current Header compenent > will create a snapshot 1`] = `
+exports[`App.tsx > will create and match snapshot 1`] = `
 <div
   className="App container"
 >
   <div
     className="row"
-    style={
-      {
-        "textAlign": "center",
-      }
-    }
+    id="Header"
   >
     <h1
       id="LastEle"
@@ -22,6 +18,7 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
     className="row"
   >
     <div
+<<<<<<< HEAD
       className="container"
       style={
         {
@@ -99,29 +96,17 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
     className="row"
   >
     <div
+=======
+>>>>>>> starting_react
       className="col-1"
     />
     <div
-      className="col-10"
-      style={
-        {
-          "backgroundColor": "lightgray",
-          "border": "black solid 4px",
-          "height": "40vh",
-          "textAlign": "center",
-        }
-      }
+      className="listHolder col-10"
     >
       <h5
-        style={
-          {
-            "backgroundColor": "white",
-            "borderRadius": "5vw",
-            "marginTop": "5px",
-          }
-        }
+        className="listHeader"
       >
-        Pending
+         Pending 
       </h5>
     </div>
     <div
@@ -135,26 +120,12 @@ exports[`Will take a snapshot of the current Header compenent > will create a sn
       className="col-1"
     />
     <div
-      className="col-10"
-      style={
-        {
-          "backgroundColor": "lightgray",
-          "border": "black solid 4px",
-          "height": "40vh",
-          "textAlign": "center",
-        }
-      }
+      className="listHolder col-10"
     >
       <h5
-        style={
-          {
-            "backgroundColor": "white",
-            "borderRadius": "5vw",
-            "marginTop": "5px",
-          }
-        }
+        className="listHeader"
       >
-        Completed
+         Completed 
       </h5>
     </div>
     <div
