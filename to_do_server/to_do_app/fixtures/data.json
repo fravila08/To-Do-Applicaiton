@@ -1,0 +1,46 @@
+[
+  {
+    "model": "to_do_app.Task",
+    "pk": 1,
+    "fields": {
+      "title": "Create Test"
+    }
+  },
+  {
+    "model": "to_do_app.Task",
+    "pk": 2,
+    "fields": {
+      "title": "Code some more"
+    }
+  },
+  {
+    "model": "to_do_app.Task",
+    "pk": 3,
+    "fields": {
+      "title": "Learn more about TS"
+    }
+  },
+  {
+    "model": "to_do_app.Task",
+    "pk": 4,
+    "fields": {
+      "title": "Read POODR"
+    }
+  },
+  {
+    "model": "to_do_app.Task",
+    "pk": 5,
+    "fields": {
+      "title": "Complete Code Platoon",
+      "completed": true
+    }
+  },
+  {
+    "model": "to_do_app.Task",
+    "pk": 6,
+    "fields": {
+      "title": "Start hunting for jobs",
+      "completed": true
+    }
+  }
+]
