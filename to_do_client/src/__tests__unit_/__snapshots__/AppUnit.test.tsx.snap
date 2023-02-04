@@ -16,6 +16,49 @@ exports[`App > will create and match snapshot 1`] = `
     className="row"
   >
     <div
+      className="container"
+      style={
+        {
+          "marginBottom": "1vh",
+        }
+      }
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-4"
+        />
+        <div
+          className="formHolder col-8"
+        >
+          <form
+            className=""
+            onSubmit={[Function]}
+          >
+            <input
+              className="form-control"
+              id="createTaskInput"
+              onChange={[Function]}
+              value=""
+            />
+            <button
+              className="btn btn-success"
+              disabled={true}
+              id="createTaskButton"
+              type="submit"
+            >
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
       className="col-1"
     />
     <div

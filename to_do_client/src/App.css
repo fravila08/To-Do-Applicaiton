@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+/* List holders [pending/completed] */
+
 .listHolder {
   border: black solid 4px;
   min-height: 40vh;
@@ -15,11 +17,24 @@
   margin-top: 1vh;
 }
 
+/* Task Row */
+
 .task {
   background-color: grey;
   border: black 2px solid;
 }
 
 .taskTitle {
+  display: flex;
+}
+
+/* Input field on upper right hand corner */
+
+.FormHolder {
+  margin: 0;
+  padding: 0;
+}
+
+Form {
   display: flex;
 }

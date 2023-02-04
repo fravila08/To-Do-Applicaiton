@@ -20,12 +20,14 @@ export async function getTasks(): Promise<ITask[]> {
 }
 
 function App() {
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
+  const [pendingTasks, setPendingTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
     const getResponse = async () => {
       let response = await getTasks();
-      setTasks(response);
+      setCompletedTasks(response.filter((task) => task.completed));
+      setPendingTasks(response.filter((task) => !task.completed));
     };
     getResponse();
   }, []);
@@ -38,10 +40,13 @@ function App() {
         <h1>To Do App</h1>
       </Row>
       <Row>
+        <Header pendTasks={pendingTasks} setPendTasks={setPendingTasks} />
+      </Row>
+      <Row>
         <Col xs={1}></Col>
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Pending </h5>
-          {tasks.map((task) =>
+          {pendingTasks.map((task) =>
             task.completed === false ? <Task task={task} /> : null
           )}
         </Col>
@@ -51,7 +56,9 @@ function App() {
         <Col xs={1}></Col>
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Completed </h5>
-          {tasks.map((task) => (task.completed ? <Task task={task} /> : null))}
+          {completedTasks.map((task) =>
+            task.completed ? <Task task={task} /> : null
+          )}
         </Col>
         <Col xs={1}></Col>
       </Row>

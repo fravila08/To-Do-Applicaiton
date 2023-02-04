@@ -6,7 +6,6 @@ import App from "../App";
 
 vi.mock("axios");
 
-
 describe("App", () => {
   describe("getTasks()", () => {
     it("will return an array of tasks", async () => {
