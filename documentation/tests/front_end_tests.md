@@ -15,7 +15,8 @@
 ```
 
 - End-to-End (e2e) Test
+  - **NOTE**: This will open a chromium browser and create a new task if you'd like to run this test multiple times, please ensure to delete the newly created task from your database prior to.
 
 ```bash
-    npm run E2E.test.tsx
+    npm run test E2E.test.tsx
 ```
