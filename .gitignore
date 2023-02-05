@@ -1,6 +1,6 @@
 env
 .vscode
 to_do_server/.env
-to_do_server/to_do_server/__pycache__/
-to_do_server/to_do_app/__pycache__/
-to_do_server/to_do_app/tests/__pycache__/
+to_do_server/to_do_server/__pycache__
+to_do_server/to_do_app/__pycache__
+to_do_server/to_do_app/tests/__pycache__

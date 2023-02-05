@@ -8,8 +8,8 @@ def home(request):
     the_index = open('static/index.html').read()
     return HttpResponse(the_index)
 
-@api_view(['GET', 'POST'])
-def all_tasks(request):
+@api_view(['GET', 'POST','PUT'])
+def all_tasks(request, id=0):
     if request.method=='GET':
         my_tasks = list(Task.objects.all().values())
         return JsonResponse({'tasks':my_tasks})
@@ -20,5 +20,12 @@ def all_tasks(request):
             return JsonResponse({'itemCreated':True, 'id': newTask.id})
         except:
             return JsonResponse({'itemCreated':False, 'id':0})
+    elif request.method =='PUT':
+        try:
+            task= Task.objects.get(id=id)
+            task.change_status()
+            return JsonResponse({'changed':True})
+        except:
+            return JsonResponse({'changed':False})
 
     

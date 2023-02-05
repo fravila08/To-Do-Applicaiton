@@ -47,17 +47,17 @@ function App() {
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Pending </h5>
           {pendingTasks.map((task) =>
-            task.completed === false ? <Task task={task} /> : null
+             <Task pendingTasks={pendingTasks} setPendingTasks={setPendingTasks} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} task={task} />
           )}
         </Col>
         <Col xs={1}></Col>
       </Row>
       <Row>
         <Col xs={1}></Col>
-        <Col xs={10} className="listHolder">
+        <Col xs={10} id="CompletedList" className="listHolder">
           <h5 className="listHeader"> Completed </h5>
           {completedTasks.map((task) =>
-            task.completed ? <Task task={task} /> : null
+            <Task pendingTasks={pendingTasks} setPendingTasks={setPendingTasks} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} task={task} />
           )}
         </Col>
         <Col xs={1}></Col>

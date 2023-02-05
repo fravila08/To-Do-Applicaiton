@@ -7,5 +7,6 @@ class Task(models.Model):
     
     def change_status(self):
         self.completed = not self.completed
+        self.save()
     
     
