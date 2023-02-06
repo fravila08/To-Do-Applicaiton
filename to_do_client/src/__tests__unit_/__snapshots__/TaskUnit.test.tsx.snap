@@ -25,11 +25,13 @@ exports[`Task > will create and match a snapshot 1`] = `
         checked={false}
         className="form-check-input"
         disabled={false}
+        id="taskCheck1"
         onChange={[Function]}
         type="checkbox"
       />
       <label
         className="form-check-label"
+        htmlFor="taskCheck1"
         title=""
       >
         Done

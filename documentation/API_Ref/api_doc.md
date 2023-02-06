@@ -29,3 +29,15 @@
 ```
   {'itemCreated':boolean, 'id':int}
 ```
+
+### Change Task's Completed Status
+
+```http
+  PUT .../changestatus/<int:id of selected task>
+```
+
+- Body of Response: Will return if the task's completed status was changed.
+
+```
+  {'changed':boolean}
+```

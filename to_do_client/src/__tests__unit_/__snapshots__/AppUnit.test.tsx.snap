@@ -82,6 +82,7 @@ exports[`App > will create and match snapshot 1`] = `
     />
     <div
       className="listHolder col-10"
+      id="CompletedList"
     >
       <h5
         className="listHeader"
