@@ -22,14 +22,14 @@ describe("Task", () => {
 
 describe("Task", () => {
   it("will create and match a snapshot", () => {
-    let selectedTasks:number[]=[]
-    const setSelectedTasks=(nl:number[])=>{
-      selectedTasks=nl
-    }
-    let allTasks:ITask[]=[]
-    const setAllTasks=(tl:ITask[])=>{
-      allTasks=tl
-    }
+    let selectedTasks: number[] = [];
+    const setSelectedTasks = (nl: number[]) => {
+      selectedTasks = nl;
+    };
+    let allTasks: ITask[] = [];
+    const setAllTasks = (tl: ITask[]) => {
+      allTasks = tl;
+    };
     const header = TestRenderer.create(
       <Task
         selectedTasks={selectedTasks}

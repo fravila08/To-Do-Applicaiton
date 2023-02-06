@@ -55,14 +55,14 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const evalChangeStatus=():boolean=>{
-    let mylist = selectedTasks
-    return mylist.length < 1
-  }
+  const evalChangeStatus = (): boolean => {
+    let mylist = selectedTasks;
+    return mylist.length < 1;
+  };
 
-  useEffect(()=>{
-    evalChangeStatus()
-  },[selectedTasks])
+  useEffect(() => {
+    evalChangeStatus();
+  }, [selectedTasks]);
 
   useEffect(() => {
     let evalInput = newTask.replaceAll(" ", "");
