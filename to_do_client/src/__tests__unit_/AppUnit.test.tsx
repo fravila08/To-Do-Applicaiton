@@ -15,9 +15,7 @@ describe("App", () => {
       expect(tasks).toStrictEqual([]);
     });
   });
-});
 
-describe("App", () => {
   it("will create and match snapshot", () => {
     const myApp = TestRenderer.create(<App />);
     expect(myApp).toMatchSnapshot();

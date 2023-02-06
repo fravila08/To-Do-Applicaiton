@@ -8,8 +8,8 @@ import axios from "axios";
 import { ITask } from "../App";
 
 interface HeaderProps {
-  pendTasks: ITask[];
-  setPendTasks: (pendTasks: ITask[]) => void;
+  allTasks: ITask[];
+  setAllTasks: (allTasks: ITask[]) => void;
 }
 
 export interface ResponseCreateTask {
@@ -24,16 +24,16 @@ export const createTask = async (str: string): Promise<ResponseCreateTask> => {
   return response["data"];
 };
 
-export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
-  const [showCreate, setShowCreate] = useState(true);
+export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
     let evalInput = newTask.replaceAll(" ", "");
     if (evalInput.length >= 1 && evalInput != "") {
-      setShowCreate(false);
+      setIsDisabled(false);
     } else {
-      setShowCreate(true);
+      setIsDisabled(true);
     }
   }, [newTask]);
 
@@ -44,8 +44,8 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
     event?.preventDefault();
     let response = await createTask(str);
     if (response.itemCreated) {
-      setPendTasks([
-        ...pendTasks,
+      setAllTasks([
+        ...allTasks,
         { id: response.id, title: str, completed: false },
       ]);
       setNewTask("");
@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
             <Button
               variant="success"
               id="createTaskButton"
-              disabled={showCreate}
+              disabled={isDisabled}
               type="submit"
             >
               Create

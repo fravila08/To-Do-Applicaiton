@@ -19,16 +19,14 @@ describe("Header", () => {
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
     });
   });
-});
 
-describe("Header", () => {
   it("will create and match snapshot", () => {
-    let pendTasks: ITask[] = [];
-    const setPendTasks = (newPendTasks: ITask[]) => {
-      pendTasks = newPendTasks;
+    let allTasks: ITask[] = [];
+    const setAllTasks = (newAllTasks: ITask[]) => {
+      allTasks = newAllTasks;
     };
     const myHeader = TestRenderer.create(
-      <Header pendTasks={pendTasks} setPendTasks={setPendTasks} />
+      <Header allTasks={allTasks} setAllTasks={setAllTasks} />
     );
     expect(myHeader).toMatchSnapshot();
   });
