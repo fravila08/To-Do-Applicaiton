@@ -28,4 +28,19 @@ def all_tasks(request, id=0):
         except:
             return JsonResponse({'changed':False})
 
+@api_view(['PUT'])
+def multi_task_handler(request):
+    if request.method == 'PUT':
+        try:
+            def grab_task_and_change_status(id):
+                task= Task.objects.get(id=id)
+                task.change_status()
+                
+            selectedTasks=request.data['selected']
+            [grab_task_and_change_status(i) for i in selectedTasks]
+            return JsonResponse({'success':True})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'success':False})
+            
     

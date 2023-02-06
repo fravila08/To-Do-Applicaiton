@@ -5,6 +5,20 @@ exports[`Task > will create and match a snapshot 1`] = `
   className="task row"
 >
   <div
+    className="col"
+  >
+    <div
+      className=""
+    >
+      <input
+        className="form-check-input"
+        disabled={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+  </div>
+  <div
     className="taskTitle col-9"
     id="task1"
   >

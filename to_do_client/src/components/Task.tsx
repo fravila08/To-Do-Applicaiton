@@ -6,10 +6,10 @@ import axios from "axios";
 
 interface TaskProps {
   task: ITask;
-  pendingTasks: ITask[];
-  setPendingTasks: (pendTasks: ITask[]) => void;
-  completedTasks: ITask[];
-  setCompletedTasks: (completedTasks: ITask[]) => void;
+  selectedTasks: number[];
+  setSelectedTasks: (selectedTasks: number[]) => void;
+  allTasks: ITask[];
+  setAllTasks: (allTasks: ITask[]) => void;
 }
 
 export const changeTaskStatus = async (id: number) => {
@@ -19,31 +19,32 @@ export const changeTaskStatus = async (id: number) => {
 
 export const Task: React.FC<TaskProps> = ({
   task,
-  pendingTasks,
-  setPendingTasks,
-  completedTasks,
-  setCompletedTasks,
+  setSelectedTasks,
+  selectedTasks,
+  allTasks,
+  setAllTasks,
 }) => {
-  
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
     if (response) {
-      if (clicked) {
-        taskToChange.completed = clicked;
-        setCompletedTasks([...completedTasks, taskToChange]);
-        setPendingTasks(pendingTasks.filter((task) => task !== taskToChange));
-      } else {
-        taskToChange.completed = clicked;
-        setCompletedTasks(
-          completedTasks.filter((task) => taskToChange !== task)
-        );
-        setPendingTasks([...pendingTasks, taskToChange]);
-      }
+      setAllTasks(allTasks.filter((task) => task !== taskToChange));
+      taskToChange.completed = clicked;
+      setAllTasks([...allTasks]);
     }
   };
 
   return (
     <Row className="task">
+      <Col>
+        <Form.Check
+          type="checkbox"
+          onChange={(e) =>
+            e.target.checked
+              ? setSelectedTasks([...selectedTasks, task.id])
+              : setSelectedTasks(selectedTasks.filter((id) => id !== task.id))
+          }
+        />
+      </Col>
       <Col id={`task${task.id}`} xs={9} className="taskTitle">
         {task.title}
       </Col>

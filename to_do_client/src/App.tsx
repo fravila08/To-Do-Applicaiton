@@ -20,14 +20,13 @@ export async function getTasks(): Promise<ITask[]> {
 }
 
 function App() {
-  const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
-  const [pendingTasks, setPendingTasks] = useState<ITask[]>([]);
+  const [allTasks, setAllTasks] = useState<ITask[]>([]);
+  const [selectedTasks, setSelectedTasks] = useState<number[]>([]);
 
   useEffect(() => {
     const getResponse = async () => {
       let response = await getTasks();
-      setCompletedTasks(response.filter((task) => task.completed));
-      setPendingTasks(response.filter((task) => !task.completed));
+      setAllTasks(response);
     };
     getResponse();
   }, []);
@@ -40,14 +39,27 @@ function App() {
         <h1>To Do App</h1>
       </Row>
       <Row>
-        <Header pendTasks={pendingTasks} setPendTasks={setPendingTasks} />
+        <Header
+          allTasks={allTasks}
+          setAllTasks={setAllTasks}
+          selectedTasks={selectedTasks}
+          setSelectedTasks={setSelectedTasks}
+        />
       </Row>
       <Row>
         <Col xs={1}></Col>
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Pending </h5>
-          {pendingTasks.map((task) =>
-             <Task pendingTasks={pendingTasks} setPendingTasks={setPendingTasks} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} task={task} />
+          {allTasks.map((task) =>
+            !task.completed ? (
+              <Task
+                allTasks={allTasks}
+                setAllTasks={setAllTasks}
+                selectedTasks={selectedTasks}
+                setSelectedTasks={setSelectedTasks}
+                task={task}
+              />
+            ) : null
           )}
         </Col>
         <Col xs={1}></Col>
@@ -56,8 +68,16 @@ function App() {
         <Col xs={1}></Col>
         <Col xs={10} id="CompletedList" className="listHolder">
           <h5 className="listHeader"> Completed </h5>
-          {completedTasks.map((task) =>
-            <Task pendingTasks={pendingTasks} setPendingTasks={setPendingTasks} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} task={task} />
+          {allTasks.map((task) =>
+            task.completed ? (
+              <Task
+                allTasks={allTasks}
+                setAllTasks={setAllTasks}
+                selectedTasks={selectedTasks}
+                setSelectedTasks={setSelectedTasks}
+                task={task}
+              />
+            ) : null
           )}
         </Col>
         <Col xs={1}></Col>

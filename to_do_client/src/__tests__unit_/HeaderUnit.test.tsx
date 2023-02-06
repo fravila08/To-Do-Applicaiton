@@ -5,6 +5,7 @@ import { createTask } from "../components/Header";
 import { Header } from "../components/Header";
 import { ITask } from "../App";
 import { ResponseCreateTask } from "../components/Header";
+import { changeSelectedTasks } from "../components/Header";
 
 vi.mock("axios");
 
@@ -21,14 +22,31 @@ describe("Header", () => {
   });
 });
 
+describe("Header",()=>{
+  describe("changeSelectedTasks()",()=>{
+    it("Will return if request was successful", async()=>{
+      const mockedAxios= axios as Mocked<typeof axios>;
+      mockedAxios.put.mockResolvedValue({
+        data: {success: true}
+      })
+      const changedMultipleTasks = await changeSelectedTasks([1,2,3])
+      expect(changedMultipleTasks).toBeTruthy()
+    })
+  })
+})
+
 describe("Header", () => {
   it("will create and match snapshot", () => {
-    let pendTasks: ITask[] = [];
-    const setPendTasks = (newPendTasks: ITask[]) => {
-      pendTasks = newPendTasks;
-    };
+    let selectedTasks:number[]=[]
+    const setSelectedTasks =(nl:number[])=>{
+      selectedTasks=nl
+    }
+    let allTasks:ITask[]=[]
+    const setAllTasks=(tl:ITask[])=>{
+      allTasks=tl
+    }
     const myHeader = TestRenderer.create(
-      <Header pendTasks={pendTasks} setPendTasks={setPendTasks} />
+      <Header allTasks={allTasks} setAllTasks={setAllTasks} selectedTasks={selectedTasks} setSelectedTasks={setSelectedTasks} />
     );
     expect(myHeader).toMatchSnapshot();
   });

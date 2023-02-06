@@ -6,4 +6,5 @@ urlpatterns = [
     path('allTasks', views.all_tasks, name='allTasks'),
     path('newtask', views.all_tasks, name='newtask'),
     path('changestatus/<int:id>', views.all_tasks, name='changestatus'),
+    path('changemultiple', views.multi_task_handler, name='multiple'),
 ]

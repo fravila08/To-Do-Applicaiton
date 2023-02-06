@@ -14,7 +14,16 @@ exports[`Header > will create and match snapshot 1`] = `
   >
     <div
       className="col-4"
-    />
+    >
+      <button
+        className="btn btn-primary"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      >
+        CS
+      </button>
+    </div>
     <div
       className="formHolder col-8"
     >

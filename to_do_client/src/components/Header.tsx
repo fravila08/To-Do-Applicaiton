@@ -8,8 +8,10 @@ import axios from "axios";
 import { ITask } from "../App";
 
 interface HeaderProps {
-  pendTasks: ITask[];
-  setPendTasks: (pendTasks: ITask[]) => void;
+  selectedTasks: number[];
+  setSelectedTasks: (selectedTasks: number[]) => void;
+  allTasks: ITask[];
+  setAllTasks: (allTasks: ITask[]) => void;
 }
 
 export interface ResponseCreateTask {
@@ -24,9 +26,43 @@ export const createTask = async (str: string): Promise<ResponseCreateTask> => {
   return response["data"];
 };
 
-export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
+export const changeSelectedTasks = async (lst: number[]) => {
+  let resposne = await axios.put("changemultiple", { selected: lst });
+  return resposne.data.success;
+};
+
+export const Header: React.FC<HeaderProps> = ({
+  allTasks,
+  setAllTasks,
+  selectedTasks,
+  setSelectedTasks,
+}) => {
   const [showCreate, setShowCreate] = useState(true);
   const [newTask, setNewTask] = useState("");
+
+  const changingMultipleStatus = async () => {
+    let response = await changeSelectedTasks(selectedTasks);
+    if (response) {
+      allTasks.map((task) => {
+        selectedTasks.map((id) => {
+          if (task.id === id) {
+            task.completed = !task.completed;
+          }
+        });
+      });
+      setAllTasks([...allTasks]);
+      setSelectedTasks([]);
+    }
+  };
+
+  const evalChangeStatus=():boolean=>{
+    let mylist = selectedTasks
+    return mylist.length < 1
+  }
+
+  useEffect(()=>{
+    evalChangeStatus()
+  },[selectedTasks])
 
   useEffect(() => {
     let evalInput = newTask.replaceAll(" ", "");
@@ -44,8 +80,8 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
     event?.preventDefault();
     let response = await createTask(str);
     if (response.itemCreated) {
-      setPendTasks([
-        ...pendTasks,
+      setAllTasks([
+        ...allTasks,
         { id: response.id, title: str, completed: false },
       ]);
       setNewTask("");
@@ -55,7 +91,14 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
   return (
     <Container style={{ marginBottom: "1vh" }}>
       <Row>
-        <Col xs={4}></Col>
+        <Col xs={4}>
+          <Button
+            onClick={changingMultipleStatus}
+            disabled={evalChangeStatus()}
+          >
+            CS
+          </Button>
+        </Col>
         <Col xs={8} className="formHolder">
           <Form onSubmit={(e) => creatingNewTask(newTask, e)}>
             <Form.Control
