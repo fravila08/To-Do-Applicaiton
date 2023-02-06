@@ -46,3 +46,15 @@ class TestUrls(TestCase):
     def test_change_status_func(self):
         url =reverse('changestatus', args=[1])
         self.assertEquals(resolve(url).func, all_tasks)
+        
+    def test_change_multiple_PUT_proper(self):
+        response= self.client.put(reverse('multiple'),{'selected':[1,2,3]})
+        self.assertEquals(response.status_code, 200)
+        
+    def test_change_multiple_PUT_improper(self):
+        response= self.client.put(reverse('multiple'))
+        self.assertEquals(response.status_code, 200)
+        
+    def test_change_multiple_PUT_func(self):
+        url=reverse('multiple')
+        self.assertEquals(resolve(url).func, multi_task_handler)
