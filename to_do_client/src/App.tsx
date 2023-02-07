@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import { Task } from "./components/Task";
 import axios from "axios";
 import { CsrfToken } from "./components/CsrfToken";
+import { Header } from "./components/Header";
 
 export interface ITask {
   id: number;
@@ -14,17 +15,17 @@ export interface ITask {
 }
 
 export async function getTasks(): Promise<ITask[]> {
-  let response = await axios.get("allTasks");
+  let response = await axios.get("allTasks/");
   return response.data.tasks;
 }
 
 function App() {
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [allTasks, setAllTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
     const getResponse = async () => {
       let response = await getTasks();
-      setTasks(response);
+      setAllTasks(response);
     };
     getResponse();
   }, []);
@@ -37,10 +38,13 @@ function App() {
         <h1>To Do App</h1>
       </Row>
       <Row>
+        <Header allTasks={allTasks} setAllTasks={setAllTasks} />
+      </Row>
+      <Row>
         <Col xs={1}></Col>
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Pending </h5>
-          {tasks.map((task) =>
+          {allTasks.map((task) =>
             task.completed === false ? <Task task={task} /> : null
           )}
         </Col>
@@ -50,7 +54,9 @@ function App() {
         <Col xs={1}></Col>
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Completed </h5>
-          {tasks.map((task) => (task.completed ? <Task task={task} /> : null))}
+          {allTasks.map((task) =>
+            task.completed ? <Task task={task} /> : null
+          )}
         </Col>
         <Col xs={1}></Col>
       </Row>

@@ -1,0 +1,14 @@
+// Vitest Snapshot v1
+
+exports[`Task > will create and match a snapshot 1`] = `
+<div
+  className="task row"
+>
+  <div
+    className="taskTitle col-9"
+    id="task1"
+  >
+    Style
+  </div>
+</div>
+`;

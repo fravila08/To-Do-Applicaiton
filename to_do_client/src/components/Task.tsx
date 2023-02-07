@@ -9,7 +9,7 @@ interface TaskProps {
 export const Task: React.FC<TaskProps> = ({ task }) => {
   return (
     <Row className="task">
-      <Col xs={9} className="taskTitle">
+      <Col id={`task${task.id}`} xs={9} className="taskTitle">
         {task.title}
       </Col>
     </Row>

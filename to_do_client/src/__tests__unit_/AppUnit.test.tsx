@@ -6,8 +6,8 @@ import App from "../App";
 
 vi.mock("axios");
 
-describe("App.tsx", () => {
-  describe("getTasks function", () => {
+describe("App", () => {
+  describe("getTasks()", () => {
     it("will return an array of tasks", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.get.mockResolvedValue({ data: { tasks: [] } });
@@ -15,9 +15,7 @@ describe("App.tsx", () => {
       expect(tasks).toStrictEqual([]);
     });
   });
-});
 
-describe("App.tsx", () => {
   it("will create and match snapshot", () => {
     const myApp = TestRenderer.create(<App />);
     expect(myApp).toMatchSnapshot();

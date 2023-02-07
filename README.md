@@ -4,7 +4,8 @@
 This To-Do application will allow users to `create` new tasks, `update` existing tasks, `delete` a task/set of tasks, and `read` both pending and/or completed task.
 
 - Documentation
-  - [Running Tests](https://github.com/fravila08/To-Do-Applicaiton/tree/starting_react/documentation/tests)
+  - [Running Tests](https://github.com/fravila08/To-Do-Applicaiton/tree/creatig_a_new_task/documentation/tests)
+  - [API Documentation](https://github.com/fravila08/To-Do-Applicaiton/blob/creatig_a_new_task/documentation/API_Ref/api_doc.md)
 
 ## Out-Line
 
@@ -96,7 +97,9 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`django`= your Django SECRET_KEY   
+```
+  django= your Django SECRET_KEY   
+```
 
 
 

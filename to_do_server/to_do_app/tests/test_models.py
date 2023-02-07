@@ -4,7 +4,6 @@ from to_do_app.models import *
 
 
 class TestModels(TestCase):
-    
     def setUp(self):
         self.task= Task.objects.create(title="Test out my app")
         

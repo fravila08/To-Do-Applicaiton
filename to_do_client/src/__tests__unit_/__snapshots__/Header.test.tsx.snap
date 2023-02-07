@@ -1,0 +1,77 @@
+// Vitest Snapshot v1
+
+exports[`Will take a snapshot of the current Header compenent > will create a snapshot 1`] = `
+<div
+  className="container"
+  style={
+    {
+      "marginBottom": "1vh",
+    }
+  }
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-4"
+      style={
+        {
+          "display": "flex",
+          "justifyContent": "center",
+          "margin": 0,
+          "padding": 0,
+        }
+      }
+    >
+      <button
+        className="btn btn-danger"
+        disabled={true}
+        type="button"
+      >
+        Del
+      </button>
+      <button
+        className="btn btn-warning"
+        disabled={true}
+        type="button"
+      >
+        Stat
+      </button>
+    </div>
+    <div
+      className="col-8"
+      style={
+        {
+          "margin": 0,
+          "padding": 0,
+        }
+      }
+    >
+      <form
+        className=""
+        onSubmit={[Function]}
+        style={
+          {
+            "display": "flex",
+          }
+        }
+      >
+        <input
+          className="form-control"
+          id="createTaskInput"
+          onChange={[Function]}
+          value=""
+        />
+        <button
+          className="btn btn-success"
+          disabled={true}
+          id="createTaskButton"
+          type="submit"
+        >
+          Create
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

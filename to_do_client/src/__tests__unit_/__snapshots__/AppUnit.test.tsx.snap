@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`App.tsx > will create and match snapshot 1`] = `
+exports[`App > will create and match snapshot 1`] = `
 <div
   className="App container"
 >
@@ -8,9 +8,7 @@ exports[`App.tsx > will create and match snapshot 1`] = `
     className="row"
     id="Header"
   >
-    <h1
-      id="LastEle"
-    >
+    <h1>
       To Do App
     </h1>
   </div>
@@ -30,47 +28,13 @@ exports[`App.tsx > will create and match snapshot 1`] = `
       >
         <div
           className="col-4"
-          style={
-            {
-              "display": "flex",
-              "justifyContent": "center",
-              "margin": 0,
-              "padding": 0,
-            }
-          }
-        >
-          <button
-            className="btn btn-danger"
-            disabled={true}
-            type="button"
-          >
-            Del
-          </button>
-          <button
-            className="btn btn-warning"
-            disabled={true}
-            type="button"
-          >
-            Stat
-          </button>
-        </div>
+        />
         <div
-          className="col-8"
-          style={
-            {
-              "margin": 0,
-              "padding": 0,
-            }
-          }
+          className="formHolder col-8"
         >
           <form
             className=""
             onSubmit={[Function]}
-            style={
-              {
-                "display": "flex",
-              }
-            }
           >
             <input
               className="form-control"

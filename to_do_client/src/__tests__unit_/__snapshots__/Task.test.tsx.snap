@@ -5,7 +5,16 @@ exports[`Task.tsx > will create and match a snapshot 1`] = `
   className="task row"
 >
   <div
+<<<<<<< HEAD
+    className="col-8"
+    style={
+      {
+        "display": "flex",
+      }
+    }
+=======
     className="taskTitle col-9"
+>>>>>>> starting_react
   >
     Style
   </div>
