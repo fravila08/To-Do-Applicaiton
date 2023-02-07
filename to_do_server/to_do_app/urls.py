@@ -1,8 +1,9 @@
 from django.urls import path
+from .views import Task_handler
 from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('allTasks', views.all_tasks, name='allTasks'),
-    path('newtask', views.all_tasks, name='newtask')
+    path('allTasks/', Task_handler.as_view(), name='allTasks'),
+    path('newtask/', Task_handler.as_view(), name='newtask')
 ]

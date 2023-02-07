@@ -15,7 +15,7 @@ describe("Header", () => {
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
       })<ResponseCreateTask>;
-      const newTasks = await createTask("new task");
+      const newTasks = await createTask("new task/");
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
     });
   });

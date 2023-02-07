@@ -17,9 +17,9 @@ export interface ResponseCreateTask {
   id: number;
 }
 
-export const createTask = async (str: string): Promise<ResponseCreateTask> => {
-  let response = await axios.post("newtask", {
-    name: str,
+export const createTask = async (taskTitle: string): Promise<ResponseCreateTask> => {
+  let response = await axios.post("newtask/", {
+    name: taskTitle,
   });
   return response["data"];
 };
@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
     }
   }, [newTask]);
 
-  const creatingNewTask = async (
+  const createNewTask = async (
     str: string,
     event?: React.FormEvent<HTMLFormElement>
   ) => {
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
       <Row>
         <Col xs={4}></Col>
         <Col xs={8} className="formHolder">
-          <Form onSubmit={(e) => creatingNewTask(newTask, e)}>
+          <Form onSubmit={(e) => createNewTask(newTask, e)}>
             <Form.Control
               value={newTask}
               id="createTaskInput"

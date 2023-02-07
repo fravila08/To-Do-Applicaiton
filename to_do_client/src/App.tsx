@@ -15,7 +15,7 @@ export interface ITask {
 }
 
 export async function getTasks(): Promise<ITask[]> {
-  let response = await axios.get("allTasks");
+  let response = await axios.get("allTasks/");
   return response.data.tasks;
 }
 
