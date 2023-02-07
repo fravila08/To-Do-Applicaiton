@@ -17,7 +17,9 @@ export interface ResponseCreateTask {
   id: number;
 }
 
-export const createTask = async (taskTitle: string): Promise<ResponseCreateTask> => {
+export const createTask = async (
+  taskTitle: string
+): Promise<ResponseCreateTask> => {
   let response = await axios.post("newtask/", {
     name: taskTitle,
   });
