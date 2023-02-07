@@ -26,17 +26,21 @@ export const createTask = async (
   return response["data"];
 };
 
+export const filterWhiteSpaceInput=(taskTitle:string)=>{
+  let cleanInput= taskTitle.replaceAll(" ","")
+  if (cleanInput.length >= 1 && taskTitle != "") {
+    return false
+  } else {
+    return true
+  }
+}
+
 export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    let evalInput = newTask.replaceAll(" ", "");
-    if (evalInput.length >= 1 && evalInput != "") {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+    setIsDisabled(filterWhiteSpaceInput(newTask))
   }, [newTask]);
 
   const createNewTask = async (

@@ -4,6 +4,7 @@ import axios from "axios";
 import { createTask } from "../components/Header";
 import { Header } from "../components/Header";
 import { ITask } from "../App";
+import { filterWhiteSpaceInput } from "../components/Header";
 import { ResponseCreateTask } from "../components/Header";
 
 vi.mock("axios");
@@ -19,6 +20,19 @@ describe("Header", () => {
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
     });
   });
+
+  describe("filterWhiteSpaceInput()",()=>{
+    it("will return true if input has something other than whitespace",()=>{
+      const cleanInput= filterWhiteSpaceInput("        yes")
+      expect(cleanInput).toBeTruthy
+    })
+    it("will return false if input has only whitespace",()=>{
+      const cleanInput= filterWhiteSpaceInput("        ")
+      expect(cleanInput).toBeFalsy
+    })
+  })
+
+
 
   it("will create and match snapshot", () => {
     let allTasks: ITask[] = [];
