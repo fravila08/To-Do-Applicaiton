@@ -8,8 +8,8 @@ import axios from "axios";
 import { ITask } from "../App";
 
 interface HeaderProps {
-  pendTasks: ITask[];
-  setPendTasks: (pendTasks: ITask[]) => void;
+  allTasks: ITask[];
+  setAllTasks: (allTasks: ITask[]) => void;
 }
 
 export interface ResponseCreateTask {
@@ -17,35 +17,37 @@ export interface ResponseCreateTask {
   id: number;
 }
 
-export const createTask = async (str: string): Promise<ResponseCreateTask> => {
-  let response = await axios.post("newtask", {
-    name: str,
+export const createTask = async (
+  taskTitle: string
+): Promise<ResponseCreateTask> => {
+  let response = await axios.post("newtask/", {
+    name: taskTitle,
   });
   return response["data"];
 };
 
-export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
-  const [showCreate, setShowCreate] = useState(true);
+export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
     let evalInput = newTask.replaceAll(" ", "");
     if (evalInput.length >= 1 && evalInput != "") {
-      setShowCreate(false);
+      setIsDisabled(false);
     } else {
-      setShowCreate(true);
+      setIsDisabled(true);
     }
   }, [newTask]);
 
-  const creatingNewTask = async (
+  const createNewTask = async (
     str: string,
     event?: React.FormEvent<HTMLFormElement>
   ) => {
     event?.preventDefault();
     let response = await createTask(str);
     if (response.itemCreated) {
-      setPendTasks([
-        ...pendTasks,
+      setAllTasks([
+        ...allTasks,
         { id: response.id, title: str, completed: false },
       ]);
       setNewTask("");
@@ -57,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
       <Row>
         <Col xs={4}></Col>
         <Col xs={8} className="formHolder">
-          <Form onSubmit={(e) => creatingNewTask(newTask, e)}>
+          <Form onSubmit={(e) => createNewTask(newTask, e)}>
             <Form.Control
               value={newTask}
               id="createTaskInput"
@@ -66,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ pendTasks, setPendTasks }) => {
             <Button
               variant="success"
               id="createTaskButton"
-              disabled={showCreate}
+              disabled={isDisabled}
               type="submit"
             >
               Create

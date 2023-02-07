@@ -1,6 +1,7 @@
 from django.test import TestCase,  Client
 from django.urls import reverse, resolve
 from to_do_app.views import *
+from to_do_app import views
 
 class TestUrls(TestCase):
     def setUp(self):
@@ -20,7 +21,7 @@ class TestUrls(TestCase):
         
     def test_allTasks_func(self):
         url=reverse('allTasks')
-        self.assertEquals(resolve(url).func, all_tasks)
+        self.assertEqual(resolve(url).func.view_class, views.Task_handler)
         
     def test_newtask_POST_proper_input(self):
         response=self.client.post(reverse('newtask'),{'name':"testing"})
@@ -32,7 +33,7 @@ class TestUrls(TestCase):
         
     def test_new_task_func(self):
         url=reverse('newtask')
-        self.assertEquals(resolve(url).func, all_tasks)
+        self.assertAlmostEqual(resolve(url).func.view_class, Task_handler)
         
     def test_change_statu_PUT_improper(self):
         response=self.client.put(reverse('changestatus', args=[1]))
@@ -45,4 +46,5 @@ class TestUrls(TestCase):
         
     def test_change_status_func(self):
         url =reverse('changestatus', args=[1])
-        self.assertEquals(resolve(url).func, all_tasks)
+        self.assertEquals(resolve(url).func.view_class, Task_handler)
+

@@ -22,20 +22,12 @@ describe("Task", () => {
 
 describe("Task", () => {
   it("will create and match a snapshot", () => {
-    let pendTasks: ITask[] = [];
-    const setPendTasks = (newPendTasks: ITask[]) => {
-      pendTasks = newPendTasks;
-    };
-    let compTasks: ITask[] = [];
-    const setComptTasks = (other: ITask[]) => {
-      compTasks = other;
-    };
+    let allTasks:ITask[]=[]
+    const setAllTasks=(tl:ITask[])=>{allTasks=tl}
     const header = TestRenderer.create(
       <Task
-        pendingTasks={pendTasks}
-        setPendingTasks={setPendTasks}
-        completedTasks={compTasks}
-        setCompletedTasks={setComptTasks}
+        allTasks={allTasks}
+        setAllTasks={setAllTasks}
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
