@@ -31,3 +31,8 @@
 ```bash
   python3 manage.py test to_do_app.tests.test_views
 ```
+
+## Resources
+
+- [Django Testing](https://docs.djangoproject.com/en/4.1/topics/testing/)
+- [CORS](https://www.stackhawk.com/blog/django-cors-guide/)

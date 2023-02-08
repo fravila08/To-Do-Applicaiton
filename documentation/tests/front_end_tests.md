@@ -3,29 +3,38 @@
 ## Pre-Requisites
 
 - Clone the repository
-- Change directory into `to_do_client`
+- Ensure both the `to_do_client` and `to_do_server` are running
 - Run `npm install`
 
 ## Running Tests
 
-- Running All Unit Test
+- Unit Tests
 
 ```bash
     npm run test Unit.test.tsx
 ```
 
-- End-to-End (e2e) Test
+- Intigration Tests
 
-  - **NOTE**: Ensure to manually clean and load data to the applications database before running each test. ( Please refer to the `Run Locally` section for directions on loading data )
+```bash
+    npm run test INT.test.tsx
+```
+
+- End-to-End (e2e) Tests
+
+  - **NOTE**:
+
+    - Ensure to manually clean and load data to the applications database before running tests. ( Please refer to the `Run Locally` section for directions on loading data )
+
+    - E2E tests will open up a browser and run each test.
 
   - Creating a task
 
   ```bash
-      npm run test CreatingNewTaskE2E.test.tsx
+      npm run test E2E.test.tsx
   ```
 
-  - Changing Task Status (Pending/Completed)
+## Resources
 
-  ```bash
-    npm run test ChangingTaskStatusE2E.test.tsx
-  ```
+- [Vitest](https://vitest.dev/guide/)
+- [Puppeteer](https://pptr.dev)

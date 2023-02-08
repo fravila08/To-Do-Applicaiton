@@ -15,7 +15,7 @@
 #### Create a Task
 
 ```http
-  POST .../newtask
+  POST .../newtask, {'name':string}
 ```
 
 - Body of Request:
@@ -30,14 +30,25 @@
   {'itemCreated':boolean, 'id':int}
 ```
 
-### Change Task's Completed Status
+#### Change Task's Completed Status
 
 ```http
   PUT .../changestatus/<int:id of selected task>
 ```
+
+- Body of Request:
+
+| Parameter | Type      | Description                       |
+| :-------- | :-------- | :-------------------------------- |
+| `id`      | `integer` | **Required:** ID of selected task |
 
 - Body of Response: Will return if the task's completed status was changed.
 
 ```
   {'changed':boolean}
 ```
+
+#### Resources
+
+- [Django Class Views](https://docs.djangoproject.com/en/4.1/topics/class-based-views/)
+- [Django Rest Frameworks APIview](https://www.django-rest-framework.org/api-guide/views/)
