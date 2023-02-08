@@ -20,27 +20,32 @@ export interface ResponseCreateTask {
 export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
-  let response = await axios.post("newtask/", {
-    name: taskTitle,
-  });
-  return response["data"];
+  try {
+    let response = await axios.post("newtask/", {
+      name: taskTitle,
+    });
+    return response["data"];
+  } catch (err) {
+    alert(err);
+    return { itemCreated: false, id: 0 };
+  }
 };
 
-export const filterWhiteSpaceInput=(taskTitle:string)=>{
-  let cleanInput= taskTitle.replaceAll(" ","")
-  if (cleanInput.length >= 1 && taskTitle != "") {
-    return false
+export const filterWhiteSpaceInput = (taskTitle: string) => {
+  let cleanInput = taskTitle.replaceAll(" ", "");
+  if (cleanInput.length >= 1 && cleanInput != "") {
+    return false;
   } else {
-    return true
+    return true;
   }
-}
+};
 
 export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    setIsDisabled(filterWhiteSpaceInput(newTask))
+    setIsDisabled(filterWhiteSpaceInput(newTask));
   }, [newTask]);
 
   const createNewTask = async (

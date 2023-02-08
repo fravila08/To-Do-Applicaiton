@@ -8,7 +8,7 @@ describe("Opens application and creates a new Task", () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
-      slowMo: 50,
+      slowMo: 20,
     });
     page = await browser.newPage();
     await page.goto("http://127.0.0.1:8000/");

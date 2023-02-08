@@ -18,12 +18,12 @@ describe("Task", () => {
       expect(newTasks).toBeTruthy();
     });
   });
-});
 
-describe("Task", () => {
   it("will create and match a snapshot", () => {
-    let allTasks:ITask[]=[]
-    const setAllTasks=(tl:ITask[])=>{allTasks=tl}
+    let allTasks: ITask[] = [];
+    const setAllTasks = (tl: ITask[]) => {
+      allTasks = tl;
+    };
     const header = TestRenderer.create(
       <Task
         allTasks={allTasks}

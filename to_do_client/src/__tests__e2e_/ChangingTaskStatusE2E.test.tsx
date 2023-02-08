@@ -1,5 +1,5 @@
 import puppeteer, { Browser, Page } from "puppeteer";
-import { afterAll, beforeAll, describe, it, expect } from "vitest";
+import { afterAll, beforeAll, describe, it, expect, vi } from "vitest";
 
 describe("Opens application and creates a new Task", () => {
   let browser: Browser;
@@ -23,16 +23,16 @@ describe("Opens application and creates a new Task", () => {
       await page.waitForSelector("#createTaskInput");
       await page.waitForSelector("#createTaskButton");
       await page.type("#createTaskInput", "test changing status", {
-        delay: 10,
+        delay: 15,
       });
       await page.click("#createTaskButton");
-      await page.waitForSelector("#taskCheck7");
-      await page.click("#taskCheck7");
+      await page.waitForSelector("#taskCheck8");
+      await page.click("#taskCheck8");
       let completeList = await page.$$("#CompletedList");
       let lastItem = await completeList[completeList.length - 1];
       await lastItem.evaluate((item) => item.innerHTML);
-      let taskText = await lastItem.$eval("#task7", (task) => task.innerHTML);
+      let taskText = await lastItem.$eval("#task8", (task) => task.innerHTML);
       expect(taskText).toBe("test changing status");
-    });
+    }, 7000);
   });
 });

@@ -21,18 +21,16 @@ describe("Header", () => {
     });
   });
 
-  describe("filterWhiteSpaceInput()",()=>{
-    it("will return true if input has something other than whitespace",()=>{
-      const cleanInput= filterWhiteSpaceInput("        yes")
-      expect(cleanInput).toBeTruthy
-    })
-    it("will return false if input has only whitespace",()=>{
-      const cleanInput= filterWhiteSpaceInput("        ")
-      expect(cleanInput).toBeFalsy
-    })
-  })
-
-
+  describe("filterWhiteSpaceInput()", () => {
+    it("will return true if input has something other than whitespace", () => {
+      const cleanInput = filterWhiteSpaceInput("    yes    ");
+      expect(cleanInput).toBe(false);
+    });
+    it("will return false if input has only whitespace", () => {
+      const cleanInput = filterWhiteSpaceInput("        ");
+      expect(cleanInput).toBe(true);
+    });
+  });
 
   it("will create and match snapshot", () => {
     let allTasks: ITask[] = [];

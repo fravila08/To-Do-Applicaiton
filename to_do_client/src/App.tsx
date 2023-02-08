@@ -15,8 +15,13 @@ export interface ITask {
 }
 
 export async function getTasks(): Promise<ITask[]> {
-  let response = await axios.get("allTasks/");
-  return response.data.tasks;
+  try {
+    let response = await axios.get("allTasks/");
+    return response.data.tasks;
+  } catch (err) {
+    alert(err);
+    return [];
+  }
 }
 
 function App() {
@@ -45,7 +50,9 @@ function App() {
         <Col xs={10} className="listHolder">
           <h5 className="listHeader"> Pending </h5>
           {allTasks.map((task) =>
-            task.completed === false ? <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} /> : null
+            task.completed === false ? (
+              <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} />
+            ) : null
           )}
         </Col>
         <Col xs={1}></Col>
@@ -55,7 +62,9 @@ function App() {
         <Col xs={10} id="CompletedList" className="listHolder">
           <h5 className="listHeader"> Completed </h5>
           {allTasks.map((task) =>
-            task.completed ? <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} /> : null
+            task.completed ? (
+              <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} />
+            ) : null
           )}
         </Col>
         <Col xs={1}></Col>

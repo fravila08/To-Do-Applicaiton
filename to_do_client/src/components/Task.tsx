@@ -11,22 +11,22 @@ interface TaskProps {
 }
 
 export const changeTaskStatus = async (id: number) => {
-  let response = await axios.put(`changestatus/${id}`);
-  return response.data.changed;
+  try {
+    let response = await axios.put(`changestatus/${id}`);
+    return response.data.changed;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
-export const Task: React.FC<TaskProps> = ({
-  task,
-  allTasks,
-  setAllTasks
-}) => {
-  
+export const Task: React.FC<TaskProps> = ({ task, allTasks, setAllTasks }) => {
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
     if (response) {
-      setAllTasks(allTasks.filter(task=> task !== taskToChange))
-      taskToChange.completed= clicked
-      setAllTasks([...allTasks])
+      setAllTasks(allTasks.filter((task) => task !== taskToChange));
+      taskToChange.completed = clicked;
+      setAllTasks([...allTasks]);
     }
   };
 
