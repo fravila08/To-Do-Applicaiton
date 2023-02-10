@@ -2,21 +2,36 @@
 
 ## Pre-Requisites
 
-- Clone the repository
-- Change directory into `to_do_client`
-- Run `npm install`
+- Ensure both the `to_do_client` and `to_do_server` are running
+- All test commands must be ran from the `to_do_client` parent directory
 
 ## Running Tests
 
-- Running Unit Test
+- Unit Tests
 
 ```bash
     npm run test Unit.test.tsx
 ```
 
-- End-to-End (e2e) Test
-  - **NOTE**: This will open a chromium browser and create a new task. If you'd like to run this test multiple times, please ensure to delete the newly created task from your database prior to.
+- Intigration Tests
 
 ```bash
-    npm run test E2E.test.tsx
+    npm run test INT.test.tsx
 ```
+
+- End-to-End (e2e) Tests
+
+  - **NOTE**:
+
+    - Ensure to manually clean and load data to the applications database before running tests. ( Please refer to the [Run Locally](https://github.com/fravila08/To-Do-Applicaiton/blob/TODO-003/documentation/running_locally.md) section for directions on loading data )
+
+    - E2E tests will open up a chromium browser to run tests.
+
+  ```bash
+      npm run test E2E.test.tsx
+  ```
+
+## Resources
+
+- [Vitest](https://vitest.dev/guide/)
+- [Puppeteer](https://pptr.dev)

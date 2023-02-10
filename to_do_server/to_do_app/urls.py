@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('allTasks/', Task_handler.as_view(), name='allTasks'),
-    path('newtask/', Task_handler.as_view(), name='newtask')
+    path('newtask/', Task_handler.as_view(), name='newtask'),
+    path('changestatus/<int:id>', Task_handler.as_view(), name='changestatus'),
 ]

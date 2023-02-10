@@ -4,6 +4,7 @@ import axios from "axios";
 import { createTask } from "../components/Header";
 import { Header } from "../components/Header";
 import { ITask } from "../App";
+import { isTaskTitleEmpty } from "../components/Header";
 import { ResponseCreateTask } from "../components/Header";
 
 vi.mock("axios");
@@ -15,8 +16,24 @@ describe("Header", () => {
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
       })<ResponseCreateTask>;
+
       const newTasks = await createTask("new task/");
+
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
+    });
+  });
+
+  describe("isTaskTitleEmpty()", () => {
+    it("will return true if input has something other than whitespace", () => {
+      const cleanInput = isTaskTitleEmpty("    yes    ");
+
+      expect(cleanInput).toBe(false);
+    });
+
+    it("will return false if input has only whitespace", () => {
+      const cleanInput = isTaskTitleEmpty("        ");
+
+      expect(cleanInput).toBe(true);
     });
   });
 
@@ -25,9 +42,11 @@ describe("Header", () => {
     const setAllTasks = (newAllTasks: ITask[]) => {
       allTasks = newAllTasks;
     };
+
     const myHeader = TestRenderer.create(
       <Header allTasks={allTasks} setAllTasks={setAllTasks} />
     );
+    
     expect(myHeader).toMatchSnapshot();
   });
 });

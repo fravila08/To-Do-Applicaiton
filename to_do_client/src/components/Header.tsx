@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ITask } from "../App";
+import plus from "../assets/plus.png";
 
 interface HeaderProps {
   allTasks: ITask[];
@@ -20,23 +21,32 @@ export interface ResponseCreateTask {
 export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
-  let response = await axios.post("newtask/", {
-    name: taskTitle,
-  });
-  return response["data"];
+  try {
+    let response = await axios.post("newtask/", {
+      name: taskTitle,
+    });
+    return response["data"];
+  } catch (err) {
+    alert(err);
+    return { itemCreated: false, id: 0 };
+  }
+};
+
+export const isTaskTitleEmpty = (taskTitle: string) => {
+  let cleanInput = taskTitle.replaceAll(" ", "");
+  if (cleanInput.length >= 1 && cleanInput != "") {
+    return false;
+  } else {
+    return true;
+  }
 };
 
 export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    let evalInput = newTask.replaceAll(" ", "");
-    if (evalInput.length >= 1 && evalInput != "") {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+    setIsSubmitDisabled(isTaskTitleEmpty(newTask));
   }, [newTask]);
 
   const createNewTask = async (
@@ -59,7 +69,10 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
       <Row>
         <Col xs={4}></Col>
         <Col xs={8} className="formHolder">
-          <Form onSubmit={(e) => createNewTask(newTask, e)}>
+          <Form
+            style={{ position: "relative" }}
+            onSubmit={(e) => createNewTask(newTask, e)}
+          >
             <Form.Control
               value={newTask}
               id="createTaskInput"
@@ -68,10 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
             <Button
               variant="success"
               id="createTaskButton"
-              disabled={isDisabled}
+              disabled={isSubmitDisabled}
               type="submit"
             >
-              Create
+              <img src={plus} style={{ height: "2vh" }} />
             </Button>
           </Form>
         </Col>

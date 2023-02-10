@@ -21,6 +21,11 @@ exports[`Header > will create and match snapshot 1`] = `
       <form
         className=""
         onSubmit={[Function]}
+        style={
+          {
+            "position": "relative",
+          }
+        }
       >
         <input
           className="form-control"
@@ -34,7 +39,14 @@ exports[`Header > will create and match snapshot 1`] = `
           id="createTaskButton"
           type="submit"
         >
-          Create
+          <img
+            src="/static/src/assets/plus.png"
+            style={
+              {
+                "height": "2vh",
+              }
+            }
+          />
         </button>
       </form>
     </div>

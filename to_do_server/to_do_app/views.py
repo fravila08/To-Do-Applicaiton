@@ -1,24 +1,27 @@
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
-from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from .models import *
+from .utilities import *
 # Create your views here.
 
 def home(request):
     the_index = open('static/index.html').read()
     return HttpResponse(the_index)
 
+
 class Task_handler(APIView):
     def get(self, request):
-        my_tasks = list(Task.objects.all().values())
-        return JsonResponse({'tasks':my_tasks})
+        return get_all_tasks_sorted_by_id()
     def post(self, request):
         try:
-            newTask=Task.objects.create(title=request.data['name'])
-            newTask.save()
-            return JsonResponse({'itemCreated':True, 'id': newTask.id})
+            return create_a_new_task(title=request.data['name'])
         except:
             return JsonResponse({'itemCreated':False, 'id':0})
+    def put(self, request, id=0):
+        try:
+            return update_tasks_completed_status(id=id)
+        except:
+            return JsonResponse({'changed':False})
 
     

@@ -1,3 +1,21 @@
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  color: black;
+  font-weight: 300;
+  text-shadow: 0em;
+  text-decoration: underline;
+}
+
 #Header {
   text-align: center;
 }
@@ -9,12 +27,33 @@
   min-height: 40vh;
   background-color: lightgrey;
   text-align: center;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  height: 10vh;
+}
+
+#CompletedList {
+  border-radius: 0 0 10vw 10vw;
+}
+
+#pending {
+  border-radius: 10vw 10vw 0 0;
+}
+
+.listHolder::-webkit-scrollbar {
+  display: none;
 }
 
 .listHeader {
   background-color: whitesmoke;
   border-radius: 5vw;
   margin-top: 1vh;
+  padding: 1vh 10vw;
+  text-align: center;
+  width: 50vw;
 }
 
 /* Task Row */
@@ -22,10 +61,33 @@
 .task {
   background-color: grey;
   border: black 2px solid;
+  height: 4vh;
+  width: 80vw;
+  border-radius: 1vh;
 }
 
 .taskTitle {
   display: flex;
+  text-align: left;
+  font-size: 2vh;
+}
+
+.checkHolder {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  position: relative;
+}
+.check {
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+}
+
+.checkImg {
+  height: 3vh;
+  position: absolute;
+  z-index: 1;
 }
 
 /* Input field on upper right hand corner */
@@ -37,4 +99,20 @@
 
 Form {
   display: flex;
+  flex-direction: row-reverse;
+}
+
+#createTaskInput {
+  font-size: 2vh;
+  max-width: 50vw;
+}
+
+#createTaskButton {
+  border-radius: 0 1vh 1vh 0;
+  height: 5vh;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
