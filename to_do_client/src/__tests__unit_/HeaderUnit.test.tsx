@@ -4,6 +4,7 @@ import axios from "axios";
 import { createTask } from "../components/Header";
 import { Header } from "../components/Header";
 import { ITask } from "../App";
+import { isTaskTitleEmpty } from "../components/Header";
 import { ResponseCreateTask } from "../components/Header";
 import { changeSelectedTasks } from "../components/Header";
 
@@ -16,12 +17,13 @@ describe("Header", () => {
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
       })<ResponseCreateTask>;
-      const newTasks = await createTask("new task");
+
+      const newTasks = await createTask("new task/");
+
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
     });
   });
-});
-
+  
 describe("Header", () => {
   describe("changeSelectedTasks()", () => {
     it("Will return if request was successful", async () => {
@@ -36,15 +38,30 @@ describe("Header", () => {
 });
 
 describe("Header", () => {
+  describe("isTaskTitleEmpty()", () => {
+    it("will return true if input has something other than whitespace", () => {
+      const cleanInput = isTaskTitleEmpty("    yes    ");
+
+      expect(cleanInput).toBe(false);
+    });
+
+    it("will return false if input has only whitespace", () => {
+      const cleanInput = isTaskTitleEmpty("        ");
+
+      expect(cleanInput).toBe(true);
+    });
+  });
+
   it("will create and match snapshot", () => {
+    let allTasks: ITask[] = [];
+    const setAllTasks = (newAllTasks: ITask[]) => {
+      allTasks = newAllTasks;
+    };
     let selectedTasks: number[] = [];
     const setSelectedTasks = (nl: number[]) => {
       selectedTasks = nl;
     };
-    let allTasks: ITask[] = [];
-    const setAllTasks = (tl: ITask[]) => {
-      allTasks = tl;
-    };
+
     const myHeader = TestRenderer.create(
       <Header
         allTasks={allTasks}
@@ -53,6 +70,7 @@ describe("Header", () => {
         setSelectedTasks={setSelectedTasks}
       />
     );
+    
     expect(myHeader).toMatchSnapshot();
   });
 });

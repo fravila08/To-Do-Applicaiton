@@ -8,7 +8,7 @@ describe("Opens application and creates a new Task", () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
-      slowMo: 50,
+      slowMo: 20,
     });
     page = await browser.newPage();
     await page.goto("http://127.0.0.1:8000/");
@@ -26,8 +26,10 @@ describe("Opens application and creates a new Task", () => {
         delay: 10,
       });
       await page.click("#createTaskButton");
+
       await page.waitForSelector("#task7");
       let taskText = await page.$eval("#task7", (task) => task.innerHTML);
+
       expect(taskText).toBe("test creating a task");
     });
   });

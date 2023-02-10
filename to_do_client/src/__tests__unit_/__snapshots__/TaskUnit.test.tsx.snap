@@ -25,32 +25,30 @@ exports[`Task > will create and match a snapshot 1`] = `
     Style
   </div>
   <div
-    className="col"
-    style={
-      {
-        "display": "flex",
-      }
-    }
+    className="checkHolder col-2"
   >
     <div
-      className="form-check"
+      className="check"
     >
       <input
         checked={false}
         className="form-check-input"
         disabled={false}
         id="taskCheck1"
+        name="checkbox"
         onChange={[Function]}
         type="checkbox"
       />
-      <label
-        className="form-check-label"
-        htmlFor="taskCheck1"
-        title=""
-      >
-        Done
-      </label>
     </div>
+    <label
+      className="form-label"
+      for="checkbox"
+    >
+      <img
+        className="checkImg"
+        src="/static/src/assets/pending.png"
+      />
+    </label>
   </div>
 </div>
 `;

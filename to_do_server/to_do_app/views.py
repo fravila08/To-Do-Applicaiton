@@ -1,48 +1,36 @@
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from .models import *
+from .utilities import *
 # Create your views here.
 
 def home(request):
     the_index = open('static/index.html').read()
     return HttpResponse(the_index)
 
-@api_view(['GET', 'POST','PUT'])
-def all_tasks(request, id=0):
-    if request.method=='GET':
-        my_tasks = list(Task.objects.all().values())
-        return JsonResponse({'tasks':my_tasks})
-    elif request.method=='POST':
+
+class Task_handler(APIView):
+    def get(self, request):
+        return get_all_tasks_sorted_by_id()
+    def post(self, request):
         try:
-            newTask=Task.objects.create(title=request.data['name'])
-            newTask.save()
-            return JsonResponse({'itemCreated':True, 'id': newTask.id})
+            return create_a_new_task(title=request.data['name'])
         except:
             return JsonResponse({'itemCreated':False, 'id':0})
-    elif request.method =='PUT':
+    def put(self, request, id=0):
         try:
-            task= Task.objects.get(id=id)
-            task.change_status()
-            return JsonResponse({'changed':True})
+            return update_tasks_completed_status(id=id)
         except:
             return JsonResponse({'changed':False})
 
-@api_view(['PUT'])
-def multi_task_handler(request):
-    try:
-        selectedTasks=request.data['selected']
-        if request.method == 'PUT':
-            try:
-                def grab_task_and_change_status(id):
-                    task= Task.objects.get(id=id)
-                    task.change_status()
-                [grab_task_and_change_status(i) for i in selectedTasks]
-                return JsonResponse({'success':True})
-            except Exception as e:
-                print(e)
-                return JsonResponse({'success':False})
-    except:
-        return JsonResponse({'success':False})
+
+class Multi_task_handler(APIView):
+    def put(self,request):
+        try:
+            return update_multiple_tasks_completed_status(request.data['selected'])
+        except Exception as e:
+            print(e)
+            return JsonResponse({'success':False})
             
     

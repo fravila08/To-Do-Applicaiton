@@ -5,8 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Task } from "./components/Task";
 import axios from "axios";
-import { CsrfToken } from "./components/CsrfToken";
 import { Header } from "./components/Header";
+import { TaskRenderer } from "./components/TaskRenderer";
 
 export interface ITask {
   id: number;
@@ -15,8 +15,13 @@ export interface ITask {
 }
 
 export async function getTasks(): Promise<ITask[]> {
-  let response = await axios.get("allTasks");
-  return response.data.tasks;
+  try {
+    let response = await axios.get("allTasks/");
+    return response.data.tasks;
+  } catch (err) {
+    alert(err);
+    return [];
+  }
 }
 
 function App() {
@@ -31,12 +36,10 @@ function App() {
     getResponse();
   }, []);
 
-  CsrfToken();
-
   return (
     <Container className="App">
       <Row id="Header">
-        <h1>To Do App</h1>
+        <h1>ANOTHER DAY</h1>
       </Row>
       <Row>
         <Header
@@ -48,19 +51,15 @@ function App() {
       </Row>
       <Row>
         <Col xs={1}></Col>
-        <Col xs={10} className="listHolder">
+        <Col xs={10} className="listHolder" id="pending">
           <h5 className="listHeader"> Pending </h5>
-          {allTasks.map((task) =>
-            !task.completed ? (
-              <Task
-                allTasks={allTasks}
-                setAllTasks={setAllTasks}
-                selectedTasks={selectedTasks}
-                setSelectedTasks={setSelectedTasks}
-                task={task}
-              />
-            ) : null
-          )}
+          <TaskRenderer
+            completed={false}
+            allTasks={allTasks}
+            setAllTasks={setAllTasks}
+            selectedTasks={selectedTasks}
+            setSelectedTasks={setSelectedTasks}
+          />
         </Col>
         <Col xs={1}></Col>
       </Row>
@@ -68,17 +67,13 @@ function App() {
         <Col xs={1}></Col>
         <Col xs={10} id="CompletedList" className="listHolder">
           <h5 className="listHeader"> Completed </h5>
-          {allTasks.map((task) =>
-            task.completed ? (
-              <Task
-                allTasks={allTasks}
-                setAllTasks={setAllTasks}
-                selectedTasks={selectedTasks}
-                setSelectedTasks={setSelectedTasks}
-                task={task}
-              />
-            ) : null
-          )}
+          <TaskRenderer
+            completed={true}
+            allTasks={allTasks}
+            selectedTasks={selectedTasks}
+            setSelectedTasks={setSelectedTasks}
+            setAllTasks={setAllTasks}
+          />
         </Col>
         <Col xs={1}></Col>
       </Row>

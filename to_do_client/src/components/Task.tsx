@@ -3,8 +3,10 @@ import Col from "react-bootstrap/Col";
 import { ITask } from "../App";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import done from "../assets/done.png";
+import pending from "../assets/pending.png";
 
-interface TaskProps {
+export interface TaskProps {
   task: ITask;
   selectedTasks: number[];
   setSelectedTasks: (selectedTasks: number[]) => void;
@@ -13,8 +15,13 @@ interface TaskProps {
 }
 
 export const changeTaskStatus = async (id: number) => {
-  let response = await axios.put(`changestatus/${id}`);
-  return response.data.changed;
+  try {
+    let response = await axios.put(`changestatus/${id}`);
+    return response.data.changed;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
 export const Task: React.FC<TaskProps> = ({
@@ -45,17 +52,21 @@ export const Task: React.FC<TaskProps> = ({
           }
         />
       </Col>
-      <Col id={`task${task.id}`} xs={9} className="taskTitle">
+      <Col id={`task${task.id}`} xs={7} className="taskTitle">
         {task.title}
       </Col>
-      <Col style={{ display: "flex" }}>
+      <Col className="checkHolder" xs={2}>
         <Form.Check
           id={`taskCheck${task.id}`}
           type="checkbox"
-          label="Done"
+          name="checkbox"
+          className="check"
           checked={task.completed}
           onChange={(e) => changeStatus(e.target.checked, task)}
         />
+        <Form.Label for="checkbox">
+          <img className="checkImg" src={task.completed ? done : pending} />
+        </Form.Label>
       </Col>
     </Row>
   );

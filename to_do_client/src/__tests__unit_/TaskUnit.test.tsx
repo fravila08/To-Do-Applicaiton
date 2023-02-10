@@ -14,13 +14,13 @@ describe("Task", () => {
       mockedAxios.put.mockResolvedValue({
         data: { changed: true },
       });
+
       const newTasks = await changeTaskStatus(1);
+
       expect(newTasks).toBeTruthy();
     });
   });
-});
 
-describe("Task", () => {
   it("will create and match a snapshot", () => {
     let selectedTasks: number[] = [];
     const setSelectedTasks = (nl: number[]) => {
@@ -31,6 +31,7 @@ describe("Task", () => {
       allTasks = tl;
     };
     const header = TestRenderer.create(
+
       <Task
         selectedTasks={selectedTasks}
         setSelectedTasks={setSelectedTasks}
@@ -39,6 +40,7 @@ describe("Task", () => {
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
+    
     expect(header).toMatchSnapshot();
   });
 });

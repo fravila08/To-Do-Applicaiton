@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ITask } from "../App";
+import plus from "../assets/plus.png";
 
 interface HeaderProps {
   selectedTasks: number[];
@@ -19,25 +20,41 @@ export interface ResponseCreateTask {
   id: number;
 }
 
-export const createTask = async (str: string): Promise<ResponseCreateTask> => {
-  let response = await axios.post("newtask", {
-    name: str,
-  });
-  return response["data"];
+export const createTask = async (
+  taskTitle: string
+): Promise<ResponseCreateTask> => {
+  try {
+    let response = await axios.post("newtask/", {
+      name: taskTitle,
+    });
+    return response["data"];
+  } catch (err) {
+    alert(err);
+    return { itemCreated: false, id: 0 };
+  }
 };
+
 
 export const changeSelectedTasks = async (lst: number[]) => {
   let resposne = await axios.put("changemultiple", { selected: lst });
   return resposne.data.success;
 };
 
+export const isTaskTitleEmpty = (taskTitle: string) => {
+  let cleanInput = taskTitle.replaceAll(" ", "");
+  if (cleanInput.length >= 1 && cleanInput != "") {
+    return false;
+  } else {
+    return true;
+  }
+};
 export const Header: React.FC<HeaderProps> = ({
   allTasks,
   setAllTasks,
   selectedTasks,
   setSelectedTasks,
 }) => {
-  const [showCreate, setShowCreate] = useState(true);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   const changingMultipleStatus = async () => {
@@ -65,15 +82,10 @@ export const Header: React.FC<HeaderProps> = ({
   }, [selectedTasks]);
 
   useEffect(() => {
-    let evalInput = newTask.replaceAll(" ", "");
-    if (evalInput.length >= 1 && evalInput != "") {
-      setShowCreate(false);
-    } else {
-      setShowCreate(true);
-    }
+    setIsSubmitDisabled(isTaskTitleEmpty(newTask));
   }, [newTask]);
 
-  const creatingNewTask = async (
+  const createNewTask = async (
     str: string,
     event?: React.FormEvent<HTMLFormElement>
   ) => {
@@ -100,7 +112,10 @@ export const Header: React.FC<HeaderProps> = ({
           </Button>
         </Col>
         <Col xs={8} className="formHolder">
-          <Form onSubmit={(e) => creatingNewTask(newTask, e)}>
+          <Form
+            style={{ position: "relative" }}
+            onSubmit={(e) => createNewTask(newTask, e)}
+          >
             <Form.Control
               value={newTask}
               id="createTaskInput"
@@ -109,10 +124,10 @@ export const Header: React.FC<HeaderProps> = ({
             <Button
               variant="success"
               id="createTaskButton"
-              disabled={showCreate}
+              disabled={isSubmitDisabled}
               type="submit"
             >
-              Create
+              <img src={plus} style={{ height: "2vh" }} />
             </Button>
           </Form>
         </Col>

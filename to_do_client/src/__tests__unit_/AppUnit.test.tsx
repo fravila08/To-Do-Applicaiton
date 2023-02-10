@@ -11,15 +11,16 @@ describe("App", () => {
     it("will return an array of tasks", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.get.mockResolvedValue({ data: { tasks: [] } });
+
       const tasks = await getTasks();
+
       expect(tasks).toStrictEqual([]);
     });
   });
-});
 
-describe("App", () => {
   it("will create and match snapshot", () => {
     const myApp = TestRenderer.create(<App />);
+    
     expect(myApp).toMatchSnapshot();
   });
 });
