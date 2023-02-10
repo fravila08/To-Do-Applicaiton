@@ -18,6 +18,7 @@ exports[`Header > will create and match snapshot 1`] = `
       <button
         className="btn btn-primary"
         disabled={true}
+        id="changeStatusBtn"
         onClick={[Function]}
         type="button"
       >

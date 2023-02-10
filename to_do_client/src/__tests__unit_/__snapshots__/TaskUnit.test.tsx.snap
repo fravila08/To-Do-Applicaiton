@@ -13,13 +13,14 @@ exports[`Task > will create and match a snapshot 1`] = `
       <input
         className="form-check-input"
         disabled={false}
+        id="taskSelectedBtn1"
         onChange={[Function]}
         type="checkbox"
       />
     </div>
   </div>
   <div
-    className="taskTitle col-9"
+    className="taskTitle col-7"
     id="task1"
   >
     Style

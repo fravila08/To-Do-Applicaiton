@@ -45,3 +45,17 @@ class TestViews(TestCase):
         response = self.client.put(reverse("changestatus", args=[1]))
         body=json.loads(response.content)
         self.assertFalse(body['changed'])
+        
+        
+    def test_change_multiple_IMPROPER_input(self):
+        response= self.client.put(reverse('multiple'), data={'selected':1}, content_type="application/json")
+        body=json.loads(response.content)
+        self.assertFalse(body['success'])
+
+    def test_proper_multiple_input(self):
+        task1=Task.objects.create(title='test')
+        task2=Task.objects.create(title='test')
+        task3=Task.objects.create(title='test')
+        response=self.client.put(reverse('multiple'), data={'selected':[task1.id, task2.id, task3.id]}, content_type="application/json")
+        body=json.loads(response.content)
+        self.assertTrue(body['success'])

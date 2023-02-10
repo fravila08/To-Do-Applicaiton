@@ -1,0 +1,3 @@
+// Vitest Snapshot v1
+
+exports[`TaskRenderer > will create and match a snapshot 1`] = `null`;

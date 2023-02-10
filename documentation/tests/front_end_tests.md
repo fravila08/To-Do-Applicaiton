@@ -23,7 +23,7 @@
 
   - **NOTE**:
 
-    - Ensure to manually clean and load data to the applications database before running tests. ( Please refer to the [Run Locally](https://github.com/fravila08/To-Do-Applicaiton/blob/TODO-003/documentation/running_locally.md) section for directions on loading data )
+    - Ensure to manually clean and load data to the applications database before running tests. ( Please refer to the [Run Locally](https://github.com/fravila08/To-Do-Applicaiton/blob/TODO-004/documentation/running_locally.md) section for directions on loading data )
 
     - E2E tests will open up a chromium browser to run tests.
 

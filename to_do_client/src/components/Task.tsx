@@ -45,6 +45,7 @@ export const Task: React.FC<TaskProps> = ({
       <Col>
         <Form.Check
           type="checkbox"
+          id={`taskSelectedBtn${task.id}`}
           onChange={(e) =>
             e.target.checked
               ? setSelectedTasks([...selectedTasks, task.id])

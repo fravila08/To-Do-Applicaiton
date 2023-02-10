@@ -30,7 +30,6 @@ class Multi_task_handler(APIView):
         try:
             return update_multiple_tasks_completed_status(request.data['selected'])
         except Exception as e:
-            print(e)
             return JsonResponse({'success':False})
             
     

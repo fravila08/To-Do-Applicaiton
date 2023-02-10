@@ -72,13 +72,13 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const evalChangeStatus = (): boolean => {
+  const isChangeStatusDisabled = (): boolean => {
     let mylist = selectedTasks;
     return mylist.length < 1;
   };
 
   useEffect(() => {
-    evalChangeStatus();
+    isChangeStatusDisabled();
   }, [selectedTasks]);
 
   useEffect(() => {
@@ -106,7 +106,8 @@ export const Header: React.FC<HeaderProps> = ({
         <Col xs={4}>
           <Button
             onClick={changingMultipleStatus}
-            disabled={evalChangeStatus()}
+            disabled={isChangeStatusDisabled()}
+            id="changeStatusBtn"
           >
             CS
           </Button>

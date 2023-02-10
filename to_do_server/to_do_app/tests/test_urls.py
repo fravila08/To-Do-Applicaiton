@@ -58,4 +58,4 @@ class TestUrls(TestCase):
         
     def test_change_multiple_PUT_func(self):
         url=reverse('multiple')
-        self.assertEquals(resolve(url).func.view_calss, Multi_task_handler)
+        self.assertEquals(resolve(url).func.view_class, Multi_task_handler)
