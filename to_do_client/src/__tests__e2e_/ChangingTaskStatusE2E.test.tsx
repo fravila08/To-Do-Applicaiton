@@ -8,7 +8,7 @@ describe("Opens application and creates a new Task", () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
-      slowMo: 20,
+      slowMo: 25,
     });
     page = await browser.newPage();
     await page.goto("http://127.0.0.1:8000/");
@@ -30,9 +30,11 @@ describe("Opens application and creates a new Task", () => {
       await page.click("#taskCheck8");
       let completeList = await page.$$("#CompletedList");
       let lastItem = await completeList[completeList.length - 1];
+
       await lastItem.evaluate((item) => item.innerHTML);
       let taskText = await lastItem.$eval("#task8", (task) => task.innerHTML);
+
       expect(taskText).toBe("test changing status");
-    }, 7000);
+    }, 8000);
   });
 });

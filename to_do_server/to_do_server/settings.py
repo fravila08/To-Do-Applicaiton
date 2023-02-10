@@ -123,11 +123,13 @@ CORS_ALLOWED_ORIGINS=[
     'http://localhost:3000',
     'http://*'
 ]
+
 CORS_ALLOWED_METHODS=[
     'POST',
     'PUT',
     'GET',
 ]
+
 CORS_ALLOWED_HEADERS=[
     'x-csrftoken'
 ]

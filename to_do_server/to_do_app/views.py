@@ -2,6 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
 from .models import *
+from .utilities import *
 # Create your views here.
 
 def home(request):
@@ -11,22 +12,15 @@ def home(request):
 
 class Task_handler(APIView):
     def get(self, request):
-        my_tasks = list(Task.objects.all().values())
-        my_tasks=sorted(my_tasks, key=lambda x:x['id'])
-        return JsonResponse({'tasks':my_tasks})
-    @csrf_exempt
+        return get_all_tasks_sorted_by_id()
     def post(self, request):
         try:
-            newTask=Task.objects.create(title=request.data['name'])
-            newTask.save()
-            return JsonResponse({'itemCreated':True, 'id': newTask.id})
+            return create_a_new_task(title=request.data['name'])
         except:
             return JsonResponse({'itemCreated':False, 'id':0})
     def put(self, request, id=0):
         try:
-            task= Task.objects.get(id=id)
-            task.change_status()
-            return JsonResponse({'changed':True})
+            return update_tasks_completed_status(id=id)
         except:
             return JsonResponse({'changed':False})
 

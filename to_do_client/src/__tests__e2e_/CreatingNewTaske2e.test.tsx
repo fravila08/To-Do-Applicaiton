@@ -26,8 +26,10 @@ describe("Opens application and creates a new Task", () => {
         delay: 10,
       });
       await page.click("#createTaskButton");
+
       await page.waitForSelector("#task7");
       let taskText = await page.$eval("#task7", (task) => task.innerHTML);
+
       expect(taskText).toBe("test creating a task");
     });
   });

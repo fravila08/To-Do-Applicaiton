@@ -2,9 +2,8 @@
 
 ## Pre-Requisites
 
-- Clone the repository
-- Create your `.env file` holding your SECRET_KEY
-- Change directory into `to_do_server`
+- Ensure your `.env file` is holding your SECRET_KEY
+- All test commands must be ran through the `to_do_server` parent directory
 
 ## Running Tests
 

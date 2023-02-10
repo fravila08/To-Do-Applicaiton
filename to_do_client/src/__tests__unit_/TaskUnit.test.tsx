@@ -14,7 +14,9 @@ describe("Task", () => {
       mockedAxios.put.mockResolvedValue({
         data: { changed: true },
       });
+
       const newTasks = await changeTaskStatus(1);
+
       expect(newTasks).toBeTruthy();
     });
   });
@@ -25,12 +27,14 @@ describe("Task", () => {
       allTasks = tl;
     };
     const header = TestRenderer.create(
+
       <Task
         allTasks={allTasks}
         setAllTasks={setAllTasks}
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
+    
     expect(header).toMatchSnapshot();
   });
 });

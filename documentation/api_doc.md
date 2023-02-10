@@ -9,16 +9,19 @@
 - Body of Response: an array of Task dictionaries
 
 ```
-  [{'id':number, 'Title':string, 'Completed':boolean}]
+  [{'id':integer, 'Title':string, 'Completed':boolean}]
 ```
 
 #### Create a Task
 
 ```http
-  POST .../newtask, {'name':string}
+  POST .../newtask
 ```
 
 - Body of Request:
+```bash
+  {'name':string}
+```
 
 | Parameter | Type     | Description                              |
 | :-------- | :------- | :--------------------------------------- |

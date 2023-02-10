@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ITask } from "../App";
+import plus from "../assets/plus.png";
 
 interface HeaderProps {
   allTasks: ITask[];
@@ -31,7 +32,7 @@ export const createTask = async (
   }
 };
 
-export const filterWhiteSpaceInput = (taskTitle: string) => {
+export const isTaskTitleEmpty = (taskTitle: string) => {
   let cleanInput = taskTitle.replaceAll(" ", "");
   if (cleanInput.length >= 1 && cleanInput != "") {
     return false;
@@ -41,11 +42,11 @@ export const filterWhiteSpaceInput = (taskTitle: string) => {
 };
 
 export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    setIsDisabled(filterWhiteSpaceInput(newTask));
+    setIsSubmitDisabled(isTaskTitleEmpty(newTask));
   }, [newTask]);
 
   const createNewTask = async (
@@ -68,7 +69,10 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
       <Row>
         <Col xs={4}></Col>
         <Col xs={8} className="formHolder">
-          <Form onSubmit={(e) => createNewTask(newTask, e)}>
+          <Form
+            style={{ position: "relative" }}
+            onSubmit={(e) => createNewTask(newTask, e)}
+          >
             <Form.Control
               value={newTask}
               id="createTaskInput"
@@ -77,10 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
             <Button
               variant="success"
               id="createTaskButton"
-              disabled={isDisabled}
+              disabled={isSubmitDisabled}
               type="submit"
             >
-              Create
+              <img src={plus} style={{ height: "2vh" }} />
             </Button>
           </Form>
         </Col>

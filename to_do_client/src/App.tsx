@@ -5,8 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Task } from "./components/Task";
 import axios from "axios";
-import { CsrfToken } from "./components/CsrfToken";
 import { Header } from "./components/Header";
+import { TaskRenderer } from "./components/TaskRenderer";
 
 export interface ITask {
   id: number;
@@ -35,25 +35,23 @@ function App() {
     getResponse();
   }, []);
 
-  CsrfToken();
-
   return (
     <Container className="App">
       <Row id="Header">
-        <h1>To Do App</h1>
+        <h1>ANOTHER DAY</h1>
       </Row>
       <Row>
         <Header allTasks={allTasks} setAllTasks={setAllTasks} />
       </Row>
       <Row>
         <Col xs={1}></Col>
-        <Col xs={10} className="listHolder">
+        <Col xs={10} className="listHolder" id="pending">
           <h5 className="listHeader"> Pending </h5>
-          {allTasks.map((task) =>
-            task.completed === false ? (
-              <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} />
-            ) : null
-          )}
+          <TaskRenderer
+            completed={false}
+            allTasks={allTasks}
+            setAllTasks={setAllTasks}
+          />
         </Col>
         <Col xs={1}></Col>
       </Row>
@@ -61,11 +59,11 @@ function App() {
         <Col xs={1}></Col>
         <Col xs={10} id="CompletedList" className="listHolder">
           <h5 className="listHeader"> Completed </h5>
-          {allTasks.map((task) =>
-            task.completed ? (
-              <Task allTasks={allTasks} setAllTasks={setAllTasks} task={task} />
-            ) : null
-          )}
+          <TaskRenderer
+            completed={true}
+            allTasks={allTasks}
+            setAllTasks={setAllTasks}
+          />
         </Col>
         <Col xs={1}></Col>
       </Row>

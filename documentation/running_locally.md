@@ -8,7 +8,7 @@
 
 2. Open a second terminal on the same directory
 
-3. Checkout current branch in both terminals
+3. Checkout current branch on both terminals
 
 ```bash
   git checkout TODO-003
