@@ -23,8 +23,7 @@ describe("Header", () => {
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
     });
   });
-  
-describe("Header", () => {
+
   describe("changeSelectedTasks()", () => {
     it("Will return if request was successful", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
@@ -35,9 +34,7 @@ describe("Header", () => {
       expect(changedMultipleTasks).toBeTruthy();
     });
   });
-});
 
-describe("Header", () => {
   describe("isTaskTitleEmpty()", () => {
     it("will return true if input has something other than whitespace", () => {
       const cleanInput = isTaskTitleEmpty("    yes    ");
