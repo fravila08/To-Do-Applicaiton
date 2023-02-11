@@ -14,10 +14,15 @@ def create_a_new_task(title):
 def change_task_status_by_id(id):
     task= Task.objects.get(id=id)
     task.change_status()
+    
+def delete_task_by_id(id):
+    task=Task.objects.get(id=id)
+    task.delete()
 
-def update_tasks_completed_status(id):
-    change_task_status_by_id(id)
-    return JsonResponse({'changed':True})
+
+def delete_multiple_tasks(lst):
+    [delete_task_by_id(i) for i in lst]
+    return JsonResponse({'success':True})
 
 def update_multiple_tasks_completed_status(lst):
     [change_task_status_by_id(i) for i in lst]
