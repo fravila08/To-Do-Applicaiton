@@ -90,6 +90,16 @@ h1 {
   z-index: 1;
 }
 
+#delBtn {
+  height: 3vh;
+  width: 2vw;
+  font-size: 2vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Input field on upper right hand corner */
 
 .FormHolder {

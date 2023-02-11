@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Task } from "./components/Task";
 import axios from "axios";
 import { Header } from "./components/Header";
 import { TaskRenderer } from "./components/TaskRenderer";
@@ -35,6 +34,10 @@ function App() {
     };
     getResponse();
   }, []);
+
+  useEffect(() => {
+    console.log(allTasks);
+  }, [allTasks]);
 
   return (
     <Container className="App">

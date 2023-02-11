@@ -34,10 +34,21 @@ export const createTask = async (
   }
 };
 
-
 export const changeSelectedTasks = async (lst: number[]) => {
-  let resposne = await axios.put("changemultiple", { selected: lst });
-  return resposne.data.success;
+  let response = await axios.put("changemultiple", { selected: lst });
+  return response.data.success;
+};
+
+export const deleteMultTasks = async (lst: number[]) => {
+  try {
+    let response = await axios.delete("deletemultiple", {
+      data: { selected: lst },
+    });
+    return response.data.success;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
 export const isTaskTitleEmpty = (taskTitle: string) => {
@@ -68,6 +79,14 @@ export const Header: React.FC<HeaderProps> = ({
         });
       });
       setAllTasks([...allTasks]);
+      setSelectedTasks([]);
+    }
+  };
+
+  const deleteMultipleTasks = async () => {
+    let response = await deleteMultTasks(selectedTasks);
+    if (response) {
+      setAllTasks(allTasks.filter((task) => !selectedTasks.includes(task.id)));
       setSelectedTasks([]);
     }
   };
@@ -103,13 +122,21 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <Container style={{ marginBottom: "1vh" }}>
       <Row>
-        <Col xs={4}>
+        <Col xs={4} style={{ display: "flex" }}>
           <Button
             onClick={changingMultipleStatus}
             disabled={isChangeStatusDisabled()}
             id="changeStatusBtn"
           >
             CS
+          </Button>
+          <Button
+            variant="danger"
+            onClick={deleteMultipleTasks}
+            disabled={isChangeStatusDisabled()}
+            id="DeleteMultBtn"
+          >
+            DEL
           </Button>
         </Col>
         <Col xs={8} className="formHolder">

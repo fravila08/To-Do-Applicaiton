@@ -14,6 +14,11 @@ exports[`Header > will create and match snapshot 1`] = `
   >
     <div
       className="col-4"
+      style={
+        {
+          "display": "flex",
+        }
+      }
     >
       <button
         className="btn btn-primary"
@@ -23,6 +28,15 @@ exports[`Header > will create and match snapshot 1`] = `
         type="button"
       >
         CS
+      </button>
+      <button
+        className="btn btn-danger"
+        disabled={true}
+        id="DeleteMultBtn"
+        onClick={[Function]}
+        type="button"
+      >
+        DEL
       </button>
     </div>
     <div

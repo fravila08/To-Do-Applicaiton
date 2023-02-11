@@ -5,7 +5,7 @@ exports[`Task > will create and match a snapshot 1`] = `
   className="task row"
 >
   <div
-    className="col"
+    className="col-1"
   >
     <div
       className=""
@@ -50,6 +50,19 @@ exports[`Task > will create and match a snapshot 1`] = `
         src="/static/src/assets/pending.png"
       />
     </label>
+  </div>
+  <div
+    className="col-2"
+  >
+    <button
+      className="btn btn-danger"
+      disabled={false}
+      id="delBtn"
+      onClick={[Function]}
+      type="button"
+    >
+      D
+    </button>
   </div>
 </div>
 `;

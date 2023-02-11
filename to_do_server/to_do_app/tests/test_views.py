@@ -1,5 +1,5 @@
-from django.test import TestCase, Client, TransactionTestCase
-from django.urls import reverse, resolve
+from django.test import TestCase, Client
+from django.urls import reverse
 import json
 from to_do_app.views import *
 

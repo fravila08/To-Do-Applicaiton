@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import done from "../assets/done.png";
 import pending from "../assets/pending.png";
+import Button from "react-bootstrap/esm/Button";
 
 export interface TaskProps {
   task: ITask;
@@ -18,6 +19,16 @@ export const changeTaskStatus = async (id: number) => {
   try {
     let response = await axios.put(`changestatus/${id}`);
     return response.data.changed;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
+};
+
+export const deleteTask = async (id: number) => {
+  try {
+    let response = await axios.delete(`deletetask/${id}`);
+    return response.data.success;
   } catch (err) {
     alert(err);
     return false;
@@ -40,9 +51,16 @@ export const Task: React.FC<TaskProps> = ({
     }
   };
 
+  const deleteATask = async (id: number) => {
+    let response = await deleteTask(id);
+    if (response) {
+      setAllTasks(allTasks.filter((task) => task.id !== id));
+    }
+  };
+
   return (
     <Row className="task">
-      <Col>
+      <Col xs={1}>
         <Form.Check
           type="checkbox"
           id={`taskSelectedBtn${task.id}`}
@@ -68,6 +86,15 @@ export const Task: React.FC<TaskProps> = ({
         <Form.Label for="checkbox">
           <img className="checkImg" src={task.completed ? done : pending} />
         </Form.Label>
+      </Col>
+      <Col xs={2}>
+        <Button
+          id="delBtn"
+          variant="danger"
+          onClick={() => deleteATask(task.id)}
+        >
+          D
+        </Button>
       </Col>
     </Row>
   );
