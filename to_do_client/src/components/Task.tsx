@@ -6,6 +6,7 @@ import axios from "axios";
 import done from "../assets/done.png";
 import pending from "../assets/pending.png";
 import Button from "react-bootstrap/esm/Button";
+import trash from "../assets/trash.png"
 
 export interface TaskProps {
   task: ITask;
@@ -93,7 +94,7 @@ export const Task: React.FC<TaskProps> = ({
           variant="danger"
           onClick={() => deleteATask(task.id)}
         >
-          D
+          <img src={trash} style={{height:"2vh"}} />
         </Button>
       </Col>
     </Row>
