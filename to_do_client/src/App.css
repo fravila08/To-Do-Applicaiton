@@ -86,6 +86,7 @@ h1 {
 
 .checkImg {
   height: 3vh;
+  left: 0;
   position: absolute;
   z-index: 1;
 }

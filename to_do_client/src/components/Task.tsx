@@ -75,7 +75,7 @@ export const Task: React.FC<TaskProps> = ({
       <Col id={`task${task.id}`} xs={7} className="taskTitle">
         {task.title}
       </Col>
-      <Col className="checkHolder" xs={2}>
+      <Col className="checkHolder" xs={1}>
         <Form.Check
           id={`taskCheck${task.id}`}
           type="checkbox"
@@ -88,7 +88,7 @@ export const Task: React.FC<TaskProps> = ({
           <img className="checkImg" src={task.completed ? done : pending} />
         </Form.Label>
       </Col>
-      <Col xs={2}>
+      <Col xs={1}>
         <Button
           id="delBtn"
           variant="danger"
