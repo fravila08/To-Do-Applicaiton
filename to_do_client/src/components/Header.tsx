@@ -9,12 +9,17 @@ import { ITask } from "../App";
 import plus from "../assets/plus.png";
 import change from "../assets/change.png";
 import trash from "../assets/trash.png";
+import { Toggle } from "./Toggle";
 
 interface HeaderProps {
   selectedTasks: number[];
   setSelectedTasks: (selectedTasks: number[]) => void;
   allTasks: ITask[];
   setAllTasks: (allTasks: ITask[]) => void;
+  showPending: boolean;
+  setShowPending: (showPending: boolean) => void;
+  showCompleted: boolean;
+  setShowCompleted: (showCompleted: boolean) => void;
 }
 
 export interface ResponseCreateTask {
@@ -66,6 +71,10 @@ export const Header: React.FC<HeaderProps> = ({
   setAllTasks,
   selectedTasks,
   setSelectedTasks,
+  showPending,
+  setShowPending,
+  showCompleted,
+  setShowCompleted,
 }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
@@ -124,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <Container style={{ marginBottom: "1vh" }}>
       <Row>
-        <Col xs={4} style={{ display: "flex" }}>
+        <Col xs={3} style={{ display: "flex" }}>
           <Button
             style={{
               height: "5vh",
@@ -155,7 +164,15 @@ export const Header: React.FC<HeaderProps> = ({
             <img src={trash} style={{ height: "3vh" }} />
           </Button>
         </Col>
-        <Col xs={8} className="formHolder">
+        <Col xs={3}>
+          <Toggle
+            showCompleted={showCompleted}
+            setShowCompleted={setShowCompleted}
+            showPending={showPending}
+            setShowPending={setShowPending}
+          />
+        </Col>
+        <Col xs={6} className="formHolder">
           <Form
             style={{ position: "relative" }}
             onSubmit={(e) => createNewTask(newTask, e)}
