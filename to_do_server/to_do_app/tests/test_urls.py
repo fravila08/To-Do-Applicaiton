@@ -85,3 +85,16 @@ class TestUrls(TestCase):
     def test_delete_mult_task_func(self):
         url=reverse("deletemult")
         self.assertEquals(resolve(url).func.view_class, Multi_task_handler)
+        
+    def test_change_task_title_proper(self):
+        task1 = Task.objects.create(title='test')
+        response = self.client.put(reverse("changetitle", args=[task1.id]), {"name":"new title"}, "application/json")
+        self.assertEquals(response.status_code, 200)
+    
+    def test_change_task_title_improper(self):
+        response = self.client.put(reverse("changetitle", args=[1]), {"name": 1}, "application/json")
+        self.assertEquals(response.status_code, 200)
+        
+    def test_change_task_title_fun(self):
+        url = reverse("changetitle", args=[1])
+        self.assertEquals(resolve(url).func.view_class, Task_handler)

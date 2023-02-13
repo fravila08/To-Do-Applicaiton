@@ -83,3 +83,20 @@ class TestViews(TestCase):
         response=self.client.delete(reverse('deletemult'), data={"selected":[0]}, content_type="application/json")
         body=json.loads(response.content)
         self.assertFalse(body['success'])
+        
+        
+    def test_change_task_title_PROPER(self):
+        task2=Task.objects.create(title="testing")
+        response = self.client.put(reverse("changetitle", args=[task2.id]), {"name":"new title"}, "application/json")
+        body = json.loads(response.content)
+        with self.subTest():
+            self.assertEquals(Task.objects.get(id= task2.id).title, "new title")
+        self.assertTrue(body['changed'])
+        
+    def test_change_task_title_IMPROPER(self):
+        task1 = Task.objects.create(title= "testing")
+        response = self.client.put(reverse("changetitle", args=[1]), {"name":"new title"}, "application/json")
+        body = json.loads(response.content)
+        with self.subTest():
+            self.assertNotEquals(Task.objects.get(id = task1.id), "new title")
+        self.assertFalse(body['changed'])

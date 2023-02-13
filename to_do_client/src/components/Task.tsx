@@ -6,7 +6,11 @@ import axios from "axios";
 import done from "../assets/done.png";
 import pending from "../assets/pending.png";
 import Button from "react-bootstrap/esm/Button";
-import trash from "../assets/trash.png"
+import trash from "../assets/trash.png";
+import editPic from "../assets/edit.png";
+import cancelPic from "../assets/cancel.png";
+import confirmPic from "../assets/confirm.png"
+import { useState } from "react";
 
 export interface TaskProps {
   task: ITask;
@@ -36,6 +40,16 @@ export const deleteTask = async (id: number) => {
   }
 };
 
+export const changeTaskTitle = async (id:number, name:string) => {
+  try {
+    let response = await axios.put(`changetitle/${id}`, {"name": name})
+    return response.data.changed
+  } catch (err) {
+    alert (err)
+    return false
+  }
+}
+
 export const Task: React.FC<TaskProps> = ({
   task,
   setSelectedTasks,
@@ -43,6 +57,10 @@ export const Task: React.FC<TaskProps> = ({
   allTasks,
   setAllTasks,
 }) => {
+  const [taskTitle, setTaskTitle] = useState<string>(task.title);
+  const [showForm, setShowForm] = useState<boolean>(true);
+  const [newTitle, setNewTitle] = useState<string>('')
+
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
     if (response) {
@@ -59,6 +77,16 @@ export const Task: React.FC<TaskProps> = ({
     }
   };
 
+  const alterTaskTitle = async ( taskToChange: ITask) => {
+    let response = await changeTaskTitle(task.id, newTitle)
+    if (response){
+      setAllTasks(allTasks.filter(task => task !== taskToChange))
+      taskToChange.title = newTitle
+      setAllTasks([...allTasks])
+      setTaskTitle(newTitle)
+    }
+  }
+
   return (
     <Row className="task">
       <Col xs={1}>
@@ -72,9 +100,15 @@ export const Task: React.FC<TaskProps> = ({
           }
         />
       </Col>
-      <Col id={`task${task.id}`} xs={7} className="taskTitle">
-        {task.title}
-      </Col>
+      {showForm ? (
+        <Col id={`task${task.id}`} xs={7} className="taskTitle">
+          {taskTitle}
+        </Col>
+      ) : (
+        <Col xs={7} style={{display:"flex", justifyContent:"center", alignItems:"center"}} className="taskTitle">
+          <Form.Control style={{height:"3vh"}} placeholder={taskTitle} value={newTitle} onChange={(e)=> setNewTitle(e.target.value)}/>
+        </Col>
+      )}
       <Col className="checkHolder" xs={1}>
         <Form.Check
           id={`taskCheck${task.id}`}
@@ -88,15 +122,29 @@ export const Task: React.FC<TaskProps> = ({
           <img className="checkImg" src={task.completed ? done : pending} />
         </Form.Label>
       </Col>
-      <Col xs={1}>
+      {showForm?
+      <Col xs={2} style={{display:"flex"}}>
         <Button
           id="delBtn"
           variant="danger"
           onClick={() => deleteATask(task.id)}
         >
-          <img src={trash} style={{height:"2vh"}} />
+          <img src={trash} style={{ height: "2vh" }} />
+        </Button>
+        <Button id="delBtn" variant="warning" onClick={() => setShowForm(!showForm)}>
+          <img src={editPic} style={{ height: "2vh" }} />
         </Button>
       </Col>
+      :
+      <Col xs={2} style={{display:"flex"}}>
+        <Button id="delBtn" variant="warning" onClick={()=>[setShowForm(!showForm), setNewTitle("")]}>
+          <img src={ cancelPic } style={{ height: "2vh" }} />
+        </Button>
+        <Button id="delBtn" variant="success" onClick={()=>[alterTaskTitle(task), setShowForm(!showForm)]}>
+          <img src={ confirmPic} style={{ height: "2vh" }} />
+        </Button>
+      </Col>
+      }
     </Row>
   );
 };

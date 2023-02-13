@@ -19,6 +19,9 @@ def delete_task_by_id(id):
     task=Task.objects.get(id=id)
     task.delete()
 
+def change_task_title(id, name):
+    task= Task.objects.get(id = id)
+    task.change_title(name)
 
 def delete_multiple_tasks(lst):
     [delete_task_by_id(i) for i in lst]

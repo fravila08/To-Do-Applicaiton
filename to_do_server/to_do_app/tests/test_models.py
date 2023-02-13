@@ -21,3 +21,7 @@ class TestModels(TestCase):
     def test_changing_task_pending_change(self):
         self.completed_task.change_status()
         self.assertFalse(self.completed_task.completed)
+        
+    def test_changing_title(self):
+        self.completed_task.change_title("This is a seperate title")
+        self.assertEquals(self.completed_task.title, "This is a seperate title")

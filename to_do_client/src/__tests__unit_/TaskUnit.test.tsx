@@ -1,8 +1,12 @@
-import { deleteTask, Task } from "../components/Task";
+import {
+  deleteTask,
+  Task,
+  changeTaskStatus,
+  changeTaskTitle,
+} from "../components/Task";
 import { describe, expect, it, vi, Mocked } from "vitest";
 import TestRenderer from "react-test-renderer";
 import { ITask } from "../App";
-import { changeTaskStatus } from "../components/Task";
 import axios from "axios";
 
 vi.mock("axios");
@@ -27,6 +31,17 @@ describe("Task", () => {
       });
       const deleted = await deleteTask(1);
       expect(deleted).toBe(true);
+    });
+  });
+
+  describe("changeTaskTitle()", () => {
+    it("will return if the changing of the title was successful", async () => {
+      const mockedAxios = axios as Mocked<typeof axios>;
+      mockedAxios.put.mockResolvedValue({
+        data: { changed: true },
+      });
+      const changed = await changeTaskTitle(1, "hello");
+      expect(changed).toBe(true);
     });
   });
 

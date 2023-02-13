@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import axios from "axios";
-import { changeTaskStatus, deleteTask } from "../components/Task";
+import {
+  changeTaskStatus,
+  deleteTask,
+  changeTaskTitle,
+} from "../components/Task";
 
 describe("Task", () => {
   describe("changeTaskStatus()", () => {
@@ -16,6 +20,13 @@ describe("Task", () => {
       axios.defaults.baseURL = "http://localhost:8000/";
       const deleted = await deleteTask(4);
       expect(deleted).toBe(true);
+    });
+  });
+
+  describe("changeTaskTitle()", () => {
+    it("will return if the changing of the title was successful", async () => {
+      const changed = await changeTaskTitle(1, "hello");
+      expect(changed).toBe(true);
     });
   });
 });

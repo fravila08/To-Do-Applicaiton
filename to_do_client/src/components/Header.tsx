@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ITask } from "../App";
 import plus from "../assets/plus.png";
+import change from "../assets/change.png";
+import trash from "../assets/trash.png";
 
 interface HeaderProps {
   selectedTasks: number[];
@@ -124,19 +126,33 @@ export const Header: React.FC<HeaderProps> = ({
       <Row>
         <Col xs={4} style={{ display: "flex" }}>
           <Button
+            style={{
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "10vw",
+            }}
             onClick={changingMultipleStatus}
             disabled={isChangeStatusDisabled()}
             id="changeStatusBtn"
           >
-            CS
+            <img src={change} style={{ height: "6vh" }} />
           </Button>
           <Button
+            style={{
+              height: "5vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "10vw",
+            }}
             variant="danger"
             onClick={deleteMultipleTasks}
             disabled={isChangeStatusDisabled()}
             id="DeleteMultBtn"
           >
-            DEL
+            <img src={trash} style={{ height: "3vh" }} />
           </Button>
         </Col>
         <Col xs={8} className="formHolder">
