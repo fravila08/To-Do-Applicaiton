@@ -13,7 +13,7 @@ exports[`Header > will create and match snapshot 1`] = `
     className="row"
   >
     <div
-      className="col-4"
+      className="col-3"
       style={
         {
           "display": "flex",
@@ -72,7 +72,72 @@ exports[`Header > will create and match snapshot 1`] = `
       </button>
     </div>
     <div
-      className="formHolder col-8"
+      className="col-3"
+    >
+      <div
+        className="btn-group btn-group-sm"
+        role="group"
+      >
+        <input
+          autoComplete="off"
+          checked={true}
+          className="btn-check"
+          disabled={false}
+          id="tbg-btn-1"
+          onChange={[Function]}
+          type="checkbox"
+          value={1}
+        />
+        <label
+          className="btn btn-outline-primary"
+          defaultChecked={true}
+          disabled={false}
+          htmlFor="tbg-btn-1"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <img
+            src="/static/src/assets/pending.png"
+            style={
+              {
+                "height": "3vh",
+              }
+            }
+          />
+        </label>
+        <input
+          autoComplete="off"
+          checked={true}
+          className="btn-check"
+          disabled={false}
+          id="tbg-btn-3"
+          onChange={[Function]}
+          type="checkbox"
+          value={3}
+        />
+        <label
+          className="btn btn-outline-primary"
+          defaultChecked={true}
+          disabled={false}
+          htmlFor="tbg-btn-3"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <img
+            src="/static/src/assets/done.png"
+            style={
+              {
+                "height": "3vh",
+              }
+            }
+          />
+        </label>
+      </div>
+    </div>
+    <div
+      className="formHolder col-6"
     >
       <form
         className=""

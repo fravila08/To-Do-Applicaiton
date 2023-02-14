@@ -9,7 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import trash from "../assets/trash.png";
 import editPic from "../assets/edit.png";
 import cancelPic from "../assets/cancel.png";
-import confirmPic from "../assets/confirm.png"
+import confirmPic from "../assets/confirm.png";
 import { useState } from "react";
 
 export interface TaskProps {
@@ -40,15 +40,15 @@ export const deleteTask = async (id: number) => {
   }
 };
 
-export const changeTaskTitle = async (id:number, name:string) => {
+export const changeTaskTitle = async (id: number, name: string) => {
   try {
-    let response = await axios.put(`changetitle/${id}`, {"name": name})
-    return response.data.changed
+    let response = await axios.put(`changetitle/${id}`, { name: name });
+    return response.data.changed;
   } catch (err) {
-    alert (err)
-    return false
+    alert(err);
+    return false;
   }
-}
+};
 
 export const Task: React.FC<TaskProps> = ({
   task,
@@ -59,7 +59,7 @@ export const Task: React.FC<TaskProps> = ({
 }) => {
   const [taskTitle, setTaskTitle] = useState<string>(task.title);
   const [showForm, setShowForm] = useState<boolean>(true);
-  const [newTitle, setNewTitle] = useState<string>('')
+  const [newTitle, setNewTitle] = useState<string>(task.title);
 
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
@@ -77,15 +77,15 @@ export const Task: React.FC<TaskProps> = ({
     }
   };
 
-  const alterTaskTitle = async ( taskToChange: ITask) => {
-    let response = await changeTaskTitle(task.id, newTitle)
-    if (response){
-      setAllTasks(allTasks.filter(task => task !== taskToChange))
-      taskToChange.title = newTitle
-      setAllTasks([...allTasks])
-      setTaskTitle(newTitle)
+  const alterTaskTitle = async (taskToChange: ITask) => {
+    let response = await changeTaskTitle(task.id, newTitle);
+    if (response) {
+      setAllTasks(allTasks.filter((task) => task !== taskToChange));
+      taskToChange.title = newTitle;
+      setAllTasks([...allTasks]);
+      setTaskTitle(newTitle);
     }
-  }
+  };
 
   return (
     <Row className="task">
@@ -105,8 +105,21 @@ export const Task: React.FC<TaskProps> = ({
           {taskTitle}
         </Col>
       ) : (
-        <Col xs={7} style={{display:"flex", justifyContent:"center", alignItems:"center"}} className="taskTitle">
-          <Form.Control style={{height:"3vh"}} placeholder={taskTitle} value={newTitle} onChange={(e)=> setNewTitle(e.target.value)}/>
+        <Col
+          xs={7}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="taskTitle"
+        >
+          <Form.Control
+            style={{ height: "3vh" }}
+            placeholder={taskTitle}
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
         </Col>
       )}
       <Col className="checkHolder" xs={1}>
@@ -122,29 +135,41 @@ export const Task: React.FC<TaskProps> = ({
           <img className="checkImg" src={task.completed ? done : pending} />
         </Form.Label>
       </Col>
-      {showForm?
-      <Col xs={2} style={{display:"flex"}}>
-        <Button
-          id="delBtn"
-          variant="danger"
-          onClick={() => deleteATask(task.id)}
-        >
-          <img src={trash} style={{ height: "2vh" }} />
-        </Button>
-        <Button id="delBtn" variant="warning" onClick={() => setShowForm(!showForm)}>
-          <img src={editPic} style={{ height: "2vh" }} />
-        </Button>
-      </Col>
-      :
-      <Col xs={2} style={{display:"flex"}}>
-        <Button id="delBtn" variant="warning" onClick={()=>[setShowForm(!showForm), setNewTitle("")]}>
-          <img src={ cancelPic } style={{ height: "2vh" }} />
-        </Button>
-        <Button id="delBtn" variant="success" onClick={()=>[alterTaskTitle(task), setShowForm(!showForm)]}>
-          <img src={ confirmPic} style={{ height: "2vh" }} />
-        </Button>
-      </Col>
-      }
+      {showForm ? (
+        <Col xs={2} style={{ display: "flex" }}>
+          <Button
+            id="delBtn"
+            variant="danger"
+            onClick={() => deleteATask(task.id)}
+          >
+            <img src={trash} style={{ height: "2vh" }} />
+          </Button>
+          <Button
+            id="delBtn"
+            variant="warning"
+            onClick={() => setShowForm(!showForm)}
+          >
+            <img src={editPic} style={{ height: "2vh" }} />
+          </Button>
+        </Col>
+      ) : (
+        <Col xs={2} style={{ display: "flex" }}>
+          <Button
+            id="delBtn"
+            variant="warning"
+            onClick={() => [setShowForm(!showForm), setNewTitle(taskTitle)]}
+          >
+            <img src={cancelPic} style={{ height: "2vh" }} />
+          </Button>
+          <Button
+            id="delBtn"
+            variant="success"
+            onClick={() => [alterTaskTitle(task), setShowForm(!showForm)]}
+          >
+            <img src={confirmPic} style={{ height: "2vh" }} />
+          </Button>
+        </Col>
+      )}
     </Row>
   );
 };

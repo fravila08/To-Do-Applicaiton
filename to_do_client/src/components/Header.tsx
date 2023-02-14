@@ -66,6 +66,7 @@ export const isTaskTitleEmpty = (taskTitle: string) => {
     return true;
   }
 };
+
 export const Header: React.FC<HeaderProps> = ({
   allTasks,
   setAllTasks,

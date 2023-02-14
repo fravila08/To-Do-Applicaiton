@@ -25,7 +25,8 @@ describe("Task", () => {
 
   describe("changeTaskTitle()", () => {
     it("will return if the changing of the title was successful", async () => {
-      const changed = await changeTaskTitle(1, "hello");
+      axios.defaults.baseURL = "http://localhost:8000/";
+      const changed = await changeTaskTitle(5, "hello");
       expect(changed).toBe(true);
     });
   });
