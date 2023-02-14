@@ -23,8 +23,8 @@ describe("Task", () => {
 
   it("will create and match a snapshot", () => {
     let selectedTasks: number[] = [];
-    const setSelectedTasks = (nl: number[]) => {
-      selectedTasks = nl;
+    const setSelectedTasks = (newList: number[]) => {
+      selectedTasks = newList;
     };
     let allTasks: ITask[] = [];
     const setAllTasks = (tl: ITask[]) => {

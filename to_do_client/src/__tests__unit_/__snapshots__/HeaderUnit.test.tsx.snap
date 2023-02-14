@@ -22,7 +22,7 @@ exports[`Header > will create and match snapshot 1`] = `
         onClick={[Function]}
         type="button"
       >
-        CS
+        Update
       </button>
     </div>
     <div

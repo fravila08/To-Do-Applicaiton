@@ -24,7 +24,7 @@ export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
   try {
-    let response = await axios.post("newtask/", {
+    let response = await axios.post("task/", {
       name: taskTitle,
     });
     return response["data"];
@@ -36,7 +36,7 @@ export const createTask = async (
 
 
 export const changeSelectedTasks = async (lst: number[]) => {
-  let resposne = await axios.put("changemultiple", { selected: lst });
+  let resposne = await axios.put("tasks/", { selected: lst });
   return resposne.data.success;
 };
 
@@ -109,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={isChangeStatusDisabled()}
             id="changeStatusBtn"
           >
-            CS
+            Update
           </Button>
         </Col>
         <Col xs={8} className="formHolder">

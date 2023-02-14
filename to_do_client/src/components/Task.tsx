@@ -16,7 +16,7 @@ export interface TaskProps {
 
 export const changeTaskStatus = async (id: number) => {
   try {
-    let response = await axios.put(`changestatus/${id}`);
+    let response = await axios.put(`task/${id}/`);
     return response.data.changed;
   } catch (err) {
     alert(err);

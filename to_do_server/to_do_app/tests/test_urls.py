@@ -21,7 +21,7 @@ class TestUrls(TestCase):
         
     def test_allTasks_func(self):
         url=reverse('allTasks')
-        self.assertEqual(resolve(url).func.view_class, views.Task_handler)
+        self.assertEqual(resolve(url).func.view_class, Multi_task_handler)
         
     def test_newtask_POST_proper_input(self):
         response=self.client.post(reverse('newtask'),{'name':"testing"})

@@ -19,6 +19,6 @@ def update_tasks_completed_status(id):
     change_task_status_by_id(id)
     return JsonResponse({'changed':True})
 
-def update_multiple_tasks_completed_status(lst):
-    [change_task_status_by_id(i) for i in lst]
+def update_multiple_tasks_completed_status(task_ids):
+    [change_task_status_by_id(i) for i in task_ids]
     return JsonResponse({'success':True})
