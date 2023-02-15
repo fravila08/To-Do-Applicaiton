@@ -24,7 +24,7 @@ export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
   try {
-    let response = await axios.post("newtask/", {
+    let response = await axios.post("task/", {
       name: taskTitle,
     });
     return response["data"];
@@ -34,16 +34,21 @@ export const createTask = async (
   }
 };
 
-export const changeSelectedTasks = async (lst: number[]) => {
-  let response = await axios.put("changemultiple", { selected: lst });
-  return response.data.success;
+export const deleteMultTasks = async (taskIdList: number[]) => {
+  try {
+    let response = await axios.delete("tasks/", {
+      data: { selected: taskIdList },
+    });
+    return response.data.success;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
-export const deleteMultTasks = async (lst: number[]) => {
+export const changeSelectedTasks = async (selectedList: number[]) => {
   try {
-    let response = await axios.delete("deletemultiple", {
-      data: { selected: lst },
-    });
+    let response = await axios.put("tasks/", { selected: selectedList });
     return response.data.success;
   } catch (err) {
     alert(err);
@@ -92,8 +97,8 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const isChangeStatusDisabled = (): boolean => {
-    let mylist = selectedTasks;
-    return mylist.length < 1;
+    let myList = selectedTasks;
+    return myList.length < 1;
   };
 
   useEffect(() => {
@@ -128,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={isChangeStatusDisabled()}
             id="changeStatusBtn"
           >
-            CS
+            Update
           </Button>
           <Button
             variant="danger"

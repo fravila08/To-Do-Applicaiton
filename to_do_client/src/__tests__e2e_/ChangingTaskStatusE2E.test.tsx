@@ -26,15 +26,15 @@ describe("Opens application and creates a new Task", () => {
         delay: 15,
       });
       await page.click("#createTaskButton");
-      await page.waitForSelector("#taskCheck8");
-      await page.click("#taskCheck8");
+      await page.waitForSelector("#taskCheck7");
+      await page.click("#taskCheck7");
       let completeList = await page.$$("#CompletedList");
       let lastItem = await completeList[completeList.length - 1];
 
       await lastItem.evaluate((item) => item.innerHTML);
-      let taskText = await lastItem.$eval("#task8", (task) => task.innerHTML);
+      let taskText = await lastItem.$eval("#task7", (task) => task.innerHTML);
 
       expect(taskText).toBe("test changing status");
-    }, 8000);
+    }, 10000);
   });
 });

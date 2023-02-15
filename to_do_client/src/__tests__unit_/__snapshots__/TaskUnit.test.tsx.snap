@@ -26,7 +26,7 @@ exports[`Task > will create and match a snapshot 1`] = `
     Style
   </div>
   <div
-    className="checkHolder col-2"
+    className="checkHolder col-1"
   >
     <div
       className="check"
@@ -52,7 +52,7 @@ exports[`Task > will create and match a snapshot 1`] = `
     </label>
   </div>
   <div
-    className="col-2"
+    className="col-1"
   >
     <button
       className="btn btn-danger"
@@ -61,7 +61,14 @@ exports[`Task > will create and match a snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      D
+      <img
+        src="/static/src/assets/trash.png"
+        style={
+          {
+            "height": "2vh",
+          }
+        }
+      />
     </button>
   </div>
 </div>

@@ -18,7 +18,7 @@ export interface TaskProps {
 
 export const changeTaskStatus = async (id: number) => {
   try {
-    let response = await axios.put(`changestatus/${id}`);
+    let response = await axios.put(`task/${id}/`);
     return response.data.changed;
   } catch (err) {
     alert(err);
@@ -28,7 +28,7 @@ export const changeTaskStatus = async (id: number) => {
 
 export const deleteTask = async (id: number) => {
   try {
-    let response = await axios.delete(`deletetask/${id}`);
+    let response = await axios.delete(`task/${id}/`);
     return response.data.success;
   } catch (err) {
     alert(err);
