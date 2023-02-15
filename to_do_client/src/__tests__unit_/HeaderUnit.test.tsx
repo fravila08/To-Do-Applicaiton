@@ -12,7 +12,7 @@ vi.mock("axios");
 
 describe("Header", () => {
   describe("createTask()", () => {
-    it("returns a dictionary with the keys of itemCreated with a boolean value and id with a number value", async () => {
+    it("returns a dictionary with itemCreated and id as keys, where itemCreated's value is true and id's value is the task's id", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
@@ -55,8 +55,8 @@ describe("Header", () => {
       allTasks = newAllTasks;
     };
     let selectedTasks: number[] = [];
-    const setSelectedTasks = (numberList: number[]) => {
-      selectedTasks = numberList;
+    const setSelectedTasks = (taskIdList: number[]) => {
+      selectedTasks = taskIdList;
     };
 
     const myHeader = TestRenderer.create(
