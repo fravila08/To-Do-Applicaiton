@@ -52,14 +52,14 @@ describe("Header", () => {
   });
 
   describe("deleteMultTasks()", () => {
-    it("will return if it successfully deleted the tasks", async () => {
+    it("returns true if tasks are deleted", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.delete.mockResolvedValue({
         data: { success: true },
       });
 
       const deleteTasks = await deleteMultTasks([1, 2, 3]);
-      
+
       expect(deleteTasks).toBe(true);
     });
   });

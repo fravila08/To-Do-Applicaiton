@@ -22,7 +22,7 @@ describe("Task", () => {
   });
 
   describe("deleteTask()", () => {
-    it("will return if it successfully deleted a task", async () => {
+    it("returns true if tasks is deleted", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.delete.mockResolvedValue({
         data: { success: true },
@@ -53,7 +53,7 @@ describe("Task", () => {
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
-    
+
     expect(header).toMatchSnapshot();
   });
 });

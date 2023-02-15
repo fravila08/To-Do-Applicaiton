@@ -20,8 +20,8 @@ def delete_task_by_id(id):
     task.delete()
 
 
-def delete_multiple_tasks(lst):
-    [delete_task_by_id(i) for i in lst]
+def delete_multiple_tasks(task_ids):
+    [delete_task_by_id(i) for i in task_ids]
     return JsonResponse({'success':True})
 
 def update_multiple_tasks_completed_status(task_ids):
