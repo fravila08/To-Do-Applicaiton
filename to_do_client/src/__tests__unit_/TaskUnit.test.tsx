@@ -27,8 +27,8 @@ describe("Task", () => {
       selectedTasks = newList;
     };
     let allTasks: ITask[] = [];
-    const setAllTasks = (tl: ITask[]) => {
-      allTasks = tl;
+    const setAllTasks = (taskList: ITask[]) => {
+      allTasks = taskList;
     };
     const header = TestRenderer.create(
 

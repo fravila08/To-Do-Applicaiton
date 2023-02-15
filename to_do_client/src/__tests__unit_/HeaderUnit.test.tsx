@@ -12,7 +12,7 @@ vi.mock("axios");
 
 describe("Header", () => {
   describe("createTask()", () => {
-    it("will return if a task was created and that task's id", async () => {
+    it("returns a dictionary with the keys of itemCreated with a boolean value and id with a number value", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
@@ -25,7 +25,7 @@ describe("Header", () => {
   });
 
   describe("changeSelectedTasks()", () => {
-    it("Will return if request was successful", async () => {
+    it("returns true if multiple tasks are successfully updated", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.put.mockResolvedValue({
         data: { success: true },
@@ -55,8 +55,8 @@ describe("Header", () => {
       allTasks = newAllTasks;
     };
     let selectedTasks: number[] = [];
-    const setSelectedTasks = (nl: number[]) => {
-      selectedTasks = nl;
+    const setSelectedTasks = (numberList: number[]) => {
+      selectedTasks = numberList;
     };
 
     const myHeader = TestRenderer.create(

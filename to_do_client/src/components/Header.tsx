@@ -35,9 +35,9 @@ export const createTask = async (
 };
 
 
-export const changeSelectedTasks = async (lst: number[]) => {
-  let resposne = await axios.put("tasks/", { selected: lst });
-  return resposne.data.success;
+export const changeSelectedTasks = async (selectedList: number[]) => {
+  let response = await axios.put("tasks/", { selected: selectedList });
+  return response.data.success;
 };
 
 export const isTaskTitleEmpty = (taskTitle: string) => {
@@ -73,8 +73,8 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const isChangeStatusDisabled = (): boolean => {
-    let mylist = selectedTasks;
-    return mylist.length < 1;
+    let myList = selectedTasks;
+    return myList.length < 1;
   };
 
   useEffect(() => {

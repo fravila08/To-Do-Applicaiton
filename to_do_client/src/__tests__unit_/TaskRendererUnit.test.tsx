@@ -5,14 +5,14 @@ import { ITask } from "../App";
 
 describe("TaskRenderer", () => {
   it("will create and match a snapshot", () => {
-    let completed: boolean = true;
+    let completed = true;
     let allTasks: ITask[] = [];
-    const setAllTasks = (tl: ITask[]) => {
-      allTasks = tl;
+    const setAllTasks = (taskList: ITask[]) => {
+      allTasks = taskList;
     };
     let selected: number[] = [];
-    const setSelected = (nl: number[]) => {
-      selected = nl;
+    const setSelected = (numberList: number[]) => {
+      selected = numberList;
     };
     const taskRenderer = TestRenderer.create(
       <TaskRenderer

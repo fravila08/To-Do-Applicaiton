@@ -22,8 +22,9 @@ describe("Opens application and creates a new Task", () => {
     it("will create and display new task under `pending`", async () => {
       await page.waitForSelector("#createTaskInput");
       await page.waitForSelector("#createTaskButton");
+      let textToDisplay = 'test creating a task'
       for (let i=0; i< 3; i++){
-        await page.type("#createTaskInput", `test creating a task${i}` );
+        await page.type("#createTaskInput", `${textToDisplay}${i}` );
         await page.click("#createTaskButton");
       }
       
@@ -43,7 +44,7 @@ describe("Opens application and creates a new Task", () => {
 
       let taskText = await page.$eval("#task8", (task) => task.innerHTML);
 
-      expect(taskText).toBe("test creating a task1");
+      expect(taskText).toBe(`${textToDisplay}1`);
     });
   });
 });
