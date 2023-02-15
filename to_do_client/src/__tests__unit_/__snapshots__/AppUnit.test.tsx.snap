@@ -28,7 +28,17 @@ exports[`App > will create and match snapshot 1`] = `
       >
         <div
           className="col-4"
-        />
+        >
+          <button
+            className="btn btn-primary"
+            disabled={true}
+            id="changeStatusBtn"
+            onClick={[Function]}
+            type="button"
+          >
+            Update
+          </button>
+        </div>
         <div
           className="formHolder col-8"
         >

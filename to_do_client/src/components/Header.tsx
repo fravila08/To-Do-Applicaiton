@@ -9,6 +9,8 @@ import { ITask } from "../App";
 import plus from "../assets/plus.png";
 
 interface HeaderProps {
+  selectedTasks: number[];
+  setSelectedTasks: (selectedTasks: number[]) => void;
   allTasks: ITask[];
   setAllTasks: (allTasks: ITask[]) => void;
 }
@@ -22,7 +24,7 @@ export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
   try {
-    let response = await axios.post("newtask/", {
+    let response = await axios.post("task/", {
       name: taskTitle,
     });
     return response["data"];
@@ -30,6 +32,12 @@ export const createTask = async (
     alert(err);
     return { itemCreated: false, id: 0 };
   }
+};
+
+
+export const changeSelectedTasks = async (selectedList: number[]) => {
+  let response = await axios.put("tasks/", { selected: selectedList });
+  return response.data.success;
 };
 
 export const isTaskTitleEmpty = (taskTitle: string) => {
@@ -40,10 +48,38 @@ export const isTaskTitleEmpty = (taskTitle: string) => {
     return true;
   }
 };
-
-export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
+export const Header: React.FC<HeaderProps> = ({
+  allTasks,
+  setAllTasks,
+  selectedTasks,
+  setSelectedTasks,
+}) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [newTask, setNewTask] = useState("");
+
+  const changingMultipleStatus = async () => {
+    let response = await changeSelectedTasks(selectedTasks);
+    if (response) {
+      allTasks.map((task) => {
+        selectedTasks.map((id) => {
+          if (task.id === id) {
+            task.completed = !task.completed;
+          }
+        });
+      });
+      setAllTasks([...allTasks]);
+      setSelectedTasks([]);
+    }
+  };
+
+  const isChangeStatusDisabled = (): boolean => {
+    let myList = selectedTasks;
+    return myList.length < 1;
+  };
+
+  useEffect(() => {
+    isChangeStatusDisabled();
+  }, [selectedTasks]);
 
   useEffect(() => {
     setIsSubmitDisabled(isTaskTitleEmpty(newTask));
@@ -67,7 +103,15 @@ export const Header: React.FC<HeaderProps> = ({ allTasks, setAllTasks }) => {
   return (
     <Container style={{ marginBottom: "1vh" }}>
       <Row>
-        <Col xs={4}></Col>
+        <Col xs={4}>
+          <Button
+            onClick={changingMultipleStatus}
+            disabled={isChangeStatusDisabled()}
+            id="changeStatusBtn"
+          >
+            Update
+          </Button>
+        </Col>
         <Col xs={8} className="formHolder">
           <Form
             style={{ position: "relative" }}

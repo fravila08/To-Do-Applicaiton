@@ -11,7 +11,7 @@
 3. Checkout current branch on both terminals
 
 ```bash
-  git checkout TODO-003
+  git checkout TODO-004
 ```
 
 ## Start Django Server(Terminal-1)

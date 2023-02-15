@@ -23,12 +23,26 @@
 
   - **NOTE**:
 
-    - Ensure to manually clean and load data to the applications database before running tests. ( Please refer to the [Run Locally](https://github.com/fravila08/To-Do-Applicaiton/blob/TODO-003/documentation/running_locally.md) section for directions on loading data )
+    - `Ensure to manually clean and load data to the applications database before running each E2E tests`. ( Please refer to the [Run Locally](https://github.com/fravila08/To-Do-Applicaiton/blob/TODO-004/documentation/running_locally.md) section for directions on loading data )
 
     - E2E tests will open up a chromium browser to run tests.
 
+  - Creating A task
+
   ```bash
-      npm run test E2E.test.tsx
+      npm run test CreatingNewTaskE2E.test.tsx
+  ```
+
+  - Changing Task Status
+
+  ```bash
+      npm run test ChangingTaskStatusE2E.test.tsx
+  ```
+
+  - Changing Multiple Task's Status
+
+  ```bash
+      npm run test ChangingMultipleTaskStatusE2E.test.tsx
   ```
 
 ## Resources

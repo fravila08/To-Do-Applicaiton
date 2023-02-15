@@ -16,7 +16,7 @@ export interface ITask {
 
 export async function getTasks(): Promise<ITask[]> {
   try {
-    let response = await axios.get("allTasks/");
+    let response = await axios.get("tasks/");
     return response.data.tasks;
   } catch (err) {
     alert(err);
@@ -26,6 +26,7 @@ export async function getTasks(): Promise<ITask[]> {
 
 function App() {
   const [allTasks, setAllTasks] = useState<ITask[]>([]);
+  const [selectedTasks, setSelectedTasks] = useState<number[]>([]);
 
   useEffect(() => {
     const getResponse = async () => {
@@ -41,7 +42,12 @@ function App() {
         <h1>ANOTHER DAY</h1>
       </Row>
       <Row>
-        <Header allTasks={allTasks} setAllTasks={setAllTasks} />
+        <Header
+          allTasks={allTasks}
+          setAllTasks={setAllTasks}
+          selectedTasks={selectedTasks}
+          setSelectedTasks={setSelectedTasks}
+        />
       </Row>
       <Row>
         <Col xs={1}></Col>
@@ -51,6 +57,8 @@ function App() {
             completed={false}
             allTasks={allTasks}
             setAllTasks={setAllTasks}
+            selectedTasks={selectedTasks}
+            setSelectedTasks={setSelectedTasks}
           />
         </Col>
         <Col xs={1}></Col>
@@ -62,6 +70,8 @@ function App() {
           <TaskRenderer
             completed={true}
             allTasks={allTasks}
+            selectedTasks={selectedTasks}
+            setSelectedTasks={setSelectedTasks}
             setAllTasks={setAllTasks}
           />
         </Col>

@@ -8,13 +8,15 @@ import pending from "../assets/pending.png";
 
 export interface TaskProps {
   task: ITask;
+  selectedTasks: number[];
+  setSelectedTasks: (selectedTasks: number[]) => void;
   allTasks: ITask[];
-  setAllTasks: (pendTasks: ITask[]) => void;
+  setAllTasks: (allTasks: ITask[]) => void;
 }
 
 export const changeTaskStatus = async (id: number) => {
   try {
-    let response = await axios.put(`changestatus/${id}`);
+    let response = await axios.put(`task/${id}/`);
     return response.data.changed;
   } catch (err) {
     alert(err);
@@ -22,7 +24,13 @@ export const changeTaskStatus = async (id: number) => {
   }
 };
 
-export const Task: React.FC<TaskProps> = ({ task, allTasks, setAllTasks }) => {
+export const Task: React.FC<TaskProps> = ({
+  task,
+  setSelectedTasks,
+  selectedTasks,
+  allTasks,
+  setAllTasks,
+}) => {
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
     if (response) {
@@ -34,7 +42,18 @@ export const Task: React.FC<TaskProps> = ({ task, allTasks, setAllTasks }) => {
 
   return (
     <Row className="task">
-      <Col id={`task${task.id}`} xs={9} className="taskTitle">
+      <Col>
+        <Form.Check
+          type="checkbox"
+          id={`taskSelectedBtn${task.id}`}
+          onChange={(e) =>
+            e.target.checked
+              ? setSelectedTasks([...selectedTasks, task.id])
+              : setSelectedTasks(selectedTasks.filter((id) => id !== task.id))
+          }
+        />
+      </Col>
+      <Col id={`task${task.id}`} xs={7} className="taskTitle">
         {task.title}
       </Col>
       <Col className="checkHolder" xs={2}>

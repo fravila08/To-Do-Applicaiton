@@ -3,7 +3,7 @@
 #### Get all Tasks
 
 ```http
-  GET .../allTasks
+  GET .../tasks/
 ```
 
 - Body of Response: an array of Task dictionaries
@@ -15,13 +15,10 @@
 #### Create a Task
 
 ```http
-  POST .../newtask
+  POST .../task/, {'name':string}
 ```
 
 - Body of Request:
-```bash
-  {'name':string}
-```
 
 | Parameter | Type     | Description                              |
 | :-------- | :------- | :--------------------------------------- |
@@ -36,7 +33,7 @@
 #### Change Task's Completed Status
 
 ```http
-  PUT .../changestatus/<int:id of selected task>
+  PUT .../task/<int:id>/ of selected task>
 ```
 
 - Body of Request:
@@ -49,6 +46,24 @@
 
 ```
   {'changed':boolean}
+```
+
+#### Change Multiple Task's Completed Status
+
+```http
+  PUT .../tasks/, {"selected":integer[]}
+```
+
+- Body of Request:
+
+| Parameter  | Type        | Description                        |
+| :--------- | :---------- | :--------------------------------- |
+| `selected` | `integer[]` | **Required:** IDs of selected task |
+
+- Body of Response: Will return if all selected tasks completed status was changed.
+
+```
+  {"success":boolean}
 ```
 
 #### Resources

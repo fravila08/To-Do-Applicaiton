@@ -6,12 +6,13 @@ import { Header } from "../components/Header";
 import { ITask } from "../App";
 import { isTaskTitleEmpty } from "../components/Header";
 import { ResponseCreateTask } from "../components/Header";
+import { changeSelectedTasks } from "../components/Header";
 
 vi.mock("axios");
 
 describe("Header", () => {
   describe("createTask()", () => {
-    it("will return if a task was created and that task's id", async () => {
+    it("returns a dictionary with itemCreated and id as keys, where itemCreated's value is true and id's value is the task's id", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.post.mockResolvedValue({
         data: { itemCreated: true, id: 1 },
@@ -20,6 +21,17 @@ describe("Header", () => {
       const newTasks = await createTask("new task/");
 
       expect(newTasks).toStrictEqual({ itemCreated: true, id: 1 });
+    });
+  });
+
+  describe("changeSelectedTasks()", () => {
+    it("returns true if multiple tasks are successfully updated", async () => {
+      const mockedAxios = axios as Mocked<typeof axios>;
+      mockedAxios.put.mockResolvedValue({
+        data: { success: true },
+      });
+      const changedMultipleTasks = await changeSelectedTasks([1, 2, 3]);
+      expect(changedMultipleTasks).toBeTruthy();
     });
   });
 
@@ -42,9 +54,18 @@ describe("Header", () => {
     const setAllTasks = (newAllTasks: ITask[]) => {
       allTasks = newAllTasks;
     };
+    let selectedTasks: number[] = [];
+    const setSelectedTasks = (taskIdList: number[]) => {
+      selectedTasks = taskIdList;
+    };
 
     const myHeader = TestRenderer.create(
-      <Header allTasks={allTasks} setAllTasks={setAllTasks} />
+      <Header
+        allTasks={allTasks}
+        setAllTasks={setAllTasks}
+        selectedTasks={selectedTasks}
+        setSelectedTasks={setSelectedTasks}
+      />
     );
     
     expect(myHeader).toMatchSnapshot();
