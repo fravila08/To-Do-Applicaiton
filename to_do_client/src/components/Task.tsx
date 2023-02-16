@@ -90,7 +90,8 @@ export const Task: React.FC<TaskProps> = ({
       </Col>
       <Col xs={1}>
         <Button
-          id="delBtn"
+          id={`deleteBtn${task.id}`}
+          className="delBtn"
           variant="danger"
           onClick={() => deleteATask(task.id)}
         >
