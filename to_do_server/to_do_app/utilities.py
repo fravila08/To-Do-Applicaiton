@@ -23,10 +23,10 @@ def change_task_title(id, name):
     task= Task.objects.get(id = id)
     task.change_title(name)
 
-def delete_multiple_tasks(lst):
-    [delete_task_by_id(i) for i in lst]
+def delete_multiple_tasks(task_ids):
+    [delete_task_by_id(i) for i in task_ids]
     return JsonResponse({'success':True})
 
-def update_multiple_tasks_completed_status(lst):
-    [change_task_status_by_id(i) for i in lst]
+def update_multiple_tasks_completed_status(task_ids):
+    [change_task_status_by_id(i) for i in task_ids]
     return JsonResponse({'success':True})

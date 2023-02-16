@@ -17,7 +17,7 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertDictEqual(body,{'itemCreated':False, 'id':0})
         
-    def test_new_task_improper_input(self):
+    def test_new_task_IMPROPER_input_no_data_provided(self):
         response=self.client.post(reverse('newtask'))
         body=json.loads(response.content)
         self.assertFalse(body['itemCreated'])
@@ -41,18 +41,18 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['changed'])
         
-    def test_change_status_IMPROPER_input(self):
+    def test_change_status_IMPROPER_input_argument_does_not_exist(self):
         response = self.client.put(reverse("changestatus", args=[1]))
         body=json.loads(response.content)
         self.assertFalse(body['changed'])
         
         
-    def test_change_multiple_IMPROPER_input(self):
+    def test_change_multiple_IMPROPER_input_selected_value_not_a_list(self):
         response= self.client.put(reverse('multiple'), data={'selected':1}, content_type="application/json")
         body=json.loads(response.content)
         self.assertFalse(body['success'])
 
-    def test_proper_multiple_input(self):
+    def test_proper_multiple_PROPER_input(self):
         task1=Task.objects.create(title='test')
         task2=Task.objects.create(title='test')
         task3=Task.objects.create(title='test')
@@ -66,12 +66,12 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['success'])
     
-    def test_delete_a_task_IMPROPER_input(self):
+    def test_delete_a_task_IMPROPER_input_argument_does_not_exist(self):
         response=self.client.delete(reverse("deletetask", args=[0]))
         body=json.loads(response.content)
         self.assertFalse(body['success'])
         
-    def test_delete_multiple_task_PROPER(self):
+    def test_delete_multiple_task_PROPER_input(self):
         task1=Task.objects.create(title='test')
         task2=Task.objects.create(title='test')
         task3=Task.objects.create(title='test')
@@ -79,7 +79,7 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['success'])
         
-    def test_delete_multiple_task_IMPROPER(self):
+    def test_delete_multiple_task_IMPROPER_input_argument_does_not_exist(self):
         response=self.client.delete(reverse('deletemult'), data={"selected":[0]}, content_type="application/json")
         body=json.loads(response.content)
         self.assertFalse(body['success'])
@@ -93,7 +93,7 @@ class TestViews(TestCase):
             self.assertEquals(Task.objects.get(id= task2.id).title, "new title")
         self.assertTrue(body['changed'])
         
-    def test_change_task_title_IMPROPER(self):
+    def test_change_task_title_IMPROPER_agument_id_does_not_exist(self):
         task1 = Task.objects.create(title= "testing")
         response = self.client.put(reverse("changetitle", args=[1]), {"name":"new title"}, "application/json")
         body = json.loads(response.content)

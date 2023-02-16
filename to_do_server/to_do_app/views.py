@@ -11,8 +11,6 @@ def home(request):
 
 
 class Task_handler(APIView):
-    def get(self, request):
-        return get_all_tasks_sorted_by_id()
     def post(self, request):
         try:
             return create_a_new_task(title=request.data['name'])
@@ -36,6 +34,8 @@ class Task_handler(APIView):
 
 
 class Multi_task_handler(APIView):
+    def get(self, request):
+        return get_all_tasks_sorted_by_id()
     def put(self,request):
         try:
             return update_multiple_tasks_completed_status(request.data['selected'])

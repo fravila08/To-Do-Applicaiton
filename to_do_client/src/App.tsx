@@ -15,7 +15,7 @@ export interface ITask {
 
 export async function getTasks(): Promise<ITask[]> {
   try {
-    let response = await axios.get("allTasks/");
+    let response = await axios.get("tasks/");
     return response.data.tasks;
   } catch (err) {
     alert(err);
@@ -34,10 +34,6 @@ function App() {
     };
     getResponse();
   }, []);
-
-  useEffect(() => {
-    console.log(allTasks);
-  }, [allTasks]);
 
   return (
     <Container className="App">

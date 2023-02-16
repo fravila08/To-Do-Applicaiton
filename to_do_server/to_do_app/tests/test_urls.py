@@ -21,7 +21,7 @@ class TestUrls(TestCase):
         
     def test_allTasks_func(self):
         url=reverse('allTasks')
-        self.assertEqual(resolve(url).func.view_class, views.Task_handler)
+        self.assertEqual(resolve(url).func.view_class, Multi_task_handler)
         
     def test_newtask_POST_proper_input(self):
         response=self.client.post(reverse('newtask'),{'name':"testing"})
@@ -60,11 +60,11 @@ class TestUrls(TestCase):
         url=reverse('multiple')
         self.assertEquals(resolve(url).func.view_class, Multi_task_handler)
         
-    def test_delete_task_proper(self):
+    def test_delete_task_DELETE_proper(self):
         response=self.client.delete(reverse("deletetask", args=[1]))
         self.assertEquals(response.status_code, 200)
         
-    def test_delete_task_improper(self):
+    def test_delete_task_DELETE_improper(self):
         response=self.client.delete(reverse("deletetask", args=[0]))
         self.assertEquals(response.status_code, 200)
         
@@ -72,13 +72,13 @@ class TestUrls(TestCase):
         url=reverse("deletetask", args=[1])
         self.assertEquals(resolve(url).func.view_class, Task_handler)   
         
-    def test_delete_mult_task_proper(self):
+    def test_delete_mult_task_DELETE_proper(self):
         task1=Task.objects.create(title="test")
         task2=Task.objects.create(title="test")
         response=self.client.delete(reverse("deletemult"),data={"selected":[task1.id,task2.id]}, content_type="application/json")
         self.assertEquals(response.status_code, 200)
         
-    def test_delete_mult_task_improper(self):
+    def test_delete_mult_task_DELETE_improper(self):
         response=self.client.delete(reverse("deletemult"), {"selected":0}, "application/json")
         self.assertEquals(response.status_code, 200)
     
@@ -86,12 +86,12 @@ class TestUrls(TestCase):
         url=reverse("deletemult")
         self.assertEquals(resolve(url).func.view_class, Multi_task_handler)
         
-    def test_change_task_title_proper(self):
+    def test_change_task_title_PUT_proper(self):
         task1 = Task.objects.create(title='test')
         response = self.client.put(reverse("changetitle", args=[task1.id]), {"name":"new title"}, "application/json")
         self.assertEquals(response.status_code, 200)
     
-    def test_change_task_title_improper(self):
+    def test_change_task_title_PUT_improper_argument_id_does_not_exist(self):
         response = self.client.put(reverse("changetitle", args=[1]), {"name": 1}, "application/json")
         self.assertEquals(response.status_code, 200)
         

@@ -60,9 +60,9 @@ exports[`Task > will create and match a snapshot 1`] = `
     }
   >
     <button
-      className="btn btn-danger"
+      className="delBtn btn btn-danger"
       disabled={false}
-      id="delBtn"
+      id="deleteBtn1"
       onClick={[Function]}
       type="button"
     >

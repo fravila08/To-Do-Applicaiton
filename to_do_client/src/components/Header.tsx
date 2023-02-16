@@ -26,7 +26,7 @@ export const createTask = async (
   taskTitle: string
 ): Promise<ResponseCreateTask> => {
   try {
-    let response = await axios.post("newtask/", {
+    let response = await axios.post("task/", {
       name: taskTitle,
     });
     return response["data"];
@@ -36,16 +36,21 @@ export const createTask = async (
   }
 };
 
-export const changeSelectedTasks = async (lst: number[]) => {
-  let response = await axios.put("changemultiple", { selected: lst });
-  return response.data.success;
+export const deleteTasks = async (taskIds: number[]) => {
+  try {
+    let response = await axios.delete("tasks/", {
+      data: { selected: taskIds },
+    });
+    return response.data.success;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
-export const deleteMultTasks = async (lst: number[]) => {
+export const changeSelectedTasks = async (taskIds: number[]) => {
   try {
-    let response = await axios.delete("deletemultiple", {
-      data: { selected: lst },
-    });
+    let response = await axios.put("tasks/", { selected: taskIds });
     return response.data.success;
   } catch (err) {
     alert(err);
@@ -61,6 +66,7 @@ export const isTaskTitleEmpty = (taskTitle: string) => {
     return true;
   }
 };
+
 export const Header: React.FC<HeaderProps> = ({
   allTasks,
   setAllTasks,
@@ -86,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const deleteMultipleTasks = async () => {
-    let response = await deleteMultTasks(selectedTasks);
+    let response = await deleteTasks(selectedTasks);
     if (response) {
       setAllTasks(allTasks.filter((task) => !selectedTasks.includes(task.id)));
       setSelectedTasks([]);
@@ -94,8 +100,8 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const isChangeStatusDisabled = (): boolean => {
-    let mylist = selectedTasks;
-    return mylist.length < 1;
+    let mySelectedTasks = selectedTasks;
+    return mySelectedTasks.length < 1;
   };
 
   useEffect(() => {
