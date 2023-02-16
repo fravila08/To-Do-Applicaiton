@@ -34,10 +34,10 @@ export const createTask = async (
   }
 };
 
-export const deleteMultTasks = async (taskIdList: number[]) => {
+export const deleteTasks = async (taskIds: number[]) => {
   try {
     let response = await axios.delete("tasks/", {
-      data: { selected: taskIdList },
+      data: { selected: taskIds },
     });
     return response.data.success;
   } catch (err) {
@@ -46,9 +46,9 @@ export const deleteMultTasks = async (taskIdList: number[]) => {
   }
 };
 
-export const changeSelectedTasks = async (selectedList: number[]) => {
+export const changeSelectedTasks = async (taskIds: number[]) => {
   try {
-    let response = await axios.put("tasks/", { selected: selectedList });
+    let response = await axios.put("tasks/", { selected: taskIds });
     return response.data.success;
   } catch (err) {
     alert(err);
@@ -90,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const deleteMultipleTasks = async () => {
-    let response = await deleteMultTasks(selectedTasks);
+    let response = await deleteTasks(selectedTasks);
     if (response) {
       setAllTasks(allTasks.filter((task) => !selectedTasks.includes(task.id)));
       setSelectedTasks([]);
@@ -98,8 +98,8 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const isChangeStatusDisabled = (): boolean => {
-    let myList = selectedTasks;
-    return myList.length < 1;
+    let mySelectedTasks = selectedTasks;
+    return mySelectedTasks.length < 1;
   };
 
   useEffect(() => {

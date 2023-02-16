@@ -1,7 +1,7 @@
 import { describe, expect, it, vi, Mocked } from "vitest";
 import TestRenderer from "react-test-renderer";
 import axios from "axios";
-import { createTask, deleteMultTasks } from "../components/Header";
+import { createTask, deleteTasks } from "../components/Header";
 import { Header } from "../components/Header";
 import { ITask } from "../App";
 import { isTaskTitleEmpty } from "../components/Header";
@@ -51,16 +51,16 @@ describe("Header", () => {
     });
   });
 
-  describe("deleteMultTasks()", () => {
+  describe("deleteTasks()", () => {
     it("returns true if tasks are deleted", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.delete.mockResolvedValue({
         data: { success: true },
       });
 
-      const deleteTasks = await deleteMultTasks([1, 2, 3]);
+      const deletedTasks = await deleteTasks([1, 2, 3]);
 
-      expect(deleteTasks).toBe(true);
+      expect(deletedTasks).toBe(true);
     });
   });
 

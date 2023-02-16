@@ -19,7 +19,7 @@ describe("Deleteting a single task", () => {
   });
 
   describe("Delete a task", () => {
-    it("will create and display new task under `pending`", async () => {
+    it("will create a task to delete", async () => {
       // create a task
       await page.waitForSelector("#createTaskInput");
       await page.waitForSelector("#createTaskButton");

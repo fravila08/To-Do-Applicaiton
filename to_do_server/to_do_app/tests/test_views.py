@@ -17,7 +17,7 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertDictEqual(body,{'itemCreated':False, 'id':0})
         
-    def test_new_task_IMPROPER_input(self):
+    def test_new_task_IMPROPER_input_no_data_provided(self):
         response=self.client.post(reverse('newtask'))
         body=json.loads(response.content)
         self.assertFalse(body['itemCreated'])
@@ -41,13 +41,13 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['changed'])
         
-    def test_change_status_IMPROPER_input(self):
+    def test_change_status_IMPROPER_input_argument_does_not_exist(self):
         response = self.client.put(reverse("changestatus", args=[1]))
         body=json.loads(response.content)
         self.assertFalse(body['changed'])
         
         
-    def test_change_multiple_IMPROPER_input(self):
+    def test_change_multiple_IMPROPER_input_selected_value_not_a_list(self):
         response= self.client.put(reverse('multiple'), data={'selected':1}, content_type="application/json")
         body=json.loads(response.content)
         self.assertFalse(body['success'])
@@ -66,7 +66,7 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['success'])
     
-    def test_delete_a_task_IMPROPER_input(self):
+    def test_delete_a_task_IMPROPER_input_argument_does_not_exist(self):
         response=self.client.delete(reverse("deletetask", args=[0]))
         body=json.loads(response.content)
         self.assertFalse(body['success'])
@@ -79,7 +79,7 @@ class TestViews(TestCase):
         body=json.loads(response.content)
         self.assertTrue(body['success'])
         
-    def test_delete_multiple_task_IMPROPER_input(self):
+    def test_delete_multiple_task_IMPROPER_input_argument_does_not_exist(self):
         response=self.client.delete(reverse('deletemult'), data={"selected":[0]}, content_type="application/json")
         body=json.loads(response.content)
         self.assertFalse(body['success'])
