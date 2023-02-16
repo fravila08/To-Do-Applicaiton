@@ -8,12 +8,12 @@ import {
 
 describe("Header", () => {
   describe("createTask()", () => {
-    it("retuns true if a task is created", async () => {
+    it("retuns a dictionary with the keys itemCreated and id with the value true and id of new created task", async () => {
       axios.defaults.baseURL="http://localhost:8000/"
       
       const newTasks = await createTask("new task");
 
-      expect(newTasks.itemCreated).toBe(true);
+      expect(newTasks).toStrictEqual({itemCreated:true, id:7});
     });
   });
 

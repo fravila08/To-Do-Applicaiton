@@ -59,7 +59,7 @@ export const Task: React.FC<TaskProps> = ({
 }) => {
   const [taskTitle, setTaskTitle] = useState<string>(task.title);
   const [showForm, setShowForm] = useState<boolean>(true);
-  const [newTitle, setNewTitle] = useState<string>('')
+  const [newTitle, setNewTitle] = useState<string>(task.title)
 
   const changeStatus = async (clicked: boolean, taskToChange: ITask) => {
     let response = await changeTaskStatus(taskToChange["id"]);
@@ -126,22 +126,22 @@ export const Task: React.FC<TaskProps> = ({
       <Col xs={2} style={{display:"flex"}}>
         <Button
           id={`deleteBtn${task.id}`}
-          className="delBtn"
+          className="alterBtn"
           variant="danger"
           onClick={() => deleteATask(task.id)}
         >
           <img src={trash} style={{ height: "2vh" }} />
         </Button>
-        <Button id="delBtn" variant="warning" onClick={() => setShowForm(!showForm)}>
+        <Button className="alterBtn" variant="warning" onClick={() => setShowForm(!showForm)}>
           <img src={editPic} style={{ height: "2vh" }} />
         </Button>
       </Col>
       :
       <Col xs={2} style={{display:"flex"}}>
-        <Button id="delBtn" variant="warning" onClick={()=>[setShowForm(!showForm), setNewTitle("")]}>
+        <Button className="alterBtn" variant="warning" onClick={()=>[setShowForm(!showForm), setNewTitle(task.title)]}>
           <img src={ cancelPic } style={{ height: "2vh" }} />
         </Button>
-        <Button id="delBtn" variant="success" onClick={()=>[alterTaskTitle(task), setShowForm(!showForm)]}>
+        <Button className="alterBtn" variant="success" onClick={()=>[alterTaskTitle(task), setShowForm(!showForm)]}>
           <img src={ confirmPic} style={{ height: "2vh" }} />
         </Button>
       </Col>
