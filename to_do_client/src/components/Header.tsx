@@ -34,10 +34,26 @@ export const createTask = async (
   }
 };
 
+export const deleteTasks = async (taskIds: number[]) => {
+  try {
+    let response = await axios.delete("tasks/", {
+      data: { selected: taskIds },
+    });
+    return response.data.success;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
+};
 
-export const changeSelectedTasks = async (selectedList: number[]) => {
-  let response = await axios.put("tasks/", { selected: selectedList });
-  return response.data.success;
+export const changeSelectedTasks = async (taskIds: number[]) => {
+  try {
+    let response = await axios.put("tasks/", { selected: taskIds });
+    return response.data.success;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
 };
 
 export const isTaskTitleEmpty = (taskTitle: string) => {
@@ -48,6 +64,7 @@ export const isTaskTitleEmpty = (taskTitle: string) => {
     return true;
   }
 };
+
 export const Header: React.FC<HeaderProps> = ({
   allTasks,
   setAllTasks,
@@ -72,9 +89,17 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const deleteMultipleTasks = async () => {
+    let response = await deleteTasks(selectedTasks);
+    if (response) {
+      setAllTasks(allTasks.filter((task) => !selectedTasks.includes(task.id)));
+      setSelectedTasks([]);
+    }
+  };
+
   const isChangeStatusDisabled = (): boolean => {
-    let myList = selectedTasks;
-    return myList.length < 1;
+    let mySelectedTasks = selectedTasks;
+    return mySelectedTasks.length < 1;
   };
 
   useEffect(() => {
@@ -103,13 +128,21 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <Container style={{ marginBottom: "1vh" }}>
       <Row>
-        <Col xs={4}>
+        <Col xs={4} style={{ display: "flex" }}>
           <Button
             onClick={changingMultipleStatus}
             disabled={isChangeStatusDisabled()}
             id="changeStatusBtn"
           >
             Update
+          </Button>
+          <Button
+            variant="danger"
+            onClick={deleteMultipleTasks}
+            disabled={isChangeStatusDisabled()}
+            id="DeleteMultBtn"
+          >
+            DEL
           </Button>
         </Col>
         <Col xs={8} className="formHolder">

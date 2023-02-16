@@ -59,3 +59,29 @@ class TestUrls(TestCase):
     def test_change_multiple_PUT_func(self):
         url=reverse('multiple')
         self.assertEquals(resolve(url).func.view_class, Multi_task_handler)
+        
+    def test_delete_task_proper(self):
+        response=self.client.delete(reverse("deletetask", args=[1]))
+        self.assertEquals(response.status_code, 200)
+        
+    def test_delete_task_improper(self):
+        response=self.client.delete(reverse("deletetask", args=[0]))
+        self.assertEquals(response.status_code, 200)
+        
+    def test_delete_task_func(self):
+        url=reverse("deletetask", args=[1])
+        self.assertEquals(resolve(url).func.view_class, Task_handler)   
+        
+    def test_delete_mult_task_proper(self):
+        task1=Task.objects.create(title="test")
+        task2=Task.objects.create(title="test")
+        response=self.client.delete(reverse("deletemult"),data={"selected":[task1.id,task2.id]}, content_type="application/json")
+        self.assertEquals(response.status_code, 200)
+        
+    def test_delete_mult_task_improper(self):
+        response=self.client.delete(reverse("deletemult"), {"selected":0}, "application/json")
+        self.assertEquals(response.status_code, 200)
+    
+    def test_delete_mult_task_func(self):
+        url=reverse("deletemult")
+        self.assertEquals(resolve(url).func.view_class, Multi_task_handler)

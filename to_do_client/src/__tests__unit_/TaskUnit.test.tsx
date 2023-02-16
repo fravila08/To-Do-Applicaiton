@@ -1,4 +1,4 @@
-import { Task } from "../components/Task";
+import { deleteTask, Task } from "../components/Task";
 import { describe, expect, it, vi, Mocked } from "vitest";
 import TestRenderer from "react-test-renderer";
 import { ITask } from "../App";
@@ -21,6 +21,19 @@ describe("Task", () => {
     });
   });
 
+  describe("deleteTask()", () => {
+    it("returns true if tasks is deleted", async () => {
+      const mockedAxios = axios as Mocked<typeof axios>;
+      mockedAxios.delete.mockResolvedValue({
+        data: { success: true },
+      });
+
+      const deleted = await deleteTask(1);
+
+      expect(deleted).toBe(true);
+    });
+  });
+
   it("will create and match a snapshot", () => {
     let selectedTasks: number[] = [];
     const setSelectedTasks = (newList: number[]) => {
@@ -30,8 +43,8 @@ describe("Task", () => {
     const setAllTasks = (taskList: ITask[]) => {
       allTasks = taskList;
     };
-    const header = TestRenderer.create(
 
+    const header = TestRenderer.create(
       <Task
         selectedTasks={selectedTasks}
         setSelectedTasks={setSelectedTasks}
@@ -40,7 +53,7 @@ describe("Task", () => {
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
-    
+
     expect(header).toMatchSnapshot();
   });
 });

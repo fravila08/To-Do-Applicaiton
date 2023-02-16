@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import done from "../assets/done.png";
 import pending from "../assets/pending.png";
+import Button from "react-bootstrap/esm/Button";
+import trash from "../assets/trash.png"
 
 export interface TaskProps {
   task: ITask;
@@ -18,6 +20,16 @@ export const changeTaskStatus = async (id: number) => {
   try {
     let response = await axios.put(`task/${id}/`);
     return response.data.changed;
+  } catch (err) {
+    alert(err);
+    return false;
+  }
+};
+
+export const deleteTask = async (id: number) => {
+  try {
+    let response = await axios.delete(`task/${id}/`);
+    return response.data.success;
   } catch (err) {
     alert(err);
     return false;
@@ -40,9 +52,16 @@ export const Task: React.FC<TaskProps> = ({
     }
   };
 
+  const deleteATask = async (id: number) => {
+    let response = await deleteTask(id);
+    if (response) {
+      setAllTasks(allTasks.filter((task) => task.id !== id));
+    }
+  };
+
   return (
     <Row className="task">
-      <Col>
+      <Col xs={1}>
         <Form.Check
           type="checkbox"
           id={`taskSelectedBtn${task.id}`}
@@ -56,7 +75,7 @@ export const Task: React.FC<TaskProps> = ({
       <Col id={`task${task.id}`} xs={7} className="taskTitle">
         {task.title}
       </Col>
-      <Col className="checkHolder" xs={2}>
+      <Col className="checkHolder" xs={1}>
         <Form.Check
           id={`taskCheck${task.id}`}
           type="checkbox"
@@ -68,6 +87,16 @@ export const Task: React.FC<TaskProps> = ({
         <Form.Label for="checkbox">
           <img className="checkImg" src={task.completed ? done : pending} />
         </Form.Label>
+      </Col>
+      <Col xs={1}>
+        <Button
+          id={`deleteBtn${task.id}`}
+          className="delBtn"
+          variant="danger"
+          onClick={() => deleteATask(task.id)}
+        >
+          <img src={trash} style={{height:"2vh"}} />
+        </Button>
       </Col>
     </Row>
   );

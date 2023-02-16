@@ -18,9 +18,16 @@ class Task_handler(APIView):
             return JsonResponse({'itemCreated':False, 'id':0})
     def put(self, request, id=0):
         try:
-            return update_tasks_completed_status(id=id)
+            change_task_status_by_id(id)
+            return JsonResponse({'changed':True})
         except Exception as e:
             return JsonResponse({'changed':False})
+    def delete(self, request, id=0):
+        try:
+            delete_task_by_id(id)
+            return JsonResponse({"success":True})
+        except:
+            return JsonResponse({"success":False})
 
 
 class Multi_task_handler(APIView):
@@ -29,6 +36,11 @@ class Multi_task_handler(APIView):
     def put(self,request):
         try:
             return update_multiple_tasks_completed_status(request.data['selected'])
+        except Exception as e:
+            return JsonResponse({'success':False})
+    def delete(self, request):
+        try:
+            return delete_multiple_tasks(request.data['selected'])
         except Exception as e:
             return JsonResponse({'success':False})
             

@@ -14,6 +14,7 @@ describe("TaskRenderer", () => {
     const setSelected = (numberList: number[]) => {
       selected = numberList;
     };
+
     const taskRenderer = TestRenderer.create(
       <TaskRenderer
         completed={completed}

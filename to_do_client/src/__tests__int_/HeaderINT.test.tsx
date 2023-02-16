@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import axios from "axios";
-import { changeSelectedTasks, createTask } from "../components/Header";
+import {
+  changeSelectedTasks,
+  createTask,
+  deleteTasks,
+} from "../components/Header";
 
 describe("Header", () => {
   describe("createTask()", () => {
@@ -20,6 +24,16 @@ describe("Header", () => {
       const changedSelectedTasks = await changeSelectedTasks([1, 2, 3]);
 
       expect(changedSelectedTasks).toBe(true);
+    });
+  });
+
+  describe("deleteTasks()", () => {
+    it("will return if it successfully deleted all selected tasks", async () => {
+      axios.defaults.baseURL = "http://localhost:8000/";
+
+      const deletedTasks = await deleteTasks([1, 2, 3]);
+      
+      expect(deletedTasks).toBe(true);
     });
   });
 });
