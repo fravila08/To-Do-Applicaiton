@@ -3,7 +3,7 @@
 #### Get all Tasks
 
 ```http
-  GET .../allTasks
+  GET .../tasks/
 ```
 
 - Body of Response: an array of Task dictionaries
@@ -15,7 +15,7 @@
 #### Create a Task
 
 ```http
-  POST .../newtask, {'name':string}
+  POST .../task/, {'name':string}
 ```
 
 - Body of Request:
@@ -33,7 +33,7 @@
 #### Change Task's Completed Status
 
 ```http
-  PUT .../changestatus/<int:id of selected task>
+  PUT .../task/<int:id>/ of selected task>
 ```
 
 - Body of Request:
@@ -51,7 +51,7 @@
 #### Change Multiple Task's Completed Status
 
 ```http
-  PUT .../changemultiple, {"selected":integer[]}
+  PUT .../tasks/, {"selected":integer[]}
 ```
 
 - Body of Request:

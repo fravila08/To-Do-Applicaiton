@@ -18,42 +18,49 @@ describe("Task", () => {
       mockedAxios.put.mockResolvedValue({
         data: { changed: true },
       });
+
       const newTasks = await changeTaskStatus(1);
+
       expect(newTasks).toBeTruthy();
     });
   });
 
   describe("deleteTask()", () => {
-    it("will return if it successfully deleted a task", async () => {
+    it("returns true if tasks is deleted", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.delete.mockResolvedValue({
         data: { success: true },
       });
+
       const deleted = await deleteTask(1);
+
       expect(deleted).toBe(true);
     });
   });
 
   describe("changeTaskTitle()", () => {
-    it("will return if the changing of the title was successful", async () => {
+    it("will return true when changing the task title", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.put.mockResolvedValue({
         data: { changed: true },
       });
+
       const changed = await changeTaskTitle(1, "hello");
+
       expect(changed).toBe(true);
     });
   });
 
   it("will create and match a snapshot", () => {
     let selectedTasks: number[] = [];
-    const setSelectedTasks = (nl: number[]) => {
-      selectedTasks = nl;
+    const setSelectedTasks = (newList: number[]) => {
+      selectedTasks = newList;
     };
     let allTasks: ITask[] = [];
-    const setAllTasks = (tl: ITask[]) => {
-      allTasks = tl;
+    const setAllTasks = (taskList: ITask[]) => {
+      allTasks = taskList;
     };
+
     const header = TestRenderer.create(
       <Task
         selectedTasks={selectedTasks}
@@ -63,6 +70,7 @@ describe("Task", () => {
         task={{ id: 1, title: "Style", completed: false }}
       />
     );
+
     expect(header).toMatchSnapshot();
   });
 });

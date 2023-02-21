@@ -91,14 +91,22 @@ h1 {
   z-index: 1;
 }
 
-#delBtn {
+.alterBtn {
   height: 3vh;
   width: 2vw;
   font-size: 2vh;
   text-align: center;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
+}
+
+.buttonHolder {
+  display: flex;
+}
+
+.buttonImg {
+  height: 2vh;
 }
 
 /* Input field on upper right hand corner */

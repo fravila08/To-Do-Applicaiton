@@ -2,7 +2,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ITask } from "../App";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
+import axios, { all } from "axios";
 import done from "../assets/done.png";
 import pending from "../assets/pending.png";
 import Button from "react-bootstrap/esm/Button";
@@ -22,7 +22,7 @@ export interface TaskProps {
 
 export const changeTaskStatus = async (id: number) => {
   try {
-    let response = await axios.put(`changestatus/${id}`);
+    let response = await axios.put(`task/${id}/`);
     return response.data.changed;
   } catch (err) {
     alert(err);
@@ -32,7 +32,7 @@ export const changeTaskStatus = async (id: number) => {
 
 export const deleteTask = async (id: number) => {
   try {
-    let response = await axios.delete(`deletetask/${id}`);
+    let response = await axios.delete(`task/${id}/`);
     return response.data.success;
   } catch (err) {
     alert(err);
@@ -42,7 +42,7 @@ export const deleteTask = async (id: number) => {
 
 export const changeTaskTitle = async (id: number, name: string) => {
   try {
-    let response = await axios.put(`changetitle/${id}`, { name: name });
+    let response = await axios.put(`task/${id}/`, { name: name });
     return response.data.changed;
   } catch (err) {
     alert(err);
@@ -73,7 +73,10 @@ export const Task: React.FC<TaskProps> = ({
   const deleteATask = async (id: number) => {
     let response = await deleteTask(id);
     if (response) {
-      setAllTasks(allTasks.filter((task) => task.id !== id));
+      let selectedTask = document.getElementById(`taskMaster${id}`);
+      if (selectedTask) {
+        selectedTask.style.display = "none";
+      }
     }
   };
 
@@ -88,7 +91,7 @@ export const Task: React.FC<TaskProps> = ({
   };
 
   return (
-    <Row className="task">
+    <Row id={`taskMaster${task.id}`} className="task">
       <Col xs={1}>
         <Form.Check
           type="checkbox"
@@ -115,6 +118,7 @@ export const Task: React.FC<TaskProps> = ({
           className="taskTitle"
         >
           <Form.Control
+            id={`newTitleForm${task.id}`}
             style={{ height: "3vh" }}
             placeholder={taskTitle}
             value={newTitle}
@@ -136,37 +140,40 @@ export const Task: React.FC<TaskProps> = ({
         </Form.Label>
       </Col>
       {showForm ? (
-        <Col xs={2} style={{ display: "flex" }}>
+        <Col xs={2} className="buttonHolder" >
           <Button
-            id="delBtn"
+            id={`deleteBtn${task.id}`}
+            className="alterBtn"
             variant="danger"
             onClick={() => deleteATask(task.id)}
           >
-            <img src={trash} style={{ height: "2vh" }} />
+            <img className="buttonImg" src={trash}  />
           </Button>
           <Button
-            id="delBtn"
+            id={`showChangeForm${task.id}`}
+            className="alterBtn"
             variant="warning"
             onClick={() => setShowForm(!showForm)}
           >
-            <img src={editPic} style={{ height: "2vh" }} />
+            <img className="buttonImg" src={editPic}  />
           </Button>
         </Col>
       ) : (
-        <Col xs={2} style={{ display: "flex" }}>
+        <Col xs={2} className="buttonHolder" >
           <Button
-            id="delBtn"
+            className="alterBtn"
             variant="warning"
-            onClick={() => [setShowForm(!showForm), setNewTitle(taskTitle)]}
+            onClick={() => [setShowForm(!showForm), setNewTitle(task.title)]}
           >
-            <img src={cancelPic} style={{ height: "2vh" }} />
+            <img className="buttonImg" src={cancelPic}  />
           </Button>
           <Button
-            id="delBtn"
+            id={`confirmChange${task.id}`}
+            className="alterBtn"
             variant="success"
             onClick={() => [alterTaskTitle(task), setShowForm(!showForm)]}
           >
-            <img src={confirmPic} style={{ height: "2vh" }} />
+            <img className="buttonImg" src={confirmPic}  />
           </Button>
         </Col>
       )}
