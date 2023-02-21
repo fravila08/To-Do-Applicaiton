@@ -101,6 +101,14 @@ h1 {
   align-items: center;
 }
 
+.buttonHolder{
+  display: flex;
+}
+
+.buttonImg{
+  height: 2vh;
+}
+
 /* Input field on upper right hand corner */
 
 .FormHolder {

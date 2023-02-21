@@ -39,12 +39,14 @@ describe("Task", () => {
   });
 
   describe("changeTaskTitle()", () => {
-    it("will return if the changing of the title was successful", async () => {
+    it("will return true when changing the task title", async () => {
       const mockedAxios = axios as Mocked<typeof axios>;
       mockedAxios.put.mockResolvedValue({
         data: { changed: true },
       });
+
       const changed = await changeTaskTitle(1, "hello");
+
       expect(changed).toBe(true);
     });
   });

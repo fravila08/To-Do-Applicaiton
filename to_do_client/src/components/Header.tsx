@@ -94,8 +94,12 @@ export const Header: React.FC<HeaderProps> = ({
   const deleteMultipleTasks = async () => {
     let response = await deleteTasks(selectedTasks);
     if (response) {
-      setAllTasks(allTasks.filter((task) => !selectedTasks.includes(task.id)));
-      setSelectedTasks([]);
+      selectedTasks.map((id)=>{
+        let selectedTask = document.getElementById(`taskMaster${id}`)
+        if(selectedTask){
+          selectedTask.style.display = 'none'
+        }
+      })
     }
   };
 

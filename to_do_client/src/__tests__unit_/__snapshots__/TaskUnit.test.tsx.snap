@@ -3,6 +3,7 @@
 exports[`Task > will create and match a snapshot 1`] = `
 <div
   className="task row"
+  id="taskMaster1"
 >
   <div
     className="col-1"
@@ -52,43 +53,30 @@ exports[`Task > will create and match a snapshot 1`] = `
     </label>
   </div>
   <div
-    className="col-2"
-    style={
-      {
-        "display": "flex",
-      }
-    }
+    className="buttonHolder col-2"
   >
     <button
-      className="delBtn btn btn-danger"
+      className="alterBtn btn btn-danger"
       disabled={false}
       id="deleteBtn1"
       onClick={[Function]}
       type="button"
     >
       <img
+        className="buttonImg"
         src="/static/src/assets/trash.png"
-        style={
-          {
-            "height": "2vh",
-          }
-        }
       />
     </button>
     <button
-      className="btn btn-warning"
+      className="alterBtn btn btn-warning"
       disabled={false}
-      id="delBtn"
+      id="showChangeForm1"
       onClick={[Function]}
       type="button"
     >
       <img
+        className="buttonImg"
         src="/static/src/assets/edit.png"
-        style={
-          {
-            "height": "2vh",
-          }
-        }
       />
     </button>
   </div>
