@@ -18,7 +18,6 @@ describe("Change Task Title", () => {
     await browser.close();
   });
 
-  describe("Change Task Title", () => {
     it("will create a task and change its title", async () => {
       // create a task
       await page.waitForSelector("#createTaskInput");
@@ -44,5 +43,4 @@ describe("Change Task Title", () => {
       let taskText = await page.$eval("#task7", (task) => task.innerHTML);
       expect(taskText).toBe(textToDisplay + newText);
     });
-  });
 });

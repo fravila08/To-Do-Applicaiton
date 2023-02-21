@@ -18,19 +18,17 @@ describe("Opens application and creates a new Task", () => {
     await browser.close();
   });
 
-  describe("Creating a Task", () => {
-    it("will create and display new task under `pending`", async () => {
-      await page.waitForSelector("#createTaskInput");
-      await page.waitForSelector("#createTaskButton");
-      await page.type("#createTaskInput", "test creating a task", {
-        delay: 10,
-      });
-      await page.click("#createTaskButton");
-
-      await page.waitForSelector("#task7");
-      let taskText = await page.$eval("#task7", (task) => task.innerHTML);
-
-      expect(taskText).toBe("test creating a task");
+  it("will create and display new task under `pending`", async () => {
+    await page.waitForSelector("#createTaskInput");
+    await page.waitForSelector("#createTaskButton");
+    await page.type("#createTaskInput", "test creating a task", {
+      delay: 10,
     });
+    await page.click("#createTaskButton");
+
+    await page.waitForSelector("#task7");
+    let taskText = await page.$eval("#task7", (task) => task.innerHTML);
+
+    expect(taskText).toBe("test creating a task");
   });
 });

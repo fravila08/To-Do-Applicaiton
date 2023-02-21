@@ -101,11 +101,11 @@ h1 {
   align-items: center;
 }
 
-.buttonHolder{
+.buttonHolder {
   display: flex;
 }
 
-.buttonImg{
+.buttonImg {
   height: 2vh;
 }
 
