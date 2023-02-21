@@ -18,7 +18,10 @@ class Task_handler(APIView):
             return JsonResponse({'itemCreated':False, 'id':0})
     def put(self, request, id=0):
         try:
-            change_task_status_by_id(id)
+            if 'name' in request.data:
+                change_task_title(id, request.data['name'])
+            else:
+                change_task_status_by_id(id)
             return JsonResponse({'changed':True})
         except Exception as e:
             return JsonResponse({'changed':False})

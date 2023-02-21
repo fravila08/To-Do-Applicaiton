@@ -128,6 +128,7 @@ CORS_ALLOWED_METHODS=[
     'POST',
     'PUT',
     'GET',
+    'DELETE',
 ]
 
 CORS_ALLOWED_HEADERS=[

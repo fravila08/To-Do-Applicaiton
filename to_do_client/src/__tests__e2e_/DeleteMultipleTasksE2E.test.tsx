@@ -18,7 +18,7 @@ describe("Deleteting a single task", () => {
     await browser.close();
   });
 
-  describe("Delete a task", () => {
+  describe("Delete Multiple task", () => {
     it("will create multiple tasks, select the created tasks, and delete them", async () => {
       // create multiple tasks
       await page.waitForSelector("#createTaskInput");
@@ -44,12 +44,13 @@ describe("Deleteting a single task", () => {
       let results = [];
       for (let k = 7; k < 10; k++) {
         await page.waitForSelector(`#task${k}`, { hidden: true });
-        const taskDoesNotExist = await page.$(`#task${k}`);
-        results.push(taskDoesNotExist);
+        const taskDoesNotExist = await page.$(`#taskMaster${k}`);
+        const displayStyle = await taskDoesNotExist?.evaluate(node =>getComputedStyle(node).display);
+        results.push(displayStyle);
       }
 
       // assert all selector querys are null
-      expect(results).toStrictEqual([null, null, null]);
+      expect(results).toStrictEqual(['none','none','none']);
     });
   });
 });

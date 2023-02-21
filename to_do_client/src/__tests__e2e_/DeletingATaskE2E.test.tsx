@@ -14,9 +14,9 @@ describe("Deleteting a single task", () => {
     await page.goto("http://127.0.0.1:8000/");
   });
 
-  afterAll(async () => {
-    await browser.close();
-  });
+  // afterAll(async () => {
+  //   await browser.close();
+  // });
 
   describe("Delete a task", () => {
     it("will create a task to delete", async () => {
@@ -34,10 +34,11 @@ describe("Deleteting a single task", () => {
       // delete task
       await page.click("#deleteBtn7");
       await page.waitForSelector("#task7", { hidden: true });
-      const taskDoesNotExist = await page.$("#task7");
+      const taskDoesNotExist = await page.$("#taskMaster7");
+      const displayStyle = await taskDoesNotExist?.evaluate(node =>getComputedStyle(node).display);
 
       // assert selector query is null
-      expect(taskDoesNotExist).toBe(null);
+      expect(displayStyle).toBe('none');
     });
   });
 });

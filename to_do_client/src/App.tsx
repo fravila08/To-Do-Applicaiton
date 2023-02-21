@@ -35,6 +35,10 @@ function App() {
     getResponse();
   }, []);
 
+  useEffect(()=>{
+    console.log(allTasks)
+  },[allTasks])
+
   return (
     <Container className="App">
       <Row id="Header">

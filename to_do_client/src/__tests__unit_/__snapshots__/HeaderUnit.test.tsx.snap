@@ -25,18 +25,50 @@ exports[`Header > will create and match snapshot 1`] = `
         disabled={true}
         id="changeStatusBtn"
         onClick={[Function]}
+        style={
+          {
+            "alignItems": "center",
+            "display": "flex",
+            "height": "5vh",
+            "justifyContent": "center",
+            "width": "10vw",
+          }
+        }
         type="button"
       >
-        Update
+        <img
+          src="/static/src/assets/change.png"
+          style={
+            {
+              "height": "6vh",
+            }
+          }
+        />
       </button>
       <button
         className="btn btn-danger"
         disabled={true}
         id="DeleteMultBtn"
         onClick={[Function]}
+        style={
+          {
+            "alignItems": "center",
+            "display": "flex",
+            "height": "5vh",
+            "justifyContent": "center",
+            "width": "10vw",
+          }
+        }
         type="button"
       >
-        DEL
+        <img
+          src="/static/src/assets/trash.png"
+          style={
+            {
+              "height": "3vh",
+            }
+          }
+        />
       </button>
     </div>
     <div
