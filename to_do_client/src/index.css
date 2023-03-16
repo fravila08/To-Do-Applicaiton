@@ -1,9 +1,14 @@
-body{
-    width: 100vw;
-    height: 100vh;
+body {
+  width: 100vw;
+  height: 100vh;
 }
-  
-.App{
-    background: rgb(0,70,153);
-    background: radial-gradient(circle, rgba(0,70,153,1) 68%, rgba(2,49,105,1) 100%, rgba(52,50,50,1) 100%);
+
+.App {
+  background: rgb(0, 70, 153);
+  background: radial-gradient(
+    circle,
+    rgba(0, 70, 153, 1) 68%,
+    rgba(2, 49, 105, 1) 100%,
+    rgba(52, 50, 50, 1) 100%
+  );
 }

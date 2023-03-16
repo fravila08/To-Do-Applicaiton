@@ -32,7 +32,7 @@ describe("Task", () => {
       axios.defaults.baseURL="http://localhost:8000/"
       
       const changed = await changeTaskTitle(5, "hello");
-
+      
       expect(changed).toBe(true);
     });
   });

@@ -7,6 +7,7 @@ import { ITask } from "../App";
 import { isTaskTitleEmpty } from "../components/Header";
 import { ResponseCreateTask } from "../components/Header";
 import { changeSelectedTasks } from "../components/Header";
+import { bool } from "prop-types";
 
 vi.mock("axios");
 
@@ -73,6 +74,14 @@ describe("Header", () => {
     const setSelectedTasks = (taskIdList: number[]) => {
       selectedTasks = taskIdList;
     };
+    let showCompleted: boolean = true;
+    let showPending: boolean = true;
+    const setShowCompleted = (show: boolean) => {
+      showCompleted = show;
+    };
+    const setShowPending = (show: boolean) => {
+      showPending = show;
+    };
 
     const myHeader = TestRenderer.create(
       <Header
@@ -80,6 +89,10 @@ describe("Header", () => {
         setAllTasks={setAllTasks}
         selectedTasks={selectedTasks}
         setSelectedTasks={setSelectedTasks}
+        showCompleted={showCompleted}
+        showPending={showPending}
+        setShowCompleted={setShowCompleted}
+        setShowPending={setShowPending}
       />
     );
 
